@@ -1,0 +1,210 @@
+html {
+    font-size: 15px;
+}
+
+.bienvenidos {
+    background: url("../images/bienvenidos3_movil.jpg");
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.fixed-top {
+    background: rgba(0, 0, 0, 0.60);
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-toggler {
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.navbar-light .navbar-brand:focus,
+.navbar-light .navbar-brand:hover {
+    color: #fff;
+}
+
+.navbar-light .navbar-nav .open>.nav-link,
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.open,
+.navbar-light .navbar-nav .nav-link.active {
+    color: #13bfbf;
+    text-align: center;
+    padding: .5rem; //background: #13bfbf;
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+    text-align: center;
+    padding: .5rem;
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #fff;
+    background: #13bfbf;
+    padding: .5rem;
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand,
+.navbar-light .navbar-toggler,
+.navbar-light .navbar-toggler {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-light .navbar-brand:focus,
+.navbar-light .navbar-brand:hover,
+.navbar-light .navbar-toggler:focus,
+.navbar-light .navbar-toggler:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-light .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.bienvenidos .fa {
+    display: inline-block;
+    font-size: 1.4em;
+    vertical-align: middle;
+    background: no-repeat center center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+.bienvenidos .fa-chevron-down {
+    font-size: .7em;
+    color: #fff;
+}
+
+#navbarTogglerDemo02 {
+    clear: both;
+}
+
+.texto-bienvenido {
+    margin-top: 9rem;
+    color: #a0a0a0;
+}
+
+.btn-primary {
+    background: #13bfbf;
+    border-color: #13bfbf;
+    transition: all .5s ease;
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+    background: #009999;
+    border-color: #009999;
+}
+
+
+/*ESTILOS BLOQUE Quienes Somos*/
+
+.quienes-somos {
+    background: #009999;
+    color: #fff;
+}
+
+.quienes-somos img {
+    width: 12rem;
+    height: 12rem;
+}
+
+/*Estilos bloque servicios*/
+
+.servicios h3 {
+    font-weight: bold;
+}
+
+.servicios .fa {
+    display: inline-block;
+    font-size: 8rem;
+    vertical-align: middle;
+    color: #009999;
+    background: no-repeat center center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    transition: 1.5s ease;
+    -moz-transition: 1.5s ease;
+    /* Firefox */
+    -webkit-transition: 1.5s ease;
+    /* Chrome - Safari */
+    -o-transition: 1.5s ease;
+    /* Opera */
+}
+
+.servicios .fa:hover {
+    display: inline-block;
+    vertical-align: middle;
+    color: #13bfbf;
+    background: no-repeat center center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    /* Firefox */
+    -webkit-transform: scale(1.15);
+    /* Chrome - Safari */
+    -o-transform: scale(1.15);
+    /* Opera */
+    -ms-transform: scale(1.15);
+    /* IE9 */
+}
+
+
+/*Estilos últimos proyectos*/
+
+.ultimos-proyectos {
+    background: #009999;
+}
+
+.ultimos-proyectos h2 {
+    color: #fff;
+}
+
+
+/*Estilos footer*/
+
+.footer {
+    background: #222;
+    color: #fff;
+}
+
+.footer ul li {
+    list-style: none;
+}
+
+.footer li {
+    padding-bottom: 1.8px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer a:hover {
+    color: #13bfbf;
+}
+
+.footer .fa {
+    font-size: 1.3rem;
+}
+
+@media(min-width:768px) {
+    html {
+        font-size: 16px;
+    }
+    .bienvenidos {
+        background: url("../images/bienvenidos3_grande.jpg");
+        background-size: cover;
+    }
+
+    .texto-bienvenido {
+    margin-top: 12rem;
+}
+
+}
