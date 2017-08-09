@@ -36,7 +36,7 @@ namespace HEXI_ASP.NET.SitioWebBootstrap4
                 }
                 catch
                 {
-
+                    Response.Redirect("default.aspx");
                 }
             }
         }

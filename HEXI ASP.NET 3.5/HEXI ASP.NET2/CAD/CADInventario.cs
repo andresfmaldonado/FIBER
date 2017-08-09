@@ -677,6 +677,55 @@ namespace CAD
             cnx.Close();
             return Producto;
         }
+
+        //Método get productos para informes
+        public List<DTOInventario> GetInfoProductos()
+        {
+            List<DTOInventario> Productos = new List<DTOInventario>();
+            cnx.Open();
+            int count = 0;
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_cargar_productos_al_GV";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            /*if (dr.Read())
+            {*/
+            while (dr.Read())
+            {
+                DTOInventario Product = new DTOInventario();
+                Product.Referencia_Producto = dr["referencia_producto"].ToString();
+               //Product.Item_Producto = dr["item_producto"].ToString();
+                Product.Nombre_Producto = dr["nombre_producto"].ToString();
+                Product.Descripcion_Producto = dr["descripcion_producto"].ToString();
+                Product.Novedad_Producto = dr["novedad_producto"].ToString();
+                Product.Placa_Producto = dr["placa_producto"].ToString();
+                Product.Serial_Producto = dr["serial_producto"].ToString();
+                Product.Marca_Producto = dr["marca_producto"].ToString();
+                Product.Modelo_Producto = dr["modelo_producto"].ToString();
+                //Product.Unidad_Producto = int.Parse(dr["unidad_producto"].ToString());
+                Product.ValorUnitario_Producto = int.Parse(dr["valorUnitario_producto"].ToString());
+                string consumible = dr["consumible"].ToString();
+                if (consumible == "True")
+                {
+                    Product.Consumible = 1;
+                }
+                else
+                {
+                    Product.Consumible = 0;
+                }
+                Productos.Add(Product);
+                count++;
+            }
+            /*}
+            else
+            {
+                Productos.Add(null);
+            }*/
+            dr.Close();
+            cnx.Close();
+            return Productos;
+        }
     }
     
 }

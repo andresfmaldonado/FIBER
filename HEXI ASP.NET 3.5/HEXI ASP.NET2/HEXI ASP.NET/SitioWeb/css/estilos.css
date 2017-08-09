@@ -18,15 +18,20 @@ html {
 
 .navbar-light .navbar-brand:focus,
 .navbar-light .navbar-brand:hover {
-  color: #fff; }
+  color: #fff; 
+}
+
 
 .navbar-light .navbar-nav .open > .nav-link,
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.open,
 .navbar-light .navbar-nav .nav-link.active {
-  color: #13bfbf;
+  color: #fff;
+  border-top:2px solid #13bfbf;
   text-align: center;
-  padding: .5rem; }
+  padding: .5rem;
+
+  }
 
 .navbar-light .navbar-nav .nav-link,
 .navbar-light .navbar-nav .nav-link {
@@ -39,6 +44,15 @@ html {
   color: #fff;
   background: #13bfbf;
   padding: .5rem; }
+
+.navbar-light .navbar-nav .open > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.open,
+.navbar-light .navbar-nav .nav-link.position{
+  color: #13bfbf;
+  text-align: center;
+  padding: .5rem;
+}
 
 .navbar-light .navbar-brand,
 .navbar-light .navbar-brand,
@@ -188,6 +202,11 @@ html {
 
 .modal-content .btn-primary{
   color: #fff;
+}
+
+.btn-primary:disabled {
+    background-color: #3fbbbb;
+    border-color: #3fbbbb;
 }
 
 .modal-content .has-success .input-group-addon {

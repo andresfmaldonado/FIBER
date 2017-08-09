@@ -7,27 +7,18 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace HEXI_ASP.NET.SitioWebBootstrap4 {
+namespace HEXI_ASP.NET {
     
     
-    public partial class inicio {
+    public partial class IFormularioInventario {
         
         /// <summary>
-        /// Control form1.
+        /// Control usuarios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// Control roles.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList roles;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl usuarios;
     }
 }
