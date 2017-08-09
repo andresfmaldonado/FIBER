@@ -107,25 +107,39 @@ namespace HEXI_ASP.NET
 
         protected void registrar_Click(object sender, EventArgs e)
         {
-            if (consumo.Text != "")
+            Dictionary<string, object> list_consumos = new Dictionary<string, object>();
+            list_consumos.Add("id", id.Text);
+            list_consumos.Add("metros", metros.Text);
+            id.Text = "";
+            referencia.Text = "";
+            color.Text = "";
+            tipo.Text = "";
+            titulo.Text = "";
+            metros.Text = "";
+            consumo.Text = Convert.ToString(list_consumos["metros"]);
+        }
+
+        protected void fin_consumo_Click(object sender, EventArgs e)
+        {
+            
+            int id_u = Convert.ToInt32(Session["id_usuario"]);
+            DTOInventario inven = new DTOInventario();
+            CADInventario inventario = new CADInventario();
+            try
             {
-                int id_u = Convert.ToInt32(Session["id_usuario"]);
-                DTOInventario inven = new DTOInventario();
-                CADInventario inventario = new CADInventario();
-                try
-                {
-                    int consu = Convert.ToInt32(consumo.Text);
-                    inven.Id_Usuario = consu;
-                }
-                catch
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
+               
+                inven.Id_Usuario = id_u;
+                
+            }
+            catch
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
 
-                }
-                if (inventario.InsertarConsumo(inven) == 0)
-                {
+            }
 
-                }
+            if (inventario.InsertarConsumo(inven) == 0)
+            {
+
             }
         }
     }
