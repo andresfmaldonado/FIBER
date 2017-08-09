@@ -50,7 +50,7 @@
     <form id="form1" class="form-horizontal" runat="server">
         <div class="row">
             <div class="col-md-4 col-md-offset-1">
-                <asp:TextBox ID="id" Style="display: none;" type="text" class="form-control" placeholder="Referencia del hilo" runat="server"></asp:TextBox>
+                <asp:TextBox ID="id" Style="display: none;" type="text" class="form-control"  runat="server"></asp:TextBox>
 
                 <div class="form-group">
                     <asp:Label ID="Label1" class="control-label col-sm-2" runat="server" Text="Referencia:"></asp:Label>
@@ -155,6 +155,13 @@
                         </Columns>
                     </asp:GridView>
                 </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-1 col-center">
+                <div class="btn-group">
+                    <asp:Button ID="fin_consumo" type="button" class="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
+                </div>
+            </div>
             </div>
         </div>
     </form>
