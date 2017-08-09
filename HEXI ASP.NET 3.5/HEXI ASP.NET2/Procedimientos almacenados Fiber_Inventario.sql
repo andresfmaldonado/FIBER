@@ -44,19 +44,19 @@ END
 
 --FIN PROCEDURE--
 
---En veremos--
+
 --PROCEDURE PARA MODIFICAR EL CONSUMO DE UN PRODUCTO------------------------------------------------
-CREATE PROCEDURE prc_modificar_consumo_producto(
-@id_cons INT,
+CREATE  PROCEDURE prc_modificar_consumo_producto(
+@id_consu INT,
 @id_inven INT,
+@id_produc INT,
 @cant INT
 )
 AS
 BEGIN
-UPDATE tbl_consumo_producto SET id_consumo = @id_cons,
-id_inventario = @id_inven, cantidad = @cant;
+UPDATE tbl_consumo_producto SET cantidad = @cant WHERE id_consumo=@id_consu
+and id_inventario = @id_inven and id_producto = @id_produc;
 END
-
 --FIN PROCEDURE--
 -------------------
 
@@ -361,11 +361,11 @@ END
 --En veremos--
 --PROCEDURE PARA MODIFICAR UN HILO-----------------------------------------------------
 CREATE PROCEDURE prc_modificar_hilo(@id_hi INT,@tipo_hi VARCHAR(10),
-@titulo_hi INT,@color_hi VARCHAR(10),@peso_hi FLOAT)
+@titulo_hi INT,@color_hi VARCHAR(10),@valor FLOAT)
 AS
 BEGIN
 UPDATE tbl_hilos SET tipo_hilo = @tipo_hi, titulo_hilo = @titulo_hi, color_hilo = @color_hi,
-peso_hilo = @peso_hi WHERE id_hilo = @id_hi;
+valorMetro = @valor WHERE id_hilo = @id_hi;
 END
 
 --FIN PROCEDURE--
@@ -423,18 +423,25 @@ END
 
 --FIN PROCEDURE--
 
---En veremos--
+
 --PROCEDURE PARA MODIFICAR UN PRODUCTO--------------------------------------------------
-CREATE PROCEDURE prc_modificar_producto(@id_pro INT,@item_pro VARCHAR(10),
-@agrup_pro VARCHAR(10),@desc_pro VARCHAR(50),@nov_pro VARCHAR(30),@placa_pro VARCHAR(10),
-@serial_pro VARCHAR(10),@marca_pro VARCHAR(20),@mod_pro VARCHAR(20),@unid_pro INT,@val_pro FLOAT,
+CREATE PROCEDURE prc_modificar_producto(@id_pro INT,
+@nomb_pro VARCHAR(20),
+@desc_pro VARCHAR(50),
+@nov_pro VARCHAR(30),
+@placa_pro VARCHAR(10),
+@serial_pro VARCHAR(10),
+@marca_pro VARCHAR(20),
+@mod_pro VARCHAR(20),
+@val_pro FLOAT,
 @consu_pro BIT)
 AS
 BEGIN
-UPDATE tbl_productos SET item_producto = @item_pro, agrupacion_producto = @agrup_pro,
-descripcion_producto = @desc_pro, novedad_producto = @nov_pro, placa_producto = @placa_pro,
-serial_producto = @serial_pro, marca_producto = @marca_pro, modelo_producto = @mod_pro,
-unidad_producto = @unid_pro, valorUnitario_producto = @val_pro, consumible = @consu_pro
+UPDATE tbl_productos SET nombre_producto = @nomb_pro,
+descripcion_producto = @desc_pro, novedad_producto = @nov_pro, 
+placa_producto = @placa_pro, serial_producto = @serial_pro, 
+marca_producto = @marca_pro, modelo_producto = @mod_pro, 
+valorUnitario_producto = @val_pro, consumible = @consu_pro
 WHERE id_producto = @id_pro;
 END
 
