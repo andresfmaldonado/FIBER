@@ -25,7 +25,7 @@ END
 
 --PROCEDURE PARA REGISTRAR EL CONSUMO DE UN PRODUCTO------------------------------------------------
 
-ALTER PROCEDURE prc_insertar_consumo_producto(
+CREATE PROCEDURE prc_insertar_consumo_producto(
 @id_cons INT,
 @id_inven INT,
 @id_prod INT,
@@ -61,7 +61,7 @@ END
 -------------------
 
 --PROCEDURE PARA REGISTRAR EL CONSUMO DE UN HILO------------------------------------------------
-ALTER PROCEDURE prc_insertar_consumo_hilos(
+CREATE PROCEDURE prc_insertar_consumo_hilos(
 @id_cons INT,
 @id_inven INT,
 @id_h INT,
@@ -84,7 +84,7 @@ END
 --PROCEDURE PARA CONSULTAR HILO PARA CONSUMO--
 select * from tbl_inventario_hilo
 select * from tbl_hilos
-ALTER PROCEDURE prc_buscar_hilo_para_consumo(
+CREATE PROCEDURE prc_buscar_hilo_para_consumo(
 @id VARCHAR(10)
 )
 AS
@@ -120,12 +120,12 @@ exec prc_consultar_hilo_por_referencia_consumo'123abc'
 CREATE PROCEDURE prc_modificar_consumo_hilo(
 @id_cons INT,
 @id_inven INT,
-@peso INT
+@metros INT
 )
 AS
 BEGIN
 UPDATE tbl_consumo_hilo SET id_consumo = @id_cons,
-id_inventario = @id_inven, peso = @peso;
+id_inventario = @id_inven, metros_hilos = @metros;
 END
 
 --FIN PROCEDURE--
@@ -150,21 +150,21 @@ END
 CREATE PROCEDURE prc_modificar_pedidos
 (
 @id_ped INT,
-@fecha_ped DATE,
-@id_usu INT
+@fecha_ped DATE
+
 )
 AS
 BEGIN
 UPDATE tbl_pedidos SET 
-fecha_pedido = @fecha_ped ,
-id_usuario 	=	@id_usu
+fecha_pedido = @fecha_ped 
+
 WHERE id_pedido =	@id_ped;
 END
 
 --FIN PROCEDURE--
 
 --PROCEDURE PARA INSERTAR EN EL PEDIDO UN PRODUCTO--------------------------------------
-ALTER PROCEDURE prc_insertar_pedido_producto
+CREATE PROCEDURE prc_insertar_pedido_producto
 (
 @id_ped INT,
 @id_prod INT,
