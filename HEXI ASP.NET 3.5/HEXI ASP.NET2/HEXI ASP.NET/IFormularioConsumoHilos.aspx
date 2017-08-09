@@ -157,6 +157,7 @@
                 </div>
             </div>
         </div>
+        <asp:HiddenField runat="server" ID="_repostcheckcode" />
     </form>
     <div class="form-group">
         <div class="col-sm-12">

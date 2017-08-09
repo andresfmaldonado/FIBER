@@ -123,5 +123,19 @@ namespace HEXI_ASP.NET
             }
             return estado;
         }
+
+        public List<DTOInventario> GetProductsInform()
+        {
+            CADInventario Process = new CADInventario();
+            List<DTOInventario> Products = Process.GetInfoProductos();
+            return Products;
+        }
+
+        public List<string> GetUsersInform()
+        {
+            CADUsuario user = new CADUsuario();
+            List<string> userestadist = user.estadisticasUsers();
+            return userestadist;
+        }
     }
 }

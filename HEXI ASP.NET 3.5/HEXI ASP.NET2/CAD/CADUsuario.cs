@@ -908,6 +908,25 @@ namespace CAD
             return estado;
         }
 
+        public List<string> estadisticasUsers()
+        {
+            List<string> estadist = new List<string>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_estadistica_users";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                estadist.Add(dr["users"].ToString());
+                estadist.Add(dr["habilit"].ToString());
+            }
+            dr.Close();
+            cnx.Close();
+            return estadist;
+        }
+
 
     }
 }

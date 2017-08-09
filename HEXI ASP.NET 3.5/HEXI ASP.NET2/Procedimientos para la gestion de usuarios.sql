@@ -1,4 +1,4 @@
-USE Fiber3;
+﻿USE Fiber3;
 
 --Procedimientos para la gestión de usuarios--
 
@@ -258,4 +258,19 @@ END
 
 --FIN PROCEDURE--
 
-
+--PROCEDURE PARA ESTADISTICAS USERS Y HABILITADOS---UPDATE--------------
+CREATE PROCEDURE prc_estadistica_users
+AS
+DECLARE @cantid_user INT = (SELECT COUNT(id_usuario) FROM tbl_usuario WHERE id_usuario>1);
+DECLARE @cantid_habilit INT = (SELECT COUNT(id_usuario) FROM tbl_usuario WHERE estado_usuario='Habilitado');
+IF OBJECT_ID('tempdb..#ReporteUser') IS NOT NULL
+DROP TABLE #ReporteUser;
+CREATE TABLE #ReporteUser (
+	users INT,
+	habilit INT
+);
+INSERT INTO #ReporteUser VALUES(@cantid_user,@cantid_habilit);
+BEGIN
+SELECT * FROM #ReporteUser;
+END
+--FIN PROCEDURE--

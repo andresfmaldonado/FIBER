@@ -1,0 +1,55 @@
+        .panel-green {
+            border-color: #337ab7;
+        }
+        
+        .panel-green>.panel-heading {
+            border-color: #337ab7;
+            color: white;
+            background-color: #337ab7;
+        }
+        
+        .huge {
+            font-size: 40px;
+        }
+
+        .indic {
+            font-size: 20px;
+        }
+        
+        .panel-green>.panel-footer {
+            color: #337ab7;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 420px;
+        }
+        
+        .panel-default>.config {
+            border-color: #337ab7;
+            color: white;
+            background-color: #337ab7;
+        }
+        
+        #getconsums,
+        #getproducts {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+        
+        #getconsums:hover,
+        #getproducts:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+        }
+        
+        table {
+            background-color: #fff;
+        }
+
+        .btn-group{
+            top:0px;
+        }
