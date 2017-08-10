@@ -84,6 +84,7 @@ END
 --PROCEDURE PARA CONSULTAR HILO PARA CONSUMO--
 select * from tbl_inventario_hilo
 select * from tbl_hilos
+
 CREATE PROCEDURE prc_buscar_hilo_para_consumo(
 @id VARCHAR(10)
 )
@@ -206,7 +207,7 @@ END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA INSERTAR EN EL PEDIDO UN HILO--------------------------------------
-ALTER PROCEDURE prc_insertar_pedido_hilo
+CREATE PROCEDURE prc_insertar_pedido_hilo
 (
 @id_ped INT,
 @id_hi INT,
@@ -448,7 +449,7 @@ END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA CONSULTAR PRODUCTO POR REFERENCIA--------------------------------------------------->
-ALTER PROCEDURE prc_Consultar_producto_por_referencia(@ref VARCHAR(10))
+CREATE PROCEDURE prc_Consultar_producto_por_referencia(@ref VARCHAR(10))
 AS
 BEGIN
 SELECT id_producto, referencia_producto, nombre_producto,
@@ -459,7 +460,7 @@ END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA CONSULTAR PRODUCTO POR PLACA--------------------------------------------------->
-ALTER PROCEDURE prc_Consultar_producto_por_placa(@placa VARCHAR(10))
+CREATE PROCEDURE prc_Consultar_producto_por_placa(@placa VARCHAR(10))
 AS
 BEGIN
 SELECT id_producto, referencia_producto, nombre_producto, descripcion_producto, novedad_producto, placa_producto, serial_producto,
@@ -469,7 +470,7 @@ END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA CONSULTAR PRODUCTO POR SERIAL--------------------------------------------------->
-ALTER PROCEDURE prc_Consultar_producto_por_serial(@serial VARCHAR(10))
+CREATE PROCEDURE prc_Consultar_producto_por_serial(@serial VARCHAR(10))
 AS
 BEGIN
 SELECT id_producto, referencia_producto, nombre_producto, descripcion_producto, novedad_producto, placa_producto, serial_producto,
@@ -479,7 +480,7 @@ END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA CONSULTAR PRODUCTO POR ID------------------------------
-ALTER PROCEDURE prc_consultar_producto_por_id(@id INT)
+CREATE PROCEDURE prc_consultar_producto_por_id(@id INT)
 AS
 BEGIN
 SELECT id_producto, referencia_producto, nombre_producto,
