@@ -100,7 +100,7 @@ location.replace(history.forward(1))
 							<div class="ch-info">
 								<div class="ch-info-front ch-img-2"></div>
 								<div class="ch-info-back">
-                                    <a href="PprincipalPatronesAdmin.aspx"><h3>Patrones</h3>
+                                    <a href="PDesignPatrones.aspx"><h3>Patrones</h3>
 									<p>Fiber</p>
                                         </a>
 								</div>

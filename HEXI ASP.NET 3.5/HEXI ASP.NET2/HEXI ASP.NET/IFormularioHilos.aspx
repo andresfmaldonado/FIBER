@@ -416,11 +416,19 @@
                     }
                     else {
 
-                        $("#glypcn" + campo).remove();
-                        $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
-                        $('#' + campo).parent().children('span').hide();
-                        $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-                        return true;
+                        if (pes == 0) {
+                            $("#glypcn" + campo).remove();
+                            $('#' + campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                            $('#' + campo).parent().children('span').text("El valor debe ser mayor a cero.").show();
+                            $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                            return false;
+                        } else {
+                            $("#glypcn" + campo).remove();
+                            $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                            $('#' + campo).parent().children('span').hide();
+                            $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+                            return true;
+                        }
                     }
                 }
             }
