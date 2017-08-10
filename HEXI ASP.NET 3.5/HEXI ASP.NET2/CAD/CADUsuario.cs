@@ -563,7 +563,7 @@ namespace CAD
             dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                if ((dr["nombre_rol"].ToString()) != "Seleccione un rol")
+                if ((dr["nombre_rol"].ToString()) != "Seleccione el rol")
                 {
                     rol.Items.Add(new ListItem(dr["nombre_rol"].ToString(), dr["id_rol"].ToString()));
                 }
@@ -753,7 +753,7 @@ namespace CAD
                 SmtpServer.Host = "smtp.live.com";
                 SmtpServer.Port = 587; //Puerto que utiliza Gmail para sus servicios
                 //Especificamos las credenciales con las que enviaremos el mail
-                SmtpServer.Credentials = new System.Net.NetworkCredential("hexi@outlook.es", "DevelopersSENA");
+                SmtpServer.Credentials = new System.Net.NetworkCredential("familiafiber@outlook.com", "FiberByHEXISENA");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
                 return true;

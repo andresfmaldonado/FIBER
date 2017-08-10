@@ -80,7 +80,7 @@ namespace HEXI_ASP.NET
             else
             {
                 //Unexpected action - caused by F5 (Refresh) button
-                Response.Redirect("PFormularioUsuarios.aspx");
+                Response.Redirect("PerfilAdmin.aspx");
             }
         }
 
