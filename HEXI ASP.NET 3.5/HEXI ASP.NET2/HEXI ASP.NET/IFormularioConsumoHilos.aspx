@@ -156,14 +156,15 @@
                     </asp:GridView>
                 </div>
             </div>
-            <div class="form-group">
+            
+        </div>
+        <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-1 col-center">
                 <div class="btn-group">
                     <asp:Button ID="fin_consumo" type="button" class="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
                 </div>
             </div>
             </div>
-        </div>
         <asp:HiddenField runat="server" ID="_repostcheckcode" />
     </form>
     <div class="form-group">

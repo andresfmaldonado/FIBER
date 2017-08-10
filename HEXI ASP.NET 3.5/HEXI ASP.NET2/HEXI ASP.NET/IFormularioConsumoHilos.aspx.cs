@@ -104,19 +104,17 @@ namespace HEXI_ASP.NET
             }
             buscar.Text = "";
         }
-
+        Dictionary<string, object> list = new Dictionary<string, object>();
+        int cant_prod = 0;
         protected void registrar_Click(object sender, EventArgs e)
         {
             Dictionary<string, object> list_consumos = new Dictionary<string, object>();
             list_consumos.Add("id", id.Text);
             list_consumos.Add("metros", metros.Text);
-            id.Text = "";
-            referencia.Text = "";
-            color.Text = "";
-            tipo.Text = "";
-            titulo.Text = "";
-            metros.Text = "";
-            consumo.Text = Convert.ToString(list_consumos["metros"]);
+            cant_prod += 1;
+            list.Add("product" + cant_prod, list_consumos);
+
+            
         }
 
         protected void fin_consumo_Click(object sender, EventArgs e)
