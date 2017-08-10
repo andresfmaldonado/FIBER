@@ -22,12 +22,10 @@
     <link rel="stylesheet" href="SitioWeb/css/estilos.css"/>
     <!--Window Icon Logo-->
     <link rel="shortcut icon" href="Imagenes/icono_pagina_hexi.png" type="image/png" />
-    <!--Scrolling-nav-->
-    <!--<link href="SitioWeb/css/scrolling-nav.css" rel="stylesheet" type="text/css" />-->
     <title>HEXI</title>
 </head>
-<body>
-      <section class="bienvenidos">
+<body data-spy="scroll" data-target="#head">
+      <section class="bienvenidos" id="inicio">
         <div class="container">
             <header class="encabezado">
                 <nav class="navbar navbar-toggleable-md navbar-light fixed-top navbar-fixed-top" id="head">
@@ -39,8 +37,8 @@
 
                     <div class="collapse navbar-collapse top-nav-collapse" id="navbarTogglerDemo02">
                         <ul class="navbar-nav ml-auto mt-2 mt-md-0">
-                            <li class="nav-item active page-scroll">
-                                <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#inicio">Inicio <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link " href="#quienes">Nosotros</a>
@@ -147,7 +145,7 @@
            <div class="col-md-6 col-lg-6 text-left">
                <ul>
                    <li><h4>Mapa de navegación</h4></li>
-                   <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Inicio</a></li>
+                   <li><a href="#inicio"><i class="fa fa-angle-right" aria-hidden="true"></i> Inicio</a></li>
                    <li><a href="#quienes"><i class="fa fa-angle-right" aria-hidden="true"></i> Nosotros</a></li>
                    <li><a href="#servic"><i class="fa fa-angle-right" aria-hidden="true"></i> Servicios</a></li>
                    <li><a href="#productos"><i class="fa fa-angle-right" aria-hidden="true"></i> Proyectos</a></li>
@@ -302,25 +300,25 @@
     <script src="SitioWeb/js/jquery.easing.min.js"></script>-->
     <!--<script src="SitioWeb/js/vsaencode.js"></script>-->
     <script>
-        $(document).ready(function(){
-         
-            $('#navbarTogglerDemo02 a').click(function(){ 
-            $('#head').find('button[aria-expanded]').attr('aria-expanded',false);
-            $('#head').find('button[aria-expanded]').addClass('collapsed')
-            $('#head').find('div[aria-expanded]').attr('aria-expanded',false);
-            $('#head').find('div[aria-expanded]').removeClass('show');
-        });
+        $(document).ready(function () {
 
-         $('#navbarTogglerDemo02 a').click(function(){ 
-            desmarcar($(this).parent());
-         });
+            $('#navbarTogglerDemo02 a').click(function () {
+                $('#head').find('button[aria-expanded]').attr('aria-expanded', false);
+                $('#head').find('button[aria-expanded]').addClass('collapsed')
+                $('#head').find('div[aria-expanded]').attr('aria-expanded', false);
+                $('#head').find('div[aria-expanded]').removeClass('show');
+            });
 
-      function desmarcar(etiqueta){
-          $('.navbar li').each(function(index) {
-                $(this).removeClass("active");
-          });
-          $(etiqueta).addClass('active');
-       }
+            $('#navbarTogglerDemo02 a').click(function () {
+                desmarcar($(this).parent());
+            });
+
+            function desmarcar(etiqueta) {
+                $('.navbar li').each(function (index) {
+                    $(this).find('a').removeClass("position");
+                });
+                $(etiqueta).find('a').addClass('position');
+            }
       if ((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) {
           $('#login').find('a').removeClass('mr-auto');
       }

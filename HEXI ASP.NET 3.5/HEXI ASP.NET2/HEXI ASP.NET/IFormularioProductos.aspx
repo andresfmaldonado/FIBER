@@ -349,7 +349,7 @@
         $('#btn_Actualizar').click(verificarmodifi);
         $('#btn_Buscar').click(buscar);
         function verificarmodifi() {
-            var c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0,
+            var c1 = 0, c3 = 0, c4 = 0, c5 = 0,
                 c6 = 0, c7 = 0, c8 = 0, c9 = 0, c10 = 0;
             c1 = validacion('referencia');
             c3 = validacion('nombre');
@@ -360,8 +360,8 @@
             c7 = validacion('marca');
             c8 = validacion('modelo');
             c9 = validacion('valorUnitario');
-            c10 = validacion('consumible');
-            if (c1 == false || c2 == false || c3 == false || c4 == false || c5 == false || c6 == false || c7 == false || c8 == false || c9 == false || c10 == false) {
+            c10 = selectConsumible();
+            if (c1 == false || c3 == false || c4 == false || c5 == false || c6 == false || c7 == false || c8 == false || c9 == false || c10 == false) {
                 $("#exito").hide();
                 $("#error").show();
                 return false;
@@ -381,7 +381,7 @@
             v7 = validacion('marca');
             v8 = validacion('modelo');
             v9 = validacion('valorUnitario');
-            v10 = validacion('consumible');
+            v10 = selectConsumible();
             if (v1 === false || v2 === false || v3 === false || v4 === false || v5 === false || v6 == false || v7 == false || v8 == false || v9 == false || v10 == false) {
                 $("#exito").hide();
                 $("#error").show();
@@ -617,11 +617,19 @@
                     }
                     else {
 
-                        $("#glypcn" + campo).remove();
-                        $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
-                        $('#' + campo).parent().children('span').hide();
-                        $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-                        return true;
+                        if (val == 0) {
+                            $("#glypcn" + campo).remove();
+                            $('#' + campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                            $('#' + campo).parent().children('span').text("El valor debe ser mayor a cero.").show();
+                            $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                            return false;
+                        } else {
+                            $("#glypcn" + campo).remove();
+                            $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                            $('#' + campo).parent().children('span').hide();
+                            $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+                            return true;
+                        }
                     }
                 }
             }
@@ -645,16 +653,18 @@
 
         }
         function selectConsumible() {
-            if ($("#consumible option:selected").val() == null) {
-                $("#glypcn" + 'consumible').remove();
+
+            indice = document.getElementById('consumible').selectedIndex;
+            if (indice == null || indice == 0) {
                 $('#consumible').parent().parent().attr("class", "form-group has-error");
-                $('#consumible').parent().children('span').text("Seleccione una opción válida.").show();
+                $('#consumible').parent().children('span').text("Seleccione una opción").show();
                 return false;
-            } else {
-                $("#glypcn" + 'consumible').remove();
-                $('#consumible').parent().parent().attr("class", "form-group has-success has-feedback");
+            }
+            else {
+                $('#consumible').parent().parent().attr("class", "form-group has-success");
                 $('#consumible').parent().children('span').hide();
                 return true;
+
             }
         }
 

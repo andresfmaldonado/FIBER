@@ -176,7 +176,7 @@ namespace CAD
                 cmd.CommandText = "prc_modificar_producto";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id_pro", inventario.Id_Producto);
-                cmd.Parameters.AddWithValue("nombre", inventario.Nombre_Producto);
+                cmd.Parameters.AddWithValue("@nomb_pro", inventario.Nombre_Producto);
                 cmd.Parameters.AddWithValue("@desc_pro", inventario.Descripcion_Producto);
                 cmd.Parameters.AddWithValue("@nov_pro", inventario.Novedad_Producto);
                 cmd.Parameters.AddWithValue("@placa_pro", inventario.Placa_Producto);
@@ -660,6 +660,7 @@ namespace CAD
             {
                 DTOInventario Product = new DTOInventario();
                 Product.Referencia_Producto = dr["referencia_producto"].ToString();
+                Product.Nombre_Producto = dr["nombre_producto"].ToString();
                 Product.Descripcion_Producto = dr["descripcion_producto"].ToString();
                 Product.Novedad_Producto = dr["novedad_producto"].ToString();
                 Product.Placa_Producto = dr["placa_producto"].ToString();

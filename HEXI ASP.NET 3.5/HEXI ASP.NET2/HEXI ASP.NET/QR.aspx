@@ -32,15 +32,15 @@
                         if (Dato.GetProductResult[0] != null) {
                             // alert(JSON.stringify(Dato.GetProductResult[0].Referencia_Producto));
                             $('#referencia').html(Dato.GetProductResult[0].Referencia_Producto);
-                            $('#item').html(Dato.GetProductResult[0].Item_Producto);
-                            $('#agrupacion').html(Dato.GetProductResult[0].Agrupacion_Producto);
+                            $('#nombre').html(Dato.GetProductResult[0].Nombre_Producto);
+                            //$('#agrupacion').html(Dato.GetProductResult[0].Agrupacion_Producto);
                             $('#descripcion').html(Dato.GetProductResult[0].Descripcion_Producto);
                             $('#novedad').html(Dato.GetProductResult[0].Novedad_Producto);
                             $('#placa').html(Dato.GetProductResult[0].Placa_Producto);
                             $('#serial').html(Dato.GetProductResult[0].Serial_Producto);
                             $('#marca').html(Dato.GetProductResult[0].Marca_Producto);
                             $('#modelo').html(Dato.GetProductResult[0].Modelo_Producto);
-                            $('#unidad').html(Dato.GetProductResult[0].Unidad_Producto);
+                           // $('#unidad').html(Dato.GetProductResult[0].Unidad_Producto);
                             $('#valor').html(Dato.GetProductResult[0].ValorUnitario_Producto);
                             $('#resultado').show();
                             $('#qr').hide();
@@ -139,15 +139,15 @@
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div class="col-sm-5 col-xs-6 tital ">Item:</div>
-                                        <div class="col-sm-7" id="item"></div>
+                                        <div class="col-sm-5 col-xs-6 tital ">Nombre:</div>
+                                        <div class="col-sm-7" id="nombre"></div>
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div class="col-sm-5 col-xs-6 tital ">Agrupación:</div>
+                                        <!--<div class="col-sm-5 col-xs-6 tital ">Agrupación:</div>
                                         <div class="col-sm-7" id="agrupacion"></div>
                                         <div class="clearfix"></div>
-                                        <div class="bot-border"></div>
+                                        <div class="bot-border"></div>-->
 
                                         <div class="col-sm-5 col-xs-6 tital ">Descripción:</div>
                                         <div class="col-sm-7" id="descripcion"></div>
@@ -185,11 +185,11 @@
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div class="col-sm-5 col-xs-6 tital ">Unidad:</div>
+                                        <!--<div class="col-sm-5 col-xs-6 tital ">Unidad:</div>
                                         <div class="col-sm-7" id="unidad"></div>
 
                                         <div class="clearfix"></div>
-                                        <div class="bot-border"></div>
+                                        <div class="bot-border"></div>-->
 
                                         <div class="col-sm-5 col-xs-6 tital ">Valor unitario:</div>
                                         <div class="col-sm-7" id="valor"></div>
