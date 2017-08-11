@@ -411,6 +411,7 @@ namespace CAD
             cnx.Close();
 
         }
+        
         public int ConsultarHiloPorRef(DTOInventario inven)
         {
             int existe = 0;

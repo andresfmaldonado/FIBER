@@ -158,6 +158,32 @@
             </div>
             
         </div>
+         <div class="container show-top-margin separate-rows tall-rows">
+            <div class="row show-grid">
+                <div class="col-md-12">
+                    <asp:GridView ID="GVHilosTemp" AutoGenerateColumns="false" CssClass="table table-striped table-bordered dt-responsive nowrap" CellSpacing="0" Width="100%" DataKeyNames="id_hilo" OnRowEditing="GVUsuarios_RowEditing" runat="server">
+                        <Columns>
+                            <asp:TemplateField HeaderText="ID">
+                                <ItemTemplate>
+                                    <asp:Label ID="ID_HILO" runat="server" Text='<% # Bind("id_hilo") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="ID">
+                                <ItemTemplate>
+                                    <asp:Label ID="ID_HILO" runat="server" Text='<% # Bind("id_hilo") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="METROS">
+                                <ItemTemplate>
+                                    <asp:Label ID="METROS_HILO" runat="server" Text='<% # Bind("metros_hilo") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+            </div>
+            
+        </div>
         <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-1 col-center">
                 <div class="btn-group">
