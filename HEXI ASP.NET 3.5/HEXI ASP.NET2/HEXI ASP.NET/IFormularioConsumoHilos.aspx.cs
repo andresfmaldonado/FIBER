@@ -110,11 +110,15 @@ namespace HEXI_ASP.NET
         {
             Dictionary<string, object> list_consumos = new Dictionary<string, object>();
             list_consumos.Add("id", id.Text);
+            list_consumos.Add("referencia", referencia.Text);
             list_consumos.Add("metros", metros.Text);
             cant_prod += 1;
             list.Add("product" + cant_prod, list_consumos);
+            GVHilosTemp.DataSource = list["product"+cant_prod];
+            GVHilosTemp.DataBind();
 
-            
+
+
         }
 
         protected void fin_consumo_Click(object sender, EventArgs e)
