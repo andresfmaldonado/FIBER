@@ -50,24 +50,24 @@
     <form id="form1" class="form-horizontal" runat="server">
         <div class="row">
             <div class="col-md-4 col-md-offset-1">
-                <asp:TextBox ID="id" Style="display: none;" type="text" class="form-control"  runat="server"></asp:TextBox>
+                <asp:TextBox ID="id" Style="display: none;" type="text" class="form-control" runat="server"></asp:TextBox>
 
                 <div class="form-group">
                     <asp:Label ID="Label1" class="control-label col-sm-2" runat="server" Text="Referencia:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox ID="referencia" ReadOnly="true" type="text" class="form-control" placeholder="Referencia del hilo" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="referencia" disabled="true" type="text" class="form-control" placeholder="Referencia del hilo" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label3" class="control-label col-sm-2" runat="server" Text="Color:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="color" placeholder="Color del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="color" placeholder="Color del hilo" disabled="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label6" class="control-label col-sm-2" runat="server" Text="Título:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="titulo" placeholder="Título del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="titulo" placeholder="Título del hilo" disabled="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
 
@@ -76,13 +76,13 @@
                 <div class="form-group">
                     <asp:Label ID="Label5" class="control-label col-sm-2" runat="server" Text="Tipo:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="tipo" placeholder="Tipo del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="tipo" placeholder="Tipo del hilo" disabled="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label7" class="control-label col-sm-2" runat="server" Text="Metros:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="metros" placeholder="Metros del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="metros" placeholder="Metros del hilo" disabled="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
@@ -99,27 +99,26 @@
                     <asp:Button ID="registrar" OnClick="registrar_Click" type="button" class="btn btn-default" runat="server" Text="Registrar" />
                 </div>
             </div>
-            <div class="col-sm-offset-1 col-sm-1 col-center">
-                <div class="btn-group">
-                    <asp:Button ID="Button2" type="button" class="btn btn-default" runat="server" Text="Completar" />
-                </div>
-            </div>
 
         </div>
         &nbsp
      <div class="form-group">
          <asp:Label ID="Label4" class="control-label col-sm-2" runat="server" Text="Buscar:"></asp:Label>
-         <div class="col-sm-8">
+         <div class="col-sm-7">
              <asp:TextBox ID="buscar" type="text" class="form-control" placeholder="Nombre Hilo" runat="server"></asp:TextBox>
          </div>
-         <div class=" col-md-2">
-             <asp:Button ID="Button5" OnClick="Button5_Click" type="button" class="btn btn-default" runat="server" Text="Buscar" />
+         <div class=" col-md-1">
+             <input id="buscarHilo" type="button" class="btn btn-default" value="Buscar" />
+         </div>
+         <div class="col-md-1">
+             <input id="todos" type="button" class="btn btn-default" value="Ver todos" />
          </div>
      </div>
+        
         <div class="container show-top-margin separate-rows tall-rows">
             <div class="row show-grid">
                 <div class="col-md-12">
-                    <asp:GridView ID="GVHilos" AutoGenerateColumns="false" CssClass="table table-striped table-bordered dt-responsive nowrap" CellSpacing="0" Width="100%" DataKeyNames="id_hilo" OnRowEditing="GVUsuarios_RowEditing" runat="server">
+                    <asp:GridView ID="GVHilosTemp" AutoGenerateColumns="false" CssClass="table table-striped table-bordered dt-responsive nowrap" CellSpacing="0" Width="100%" DataKeyNames="id_hilo"  runat="server">
                         <Columns>
                             <asp:TemplateField HeaderText="ID">
                                 <ItemTemplate>
@@ -128,69 +127,38 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="REFERENCIA">
                                 <ItemTemplate>
-                                    <asp:Label ID="REFERENCIA_HILO" runat="server" Text='<% # Bind("referencia_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="TIPO">
-                                <ItemTemplate>
-                                    <asp:Label ID="TIPO_HILO" runat="server" Text='<% # Bind("tipo_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="TITULO">
-                                <ItemTemplate>
-                                    <asp:Label ID="TITULO_HILO" runat="server" Text='<% # Bind("titulo_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="COLOR">
-                                <ItemTemplate>
-                                    <asp:Label ID="COLOR_HILO" runat="server" Text='<% # Bind("color_hilo") %>'></asp:Label>
+                                    <asp:Label ID="REFERENCIA_HILO" runat="server" Text='<% # Bind("referencia") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="METROS">
                                 <ItemTemplate>
-                                    <asp:Label ID="METROS_HILO" runat="server" Text='<% # Bind("metros_hilo") %>'></asp:Label>
+                                    <asp:Label ID="METROS_HILO" runat="server" Text='<% # Bind("metros") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:CommandField ButtonType="Button" ShowEditButton="true" ControlStyle-CssClass="btn btn-info" />
-                        </Columns>
-                    </asp:GridView>
-                </div>
-            </div>
-            
-        </div>
-         <div class="container show-top-margin separate-rows tall-rows">
-            <div class="row show-grid">
-                <div class="col-md-12">
-                    <asp:GridView ID="GVHilosTemp" AutoGenerateColumns="false" CssClass="table table-striped table-bordered dt-responsive nowrap" CellSpacing="0" Width="100%" DataKeyNames="id_hilo" OnRowEditing="GVUsuarios_RowEditing" runat="server">
-                        <Columns>
-                            <asp:TemplateField HeaderText="ID">
+                            <asp:TemplateField HeaderText="CONSUMO">
                                 <ItemTemplate>
-                                    <asp:Label ID="ID_HILO" runat="server" Text='<% # Bind("id_hilo") %>'></asp:Label>
+                                    <asp:Label ID="CONSUMO" runat="server" Text='<% # Bind("consumo") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="ID">
+                            <asp:TemplateField HeaderText="CANTIDAD RESTANTE">
                                 <ItemTemplate>
-                                    <asp:Label ID="ID_HILO" runat="server" Text='<% # Bind("id_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="METROS">
-                                <ItemTemplate>
-                                    <asp:Label ID="METROS_HILO" runat="server" Text='<% # Bind("metros_hilo") %>'></asp:Label>
+                                    <asp:Label ID="RESTA" runat="server" Text='<% # Bind("resta") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>
             </div>
-            
+
         </div>
+       
         <div class="form-group">
-                <div class="col-sm-offset-1 col-sm-1 col-center">
+            <div class="col-sm-offset-5 col-sm-1">
                 <div class="btn-group">
                     <asp:Button ID="fin_consumo" type="button" class="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
                 </div>
             </div>
-            </div>
+        </div>
         <asp:HiddenField runat="server" ID="_repostcheckcode" />
     </form>
     <div class="form-group">
@@ -201,6 +169,58 @@
             <span id="footer">Fiber&copy; Producto: <a href="#">HEXI</a></span>
         </div>
     </div>
+    <!-- Modal1 -->
+    <div class="modal fade bs-example-modal-lg" id="modalOneHilo" tabindex="-1" role="dialog" aria-labelledby="modalOneHilo" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <h4 class="modal-title" id="modalOneHilo1">Hilo.</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- panel-body -->
+                    <div class="panel-body">
+                        <div class="table-responsive text-center" id="contentHilo">
+                            <table class="table table-bordered table-hover table-striped" id="hilo">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /modal -->
+    <!-- Modal2 -->
+    <div class="modal fade bs-example-modal-lg" id="modalAllHilos" tabindex="-1" role="dialog" aria-labelledby="modalAllHilos" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <h4 class="modal-title" id="modalLabelAllHilos">Todos los hilos.</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- panel-body -->
+                    <div class="panel-body">
+                        <div class="table-responsive text-center" id="contentinform">
+                            <table class="table table-bordered table-hover table-striped" id="hilos">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /modal -->
     <script>$('[data-toggle="tooltip"]').tooltip(); </script>
     <script src="jvscript/jquery-3.1.0.js"></script>
 
@@ -233,6 +253,128 @@
             forceParse: 0,
             showMeridian: 1
         });
+    </script>
+    <script type="text/javascript">
+        var id = 0;
+        $('#todos').click(function () {
+            
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "ServiceLectorQR.svc/tablahilos",
+                contentType: "application/json; charset=utf-8",
+                processdata: true,
+                success: function (Dato) {
+                    console.log(Dato.tablahilosResult);
+                    item = Dato.tablahilosResult;
+                    $("#hilos").html('');
+                    $("#hilos").append('<thead class="text-center"><tr><th>ID</th><th>Referencia</th><th>Tipo</th><th>Titulo</th><th>Color</th><th>Metros</th><th></th></tr>');
+                    $("#hilos").append('<tbody></tbody>');
+                    $.each(item, function (index, value) {
+                        $("#hilos").append('<tr id="re' + value.Id_Hilo + '"><td id ="cod' + value.Id_Hilo + '">' + value.Id_Hilo + '</td><td id="refe' + value.Id_Hilo + '">' + value.Referencia_Hilo + '</td><td id="tipo' + value.Id_Hilo + '">' + value.Tipo_Hilo + '</td><td id="titulo' + value.Id_Hilo + '">' + value.Titulo_Hilo + '</td><td id="color' + value.Id_Hilo + '">' + value.Color_Hilo + '</td><td id="metros' + value.Id_Hilo + '">' + value.Metros_Hilo + '</td><td id="selec"><button  type="button" class="btn btn-primary seleccionarHilo" value="' + value.Id_Hilo + '">Seleccionar</button></td></tr>');
+                    });
+                    
+                    $('.seleccionarHilo').click(function () {
+                        id = $(this).val();
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            data: '{"id":"' + id + '"}',
+                            url: "ServiceLectorQR.svc/hilos",
+                            contentType: "application/json; charset=utf-8",
+                            processdata: true,
+                            success: function (Dato) {
+                                console.log(Dato.hilosResult);
+                                item = Dato.hilosResult;
+                                $.each(item, function (index, value) {
+                                    $('#id').val(value.Id_Hilo);
+                                    $('#referencia').val(value.Referencia_Hilo);
+                                    $('#tipo').val(value.Tipo_Hilo);
+                                    $('#titulo').val(value.Titulo_Hilo);
+                                    $('#color').val(value.Color_Hilo);
+                                    $('#metros').val(value.Metros_Hilo);
+                                    $('#modalAllHilos').modal('hide');
+                                });
+                            },
+                            error: function (Mensaje) {
+                                alert('Error al llamar el servicio: ' + Mensaje.status + ' ' + Mensaje.statusText);
+                            }
+
+                        });
+                    });
+                },
+                error: function (Mensaje) {
+                    alert('Error al llamar el servicio : ' + Mensaje.status + ' ' + Mensaje.statusText);
+                }
+            });
+            $('#modalAllHilos').modal('show');
+        });
+
+        var ref;
+        $('#buscarHilo').click(function () {
+            ref = $('#buscar').val();
+            $.ajax({
+                method: "POST",
+                data: '{"referencia":"'+ref+'"}',
+                url: "ServiceLectorQR.svc/buscarHilo",
+                contentType: "application/json; charset=utf-8",
+                processdata: true,
+                success: function (Dato) {
+                    console.log(Dato.buscarHiloResult);
+                    item = Dato.buscarHiloResult;
+                    $('#hilo').html('');
+                    $('#hilo').append('<thead><tr><th>ID</th><th>REFERENCIA</th><th>TIPO</th><th>TITULO</th><th>COLOR</th><th>METROS</th><th></th></tr></thead>');
+                    $('#hilo').append('<tbody></tbody>');
+                    $.each(item, function (index, value) {
+                        $('#hilo').append('<tr id="' + value.Id_Hilo + '"><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Tipo_Hilo + '</td><td>' + value.Titulo_Hilo + '</td><td>' + value.Color_Hilo + '</td><td>' + value.Metros_Hilo + '</td><td><button type="button" class="btn btn-primary seleccionarHilo" value="'+value.Id_Hilo+'">Seleccionar</button>');
+                    });
+                    var id = 0;
+                    $('.seleccionarHilo').click(function () {
+                        id = $(this).val();
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            data: '{"id":"' + id + '"}',
+                            url: "ServiceLectorQR.svc/hilos",
+                            contentType: "application/json; charset=utf-8",
+                            processdata: true,
+                            success: function (Dato) {
+                                console.log(Dato.hilosResult);
+                                item = Dato.hilosResult;
+                                $.each(item, function (index, value) {
+                                    $('#id').val(value.Id_Hilo);
+                                    $('#referencia').val(value.Referencia_Hilo);
+                                    $('#tipo').val(value.Tipo_Hilo);
+                                    $('#titulo').val(value.Titulo_Hilo);
+                                    $('#color').val(value.Color_Hilo);
+                                    $('#metros').val(value.Metros_Hilo);
+                                    $('#modalOneHilo').modal('hide');
+                                });
+                            },
+                            error: function (Mensaje) {
+                                alert('Error al llamar el servicio: ' + Mensaje.status + ' ' + Mensaje.statusText);
+                            }
+
+                        });
+                    });
+
+                },
+                error: function (Mensaje) {
+                    alert('Error al llamar el servicio: ' + Mensaje.status + ' ' + Mensaje.statusText);
+                }
+            });
+            $('#modalOneHilo').modal('show');
+        });
+        
+       
+       
+    </script>
+    <script type="text/javascript">
+        
+            
+            
+   
+        
     </script>
     <script src="jvscript/js1/skel.min.js"></script>
     <script src="jvscript/js1/jquery.min.js"></script>

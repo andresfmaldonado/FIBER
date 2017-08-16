@@ -91,10 +91,14 @@ namespace DTO
         private int id_consumo;
         private DateTime fecha_consumo;
         private int id_usuario;
+        private int consumo;
+        private int resta;
 
         public int Id_Consumo { get; set; }
         public DateTime Fecha_Consumo { get; set; }
         public int Id_Usuario { get; set; }
+        public int Consumo { get; set; }
+        public int Resta { get; set; }
 
 
 

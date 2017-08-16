@@ -117,10 +117,7 @@
     <Content Include="css\styles2.css" />
     <Content Include="css\styleventanaemergente.css" />
     <Content Include="css\sweetalert2.css" />
-<<<<<<< HEAD
-=======
     <Content Include="PDesignPatrones.aspx" />
->>>>>>> JOHAN
     <Content Include="FiberInicioAdmin.aspx" />
     <Content Include="FolderCodeQr.aspx" />
     <Content Include="Iconos\cancel.svg" />
@@ -156,7 +153,6 @@
     <Content Include="IFormularioConsumoHilos.aspx" />
     <Content Include="IFormularioConsumoProductos.aspx" />
     <Content Include="IFormularioHilos.aspx" />
-    <Content Include="IFormularioInventario.aspx" />
     <Content Include="IFormularioPedidosHilos.aspx" />
     <Content Include="IFormularioPedidosProductos.aspx" />
     <Content Include="IFormularioProductos.aspx" />
@@ -206,19 +202,8 @@
     <Content Include="default.aspx" />
     <Content Include="SitioWeb\css\scrolling-nav.css" />
     <Content Include="SitioWeb\js\scrolling-nav.js" />
-    <Content Include="UsuariosFiberDataSet.xsc">
-      <DependentUpon>UsuariosFiberDataSet.xsd</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\HEXI.pubxml" />
     <Content Include="SitioWeb\js\jquery.easing.min" />
-    <None Include="UsuariosFiberDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>UsuariosFiberDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="UsuariosFiberDataSet.xss">
-      <DependentUpon>UsuariosFiberDataSet.xsd</DependentUpon>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -262,23 +247,15 @@
     <Content Include="PConsumo.aspx" />
     <Content Include="PerfilAdmin.aspx" />
     <Content Include="PFormularioAsistencia.aspx" />
-    <Content Include="PFormularioCohorte.aspx" />
-    <Content Include="PFormularioDestrezas.aspx" />
-    <Content Include="PFormularioPrograma.aspx" />
-    <Content Include="PFormularioResultados.aspx" />
     <Content Include="PFormularioUsuarios.aspx" />
-    <Content Include="PprincipalPatronesAdmin.aspx" />
     <Content Include="PprincipalInventariosAdmin.aspx" />
     <Content Include="PreguntasFrecuentes.aspx" />
-    <Content Include="ReporteUsuarios.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="PDesignPatrones.aspx.cs">
       <DependentUpon>PDesignPatrones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -286,7 +263,6 @@
     <Compile Include="PDesignPatrones.aspx.designer.cs">
       <DependentUpon>PDesignPatrones.aspx</DependentUpon>
     </Compile>
->>>>>>> JOHAN
     <Compile Include="FiberInicioAdmin.aspx.cs">
       <DependentUpon>FiberInicioAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -324,12 +300,6 @@
     </Compile>
     <Compile Include="IFormularioHilos.aspx.designer.cs">
       <DependentUpon>IFormularioHilos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="IFormularioInventario.aspx.cs">
-      <DependentUpon>IFormularioInventario.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="IFormularioInventario.aspx.designer.cs">
-      <DependentUpon>IFormularioInventario.aspx</DependentUpon>
     </Compile>
     <Compile Include="IFormularioPedidosHilos.aspx.cs">
       <DependentUpon>IFormularioPedidosHilos.aspx</DependentUpon>
@@ -388,30 +358,6 @@
     <Compile Include="PFormularioAsistencia.aspx.designer.cs">
       <DependentUpon>PFormularioAsistencia.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PFormularioCohorte.aspx.cs">
-      <DependentUpon>PFormularioCohorte.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PFormularioCohorte.aspx.designer.cs">
-      <DependentUpon>PFormularioCohorte.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PFormularioDestrezas.aspx.cs">
-      <DependentUpon>PFormularioDestrezas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PFormularioDestrezas.aspx.designer.cs">
-      <DependentUpon>PFormularioDestrezas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PFormularioPrograma.aspx.cs">
-      <DependentUpon>PFormularioPrograma.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PFormularioPrograma.aspx.designer.cs">
-      <DependentUpon>PFormularioPrograma.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PFormularioResultados.aspx.cs">
-      <DependentUpon>PFormularioResultados.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PFormularioResultados.aspx.designer.cs">
-      <DependentUpon>PFormularioResultados.aspx</DependentUpon>
-    </Compile>
     <Compile Include="PFormularioUsuarios.aspx.cs">
       <DependentUpon>PFormularioUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -425,12 +371,6 @@
     </Compile>
     <Compile Include="PPedidos.aspx.designer.cs">
       <DependentUpon>PPedidos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PprincipalPatronesAdmin.aspx.cs">
-      <DependentUpon>PprincipalPatronesAdmin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PprincipalPatronesAdmin.aspx.designer.cs">
-      <DependentUpon>PprincipalPatronesAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="PprincipalInventariosAdmin.aspx.cs">
       <DependentUpon>PprincipalInventariosAdmin.aspx</DependentUpon>
@@ -454,12 +394,6 @@
     <Compile Include="QR.aspx.designer.cs">
       <DependentUpon>QR.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ReporteUsuarios.aspx.cs">
-      <DependentUpon>ReporteUsuarios.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ReporteUsuarios.aspx.designer.cs">
-      <DependentUpon>ReporteUsuarios.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ServiceLectorQR.svc.cs">
       <DependentUpon>ServiceLectorQR.svc</DependentUpon>
     </Compile>
@@ -469,11 +403,6 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UsuariosFiberDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UsuariosFiberDataSet.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -497,7 +426,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Report1.rdlc" />
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

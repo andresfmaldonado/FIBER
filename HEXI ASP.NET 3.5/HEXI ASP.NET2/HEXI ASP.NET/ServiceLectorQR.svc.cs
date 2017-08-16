@@ -137,5 +137,36 @@ namespace HEXI_ASP.NET
             List<string> userestadist = user.estadisticasUsers();
             return userestadist;
         }
+
+        public List<DTOInventario> tablahilos()
+        {
+            List<DTOInventario> tabla = new List<DTOInventario>();
+            CADInventario procesos = new CADInventario();
+            tabla = procesos.tablahilos();
+            return tabla;
+
+
+        }
+
+        public List<DTOInventario> hilos(int id)
+        {
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+            datos.Id_Hilo = id;
+            hilos = procesos.hilos(datos);
+            return hilos;
+        }
+
+        public List<DTOInventario> buscarHilo(string referencia)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Referencia_Hilo = referencia;
+            hilo = proceso.buscarHilo(datos);
+            return hilo;
+
+        }
     }
 }
