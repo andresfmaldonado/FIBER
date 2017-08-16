@@ -114,7 +114,8 @@ END
 exec prc_consultar_hilo_por_referencia_consumo'123abc'
 
 --FIN PROCEDURE--
-
+select * from tbl_inventario_hilo
+insert into tbl_inventario_hilo values (2,3,5)
 --PROCEDURE PARA BUSCAR HILO POR EL ID PARA CONSUMO----------------------------------------
 CREATE PROCEDURE prc_consultar_hilo_por_id_consumo(
 @id INT
