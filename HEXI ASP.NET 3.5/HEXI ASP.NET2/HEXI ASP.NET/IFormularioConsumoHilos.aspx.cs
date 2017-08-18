@@ -74,10 +74,10 @@ namespace HEXI_ASP.NET
             CADInventario inventario = new CADInventario();
             DTOInventario inven = new DTOInventario();
             inven.Id_Hilo = int.Parse(GVHilos.DataKeys[e.NewEditIndex].Values[0].ToString());
-            if (inventario.CompletarRegistroHilosParaModificar(inven, id, referencia, tipo, titulo, color,metros)== 0)
+            /*if (inventario.CompletarRegistroHilosParaModificar(inven, id, referencia, tipo, titulo, color,,metros)== 0)
             {
 
-            }
+            }*/
         }
 
         protected void Button5_Click(object sender, EventArgs e)

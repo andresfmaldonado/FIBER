@@ -202,7 +202,6 @@ namespace HEXI_ASP.NET {
         protected global::System.Web.UI.WebControls.GridView GVHilos;
         
         /// <summary>
-<<<<<<< HEAD
         /// Control _repostcheckcode.
         /// </summary>
         /// <remarks>
@@ -210,7 +209,7 @@ namespace HEXI_ASP.NET {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField _repostcheckcode;
-=======
+
         /// fin_consumo control.
         /// </summary>
         /// <remarks>
@@ -218,6 +217,5 @@ namespace HEXI_ASP.NET {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button fin_consumo;
->>>>>>> Andres
     }
 }
