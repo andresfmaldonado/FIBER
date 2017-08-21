@@ -156,7 +156,7 @@ END
 CREATE PROCEDURE prc_consultar_usuario_dgv
 AS
 BEGIN
-SELECT id_usuario,dni_usuario,nombre_usuario,apellido_usuario,email_usuario,tel_usuario,estado_usuario FROM tbl_usuario;
+SELECT id_usuario,dni_usuario,nombre_usuario,apellido_usuario,email_usuario,tel_usuario,estado_usuario FROM tbl_usuario WHERE id_usuario>1;
 END
 
 --FIN PROCEDURE--
@@ -261,7 +261,7 @@ END
 --PROCEDURE PARA ESTADISTICAS USERS Y HABILITADOS---UPDATE--------------
 CREATE PROCEDURE prc_estadistica_users
 AS
-DECLARE @cantid_user INT = (SELECT COUNT(id_usuario) FROM tbl_usuario);
+DECLARE @cantid_user INT = (SELECT COUNT(id_usuario) FROM tbl_usuario WHERE id_usuario>1);
 DECLARE @cantid_habilit INT = (SELECT COUNT(id_usuario) FROM tbl_usuario WHERE estado_usuario='Habilitado');
 IF OBJECT_ID('tempdb..#ReporteUser') IS NOT NULL
 DROP TABLE #ReporteUser;
@@ -274,20 +274,3 @@ BEGIN
 SELECT * FROM #ReporteUser;
 END
 --FIN PROCEDURE--
-
---PROCEDURE PARA EL REGISTRO DE HISTORIAL--
-CREATE PROCEDURE prc_history(@user INT,@description VARCHAR(50))
-AS
-BEGIN
-INSERT INTO tbl_historial(id_usuario,descripcion,fecha_h) VALUES(@user,@description,GETDATE());
-END
---FIN PROCEDURE--
-
-
---PROCEDURE PARA CARGAR EL HISTORIAL--
-CREATE PROCEDURE prc_cargar_history(@idus INT)
-AS
-BEGIN
-SELECT id,(descripcion+' | '+ CAST(fecha_h AS varchar)) as history FROM tbl_historial,tbl_usuario WHERE tbl_historial.id_usuario=tbl_usuario.id_usuario AND tbl_usuario.id_usuario=@idus; 
-END
----FIN PROCEDURE--

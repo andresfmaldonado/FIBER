@@ -15,9 +15,68 @@
     <link href="css/sweetalert2.css" rel="stylesheet" />
     <script src="jvscript/sweetalert2.js"></script>
     <script src="jvscript/jquery-3.1.0.js"></script>
-    <script src="jvscript/adapter.min.js"></script>
-    <script src="jvscript/instascan.min.js"></script>
-    
+    <script src="jvscript/html5-qrcode.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#reader').html5_qrcode(function (data) {
+                //alert(data);
+                $.ajax({
+                    type: "POST", //GET or POST or PUT or DELETE verb
+                    url: "ServiceLectorQR.svc/GetProduct", // Location of the service
+                    data: '{"referencia": "' + data + '"}', //Data sent to server
+                    contentType: "application/json; charset=utf-8", // content type sent to server
+                    dataType: "json", //Expected data format from server
+                    processdata: true, //True or False
+                    success: function (Dato) {//On Successfull service call
+                        //alert('pocesando..');
+                        if (Dato.GetProductResult[0] != null) {
+                            // alert(JSON.stringify(Dato.GetProductResult[0].Referencia_Producto));
+                            $('#referencia').html(Dato.GetProductResult[0].Referencia_Producto);
+                            $('#nombre').html(Dato.GetProductResult[0].Nombre_Producto);
+                            //$('#agrupacion').html(Dato.GetProductResult[0].Agrupacion_Producto);
+                            $('#descripcion').html(Dato.GetProductResult[0].Descripcion_Producto);
+                            $('#novedad').html(Dato.GetProductResult[0].Novedad_Producto);
+                            $('#placa').html(Dato.GetProductResult[0].Placa_Producto);
+                            $('#serial').html(Dato.GetProductResult[0].Serial_Producto);
+                            $('#marca').html(Dato.GetProductResult[0].Marca_Producto);
+                            $('#modelo').html(Dato.GetProductResult[0].Modelo_Producto);
+                           // $('#unidad').html(Dato.GetProductResult[0].Unidad_Producto);
+                            $('#valor').html(Dato.GetProductResult[0].ValorUnitario_Producto);
+                            $('#resultado').show();
+                            $('#qr').hide();
+                        } else {
+                            noexiste();
+                        }
+
+
+                    },
+                    error: function (Mensaje) {
+                        problema(Mensaje.status + ' ' + Mensaje.statusText);
+                        //alert('Error al llamar el servicio : ' + Mensaje.status + ' ' + Mensaje.statusText);
+                    }// When Service call fails
+                });
+
+            },
+                function (error) {
+                    //alert(error);
+                }, function (videoError) {
+                    camara();
+                }
+            );
+        });
+
+        function problema(error) {
+            swal('Oops...', 'Ocurrió un error inesperado!  ' + error, 'info');
+        }
+
+        function noexiste() {
+            swal('Oops...', 'Esto no se encuentra registrado!', 'warning');
+        }
+
+        function camara() {
+            swal('Oops...', 'No hay camara!', 'info');
+        }
+    </script>
 </head>
 <body>
     <div id="page-wrapper">
@@ -63,10 +122,7 @@
                         <div id="qr" class="block-center">
                             <h2>Lector QR</h2>
                             <div id="reader" class="twPc-bg">
-                                 <video id="preview" style="position: inherit;"></video>
                             </div>
-                            <div class="clearfix"></div><br/>
-                                <span id="cameraoption"></span>
                         </div>
                         <div id="resultado" style="display:none;">
                             <h2>Resultado</h2>
@@ -157,90 +213,6 @@
     <script src="jvscript/js1/util.js"></script>
     <script src="jvscript/js1/main.js"></script>
     <script src="jvscript/bootstrap.js"></script>
-    <script>
-        camaras = [];
-        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-        scanner.addListener('scan', function (content) {
-            console.log(content);
-        
-                //alert(data);
-                $.ajax({
-                    type: "POST", //GET or POST or PUT or DELETE verb
-                    url: "ServiceLectorQR.svc/GetProduct", // Location of the service
-                    data: '{"referencia": "' + content + '"}', //Data sent to server
-                    contentType: "application/json; charset=utf-8", // content type sent to server
-                    dataType: "json", //Expected data format from server
-                    processdata: true, //True or False
-                    success: function (Dato) {//On Successfull service call
-                        //alert('pocesando..');
-                        if (Dato.GetProductResult[0] != null) {
-                            // alert(JSON.stringify(Dato.GetProductResult[0].Referencia_Producto));
-                            $('#referencia').html(Dato.GetProductResult[0].Referencia_Producto);
-                            $('#nombre').html(Dato.GetProductResult[0].Nombre_Producto);
-                            //$('#agrupacion').html(Dato.GetProductResult[0].Agrupacion_Producto);
-                            $('#descripcion').html(Dato.GetProductResult[0].Descripcion_Producto);
-                            $('#novedad').html(Dato.GetProductResult[0].Novedad_Producto);
-                            $('#placa').html(Dato.GetProductResult[0].Placa_Producto);
-                            $('#serial').html(Dato.GetProductResult[0].Serial_Producto);
-                            $('#marca').html(Dato.GetProductResult[0].Marca_Producto);
-                            $('#modelo').html(Dato.GetProductResult[0].Modelo_Producto);
-                           // $('#unidad').html(Dato.GetProductResult[0].Unidad_Producto);
-                            $('#valor').html(Dato.GetProductResult[0].ValorUnitario_Producto);
-                            $('#resultado').show();
-                            $('#qr').hide();
-                        } else {
-                            noexiste();
-                        }
-
-
-                    },
-                    error: function (Mensaje) {
-                        problema(Mensaje.status + ' ' + Mensaje.statusText);
-                        //alert('Error al llamar el servicio : ' + Mensaje.status + ' ' + Mensaje.statusText);
-                    }// When Service call fails
-                });
-        });
-          
-        Instascan.Camera.getCameras().then(function (cameras) {
-            if (cameras.length > 0) {
-                camaras = cameras;
-                $.each(cameras, (i, c) => {
-                    if (i == 0) {
-                        $('#cameraoption').append('<button type="button" class="btn btn-info" value=' + i + ' onclick=selectCamera(value)><i class="fa fa-camera" aria-hidden="true"></i> ' + (i + 1) + '</button>');
-                    }
-                    if (i > 0) {
-                        if (i == 1) {
-                            $('#cameraoption').append('<button  type="button" class="btn btn-warning" value=' + i + ' onclick=selectCamera(value)><i class="fa fa-camera" aria-hidden="true"></i> ' + (i + 1) + '</button>');
-                        } else {
-                            $('#cameraoption').append('<button  type="button" class="btn btn-danger" value=' + i + ' onclick=selectCamera(value)><i class="fa fa-camera" aria-hidden="true"></i> ' + (i + 1) + '</button>');
-                        }
-                    }
-                });
-                scanner.start(cameras[0]);
-            } else {
-                camara();
-            }
-
-        }).catch(function (e) {
-            problema(e);
-        });
-
-        function selectCamera(camara) {
-            scanner.start(camaras[camara]);
-        }
-
-        function problema(error) {
-            swal('Oops...', 'Ocurrió un error inesperado!  ' + error, 'info');
-        }
-
-        function noexiste() {
-            swal('Oops...', 'Esto no se encuentra registrado!', 'warning');
-        }
-
-        function camara() {
-            swal('Oops...', 'No hay camara!', 'info');
-        }
-    </script>
     <script>
         $(document).ready(function () {
             $('#resultado').hide();

@@ -138,6 +138,8 @@
                     <span class="help-block"></span>
                 </div>
             </div>
+            </div>
+             <div class="col-md-4 col-md-offset-1">
             <div class="form-group">
                 <asp:Label ID="Label5" class="control-label col-sm-3" runat="server" Text="Serial:"></asp:Label>
                 <div class="col-sm-9">
@@ -145,8 +147,6 @@
                     <span class="help-block"></span>
                 </div>
             </div>
-            </div>
-             <div class="col-md-4 col-md-offset-1">
             <div class="form-group">
                 <asp:Label ID="Label8" class="control-label col-sm-3" runat="server" Text="Modelo:"></asp:Label>
                 <div class="col-sm-9">
@@ -158,13 +158,6 @@
                 <asp:Label ID="Label9" class="control-label col-sm-3" runat="server" Text="Marca:"></asp:Label>
                 <div class="col-sm-9">
                     <asp:TextBox ID="marca" onkeyup="validacion('marca');" type="text" class="form-control" placeholder="Marca del producto" runat="server" MaxLength="10"></asp:TextBox>
-                    <span class="help-block"></span>
-                </div>
-            </div>
-             <div class="form-group">
-                <asp:Label ID="Label2" class="control-label col-sm-3" runat="server" Text="Cantidad:"></asp:Label>
-                <div class="col-sm-9">
-                    <asp:TextBox ID="cantidad" onkeyup="validacion('cantidad');" type="text" class="form-control" placeholder="Cantidad del producto" runat="server" MaxLength="11"></asp:TextBox>
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -356,7 +349,7 @@
         $('#btn_Actualizar').click(verificarmodifi);
         $('#btn_Buscar').click(buscar);
         function verificarmodifi() {
-            var c1 = 0,c2=0, c3 = 0, c4 = 0, c5 = 0,
+            var c1 = 0, c3 = 0, c4 = 0, c5 = 0,
                 c6 = 0, c7 = 0, c8 = 0, c9 = 0, c10 = 0;
             c1 = validacion('referencia');
             c3 = validacion('nombre');
@@ -368,8 +361,7 @@
             c8 = validacion('modelo');
             c9 = validacion('valorUnitario');
             c10 = selectConsumible();
-            c2 = validacion('cantidad');
-            if (c1 == false || c2 == false || c3 == false || c4 == false || c5 == false || c6 == false || c7 == false || c8 == false || c9 == false || c10 == false) {
+            if (c1 == false || c3 == false || c4 == false || c5 == false || c6 == false || c7 == false || c8 == false || c9 == false || c10 == false) {
                 $("#exito").hide();
                 $("#error").show();
                 return false;
@@ -379,7 +371,7 @@
             }
         }
         function verificar() {
-            var v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0, v8 = 0, v9 = 0, v10 = 0, v11=0;
+            var v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0, v8 = 0, v9 = 0, v10 = 0;
             v1 = validacion('referencia');
             v2 = validacion('nombre');
             v3 = validacion('descripcion');
@@ -390,8 +382,7 @@
             v8 = validacion('modelo');
             v9 = validacion('valorUnitario');
             v10 = selectConsumible();
-            v11 = validacion('cantidad');
-            if (v1 === false || v2 === false || v3 === false || v4 === false || v5 === false || v6 == false || v7 == false || v8 == false || v9 == false || v10 == false || v11==false) {
+            if (v1 === false || v2 === false || v3 === false || v4 === false || v5 === false || v6 == false || v7 == false || v8 == false || v9 == false || v10 == false) {
                 $("#exito").hide();
                 $("#error").show();
                 return false;
@@ -642,33 +633,6 @@
                     }
                 }
             }
-
-            if (campo === 'cantidad') {
-                cant = document.getElementById(campo).value;
-                if (cant == null || cant.length == 0 || /^\s+$/.test(cant)) {
-                    $("#glypcn" + campo).remove();
-                    $("#" + campo).parent().parent().attr("class", "form-group has-error has-feedback");
-                    $('#' + campo).parent().children('span').text("Ingrese la cantidad del producto.").show();
-                    $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
-                    return false;
-                } else {
-                    if (isNaN(cant)) {
-                        $("#glypcn" + campo).remove();
-                        $('#' + campo).parent().parent().attr("class", "form-group has-error has-feedback");
-                        $('#' + campo).parent().children('span').text("Solo se admiten números.").show();
-                        $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
-                        return false;
-                    }
-                    else {
-                            $("#glypcn" + campo).remove();
-                            $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
-                            $('#' + campo).parent().children('span').hide();
-                            $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-                            return true;
-                    }
-                }
-            }
-
             if (campo === 'buscar') {
                 buscar = document.getElementById(campo).value;
                 if (buscar == null || buscar.length == 0 || /^\s+$/.test(buscar)) {

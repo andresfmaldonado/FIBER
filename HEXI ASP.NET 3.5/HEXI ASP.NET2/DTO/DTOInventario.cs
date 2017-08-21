@@ -72,36 +72,10 @@ namespace DTO
         private int id_pedido;
         private DateTime fecha_pedido;
         private float valorTotal;
-        private string estado_pedido;
-        
 
         public int Id_Pedido { get; set; }
         public DateTime Fecha_Pedido { get; set; }
         public float ValorTotal { get; set; }
-        public string Estado_Pedido { get; set; }
-        
-
-        //tbl_ingreso
-
-        private int id_ingreso;
-
-
-        public int Id_Ingreso { get; set; }
-
-        //tbl_ingreso_productos_e_hilos
-
-        private int cantidad_ingreso;
-        private int cantidad_defectuoso;
-        private float cantidad_ingreso_hilo;
-        private float cantidad_defectuoso_hilo;
-        private string detalles_ingreso;
-
-        public int Cantidad_Ingreso { get; set; }
-        public int Cantidad_Defectuoso { get; set; }
-        public float Cantidad_Ingreso_Hilo { get; set; }
-        public float Cantidad_Defectuoso_Hilo { get; set; }
-        public string Detalles_Ingreso { get; set; }
-
 
         //tbl_pedido_producto
         private float valorTotal_producto;
@@ -117,14 +91,10 @@ namespace DTO
         private int id_consumo;
         private DateTime fecha_consumo;
         private int id_usuario;
-        private int consumo;
-        private int resta;
 
         public int Id_Consumo { get; set; }
         public DateTime Fecha_Consumo { get; set; }
         public int Id_Usuario { get; set; }
-        public float Consumo { get; set; }
-        public float Resta { get; set; }
 
 
 

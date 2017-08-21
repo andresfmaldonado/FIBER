@@ -234,7 +234,7 @@ html {
     font-size: 16px; }
 
   .bienvenidos {
-    background: linear-gradient(0deg,rgba(0, 0, 0, 0.6),rgba(107, 107, 107, 0.15)),url("../images/hexi.jpg");
+    background: linear-gradient(0deg,rgba(0, 0, 0, 0.6),rgba(107, 107, 107, 0.15)),url("../images/hexi.JPG");
     background-size: cover; }
 
   .texto-bienvenido {

@@ -28,8 +28,6 @@ namespace DTO
         private string descript_report;
         private DateTime fecha_report;
         private string estado_report;
-        private string _descripcion_history;
-        private int _id_u_logueado;
 
         public string Correo
         {
@@ -288,32 +286,6 @@ namespace DTO
             set
             {
                 estado_report = value;
-            }
-        }
-
-        public string Descripcion_history
-        {
-            get
-            {
-                return _descripcion_history;
-            }
-
-            set
-            {
-                _descripcion_history = value;
-            }
-        }
-
-        public int Id_u_logueado
-        {
-            get
-            {
-                return _id_u_logueado;
-            }
-
-            set
-            {
-                _id_u_logueado = value;
             }
         }
     }

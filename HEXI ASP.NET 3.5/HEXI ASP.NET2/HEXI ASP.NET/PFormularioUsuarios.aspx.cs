@@ -84,17 +84,13 @@ namespace HEXI_ASP.NET
             GridViewRow fila = GVUsuarios.Rows[e.RowIndex];
             int codigo = Convert.ToInt32(GVUsuarios.DataKeys[e.RowIndex].Values[0]);
             string estado = (fila.FindControl("ESTADO_USER") as Label).Text.ToLower();
-            string useridentific = (fila.FindControl("DNI_USER") as Label).Text;
             DTOUsuario user = new DTOUsuario();
             user.Id = codigo;
-            user.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
             CADUsuario procesos = new CADUsuario();
             if (estado == "habilitado")
             {
                 if (procesos.DardeBaja(user) == 0)
                 {
-                    user.Descripcion_history = "Deshabilitación usuario: "+useridentific;
-                    procesos.InsertarHistorial(user);
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "baja", "AccesoDesh();", true);
                 }
                 else
@@ -108,8 +104,6 @@ namespace HEXI_ASP.NET
                 {
                     if (procesos.DardeAlta(user) == 0)
                     {
-                        user.Descripcion_history = "Habilitación usuario: " + useridentific;
-                        procesos.InsertarHistorial(user);
                         ScriptManager.RegisterClientScriptBlock(this, GetType(), "alta", "AccesoHab();", true);
                     }
                     else
@@ -254,9 +248,6 @@ namespace HEXI_ASP.NET
                             if (rol != 0)
                             {
                                 procesos.EnviarCorreoRegistro(user);
-                                user.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
-                                user.Descripcion_history = "Registro usuario: " + identificacion.Text;
-                                procesos.InsertarHistorial(user);
                                 identificacion.Text = "";
                                 nombres.Text = "";
                                 apellidos.Text = "";
@@ -419,8 +410,6 @@ namespace HEXI_ASP.NET
                 user.Correo = email.Text;
                 user.Contraseña = password.Text;
                 user.Tel = telefono.Text;
-                user.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
-                user.Descripcion_history = "Actualización usuario: " + identificacion.Text;
 
                 if (procesos.ConsultarDNIPorId(user) != (identificacion.Text))
                 {
@@ -468,7 +457,6 @@ namespace HEXI_ASP.NET
                                 }
                                 if (proceso_rol > 0)
                                 {
-                                    procesos.InsertarHistorial(user);
                                     identificacion.Text = "";
                                     nombres.Text = "";
                                     apellidos.Text = "";
@@ -546,7 +534,6 @@ namespace HEXI_ASP.NET
                             }
                             if (proceso_rol > 0)
                             {
-                                procesos.InsertarHistorial(user);
                                 identificacion.Text = "";
                                 nombres.Text = "";
                                 apellidos.Text = "";
@@ -618,7 +605,6 @@ namespace HEXI_ASP.NET
                             }
                             if (proceso_rol > 0)
                             {
-                                procesos.InsertarHistorial(user);
                                 identificacion.Text = "";
                                 nombres.Text = "";
                                 apellidos.Text = "";
@@ -690,7 +676,6 @@ namespace HEXI_ASP.NET
                         }
                         if (proceso_rol > 0)
                         {
-                            procesos.InsertarHistorial(user);
                             identificacion.Text = "";
                             nombres.Text = "";
                             apellidos.Text = "";

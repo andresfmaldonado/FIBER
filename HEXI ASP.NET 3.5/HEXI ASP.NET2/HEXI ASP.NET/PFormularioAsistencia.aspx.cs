@@ -109,10 +109,7 @@ namespace HEXI_ASP.NET
                 infor.Id = Convert.ToInt32(id_user);
                     if (user.InsertarReporteProblema(infor) == 0)
                     {
-                    infor.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
-                    infor.Descripcion_history = "Registro solicitud ayuda";
-                    user.InsertarHistorial(infor);
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
                     }
                     else
                     {

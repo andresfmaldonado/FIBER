@@ -85,7 +85,6 @@ namespace HEXI_ASP.NET
             int val = 0;
             int consu = 2;     
             int confirma = 0;
-            int cantid_p = 0;
             DTOInventario inven = new DTOInventario();
             CADInventario inventario = new CADInventario();
             try
@@ -93,7 +92,7 @@ namespace HEXI_ASP.NET
                 
                 val = Convert.ToInt32(valorUnitario.Text);
                 consu = Convert.ToInt32(consumible.SelectedValue);
-                cantid_p = Convert.ToInt32(cantidad.Text);
+                
 
 
 
@@ -123,7 +122,6 @@ namespace HEXI_ASP.NET
                 inven.Modelo_Producto = modelo.Text;
                 inven.ValorUnitario_Producto = val;
                 inven.Consumible = consu;
-                inven.Cantidad_Producto = cantid_p;
                 if(inventario.ConsultarProductoPorRef(inven) == 0)
                 {
                     if (inventario.ConsultarProductoPorPlaca(inven) == 0)
@@ -147,28 +145,13 @@ namespace HEXI_ASP.NET
                                 var imagenfinal = new Bitmap(image, new Size(new Point(200, 200)));
                                 //Guardar codigoQR en carpeta servidor
                                 imagenfinal.Save(Server.MapPath("~/QR/") + referencia.Text+".png", ImageFormat.Png);
-                                DTOUsuario u = new DTOUsuario();
-                                CADUsuario process = new CADUsuario();
-                                u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
-                                u.Descripcion_history = "Registro producto referencia: "+referencia.Text;
-                                process.InsertarHistorial(u);
+
                                 btn_Registrar.CssClass = "btn btn-default";
                                 btn_Registrar.Enabled = true;
                                 btn_Actualizar.CssClass = "btn btn-default";
                                 btn_Actualizar.Enabled = false;
                                 btn_Cancelar.CssClass = "btn btn-default";
                                 btn_Cancelar.Enabled = false;
-                                codigo.Text = "";
-                                referencia.Text = "";
-                                nombre.Text = "";
-                                descripcion.Text = "";
-                                novedad.Text = "";
-                                placa.Text = "";
-                                serial.Text = "";
-                                marca.Text = "";
-                                modelo.Text = "";
-                                cantidad.Text = "";
-                                valorUnitario.Text = "";
                                 inventario.CargarProductos(GVProductos);
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
                             }else
@@ -203,7 +186,7 @@ namespace HEXI_ASP.NET
             CADInventario inventario = new CADInventario();
             DTOInventario inven = new DTOInventario();
             inven.Id_Producto = id;
-            if (inventario.CompletarRegistroProductoParaModificar(inven, codigo, referencia, nombre, descripcion, novedad, placa, serial, marca, modelo,cantidad,valorUnitario, consumible) == 0)
+            if (inventario.CompletarRegistroProductoParaModificar(inven, codigo, referencia, nombre, descripcion, novedad, placa, serial, marca, modelo,valorUnitario, consumible) == 0)
             {
                 btn_Registrar.CssClass = "btn btn-default";
                 btn_Registrar.Enabled = false;
@@ -211,7 +194,6 @@ namespace HEXI_ASP.NET
                 btn_Actualizar.Enabled = true;
                 btn_Cancelar.CssClass = "btn btn-default";
                 btn_Cancelar.Enabled = true;
-                cantidad.ReadOnly = true;
             }else
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
@@ -261,16 +243,11 @@ namespace HEXI_ASP.NET
                 inven.Modelo_Producto = modelo.Text;
                 inven.ValorUnitario_Producto = val;
                 inven.Consumible = consu;
-                inven.Cantidad_Producto = int.Parse(cantidad.Text);
                 if (modifi == 1)
                 {
                     if (inventario.ModificarProducto(inven) == 0)
                     {
-                            DTOUsuario u = new DTOUsuario();
-                            CADUsuario process = new CADUsuario();
-                            u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
-                            u.Descripcion_history = "Actualización producto referencia: " + referencia.Text;
-                            process.InsertarHistorial(u);
+                       
                             codigo.Text = "";
                             referencia.Text = "";
                             nombre.Text = "";
@@ -280,7 +257,6 @@ namespace HEXI_ASP.NET
                             serial.Text = "";
                             marca.Text = "";
                             modelo.Text = "";
-                            cantidad.Text = "";
                             valorUnitario.Text = "";
                             // consumible.Text = "";
                             btn_Registrar.CssClass = "btn btn-default";
@@ -289,7 +265,6 @@ namespace HEXI_ASP.NET
                             btn_Actualizar.Enabled = false;
                             btn_Cancelar.CssClass = "btn btn-default";
                             btn_Cancelar.Enabled = false;
-                            cantidad.ReadOnly = false;
                             // program.ObtenerUltimoIDProgramaEIncrementarlo(codigo_programa);
                             inventario.CargarProductos(GVProductos);
                             ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "modificacion();", true);
@@ -332,8 +307,6 @@ namespace HEXI_ASP.NET
             marca.Text = "";
             modelo.Text = "";
             valorUnitario.Text = "";
-            cantidad.Text = "";
-            cantidad.ReadOnly = false;
             CADInventario inventario = new CADInventario();
             GVProductos.EditIndex = -1;
             inventario.CargarProductos(GVProductos);

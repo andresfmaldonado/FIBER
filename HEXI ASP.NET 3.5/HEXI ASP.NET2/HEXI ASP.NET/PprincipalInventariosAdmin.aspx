@@ -59,18 +59,6 @@
 							</div>
 						</div>
 					</li>
-                  <li id="ingresos" runat="server">
-						<div class="ch-item">
-							<div class="ch-info">
-								<div class="ch-info-front ch-img-21"></div>
-								<div class="ch-info-back">
-                                    <a href="IFormularioIngresos.aspx"><h3>Ingresos</h3>
-									<p>Fiber</p>
-                                        </a>
-								</div>
-							</div>
-						</div>
-					</li>
                   <li id="consumos" runat="server">
 						<div class="ch-item">				
 							<div class="ch-info">
@@ -105,18 +93,6 @@
 								<div class="ch-info-front ch-img-14"></div>
 								<div class="ch-info-back">
                                     <a href="IFormularioHilos.aspx"><h3>Hilos</h3>
-									<p>Fiber</p>
-                                        </a>
-								</div>
-							</div>
-						</div>
-					</li>
-                  <li id="historial" runat="server">
-						<div class="ch-item">
-							<div class="ch-info">
-								<div class="ch-info-front ch-img-22"></div>
-								<div class="ch-info-back">
-                                    <a href="History.aspx"><h3>Historial</h3>
 									<p>Fiber</p>
                                         </a>
 								</div>

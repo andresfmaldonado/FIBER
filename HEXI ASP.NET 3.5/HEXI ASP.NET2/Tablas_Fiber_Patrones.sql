@@ -19,8 +19,8 @@ foto_usuario VARCHAR(80) NOT NULL
 select * from tbl_usuario
 INSERT INTO tbl_usuario(dni_usuario,nombre_usuario,apellido_usuario,
 email_usuario,contraseña_usuario,tel_usuario,estado_usuario,foto_usuario)
-values ('1020488475','Johan','Zapata Herrera','johanzahe@outlook.com','johanzahe','3045984094',
-'Habilitado','Fotos/photoperfilpodefecto.jpg');
+values ('1017','Andres','Maldonado','and@hotm.com','123','2993889',
+'Habilitado','image.jpg');
 
 
 
@@ -35,11 +35,9 @@ CREATE TABLE tbl_historial(
 id INT PRIMARY KEY IDENTITY,
 id_usuario INT NOT NULL,
 descripcion VARCHAR(50) NOT NULL,
-fecha_h DATETIME NOT NULL
 FOREIGN KEY (id_usuario) REFERENCES tbl_usuario(id_usuario)
 );
 --Fin tabla historial--
-
 
 --Tabla rol--
 
@@ -50,12 +48,10 @@ descrip_rol VARCHAR(50) NOT NULL
 );
 
 --Fin tabla Rol--
-
 select * from tbl_rol
 delete from tbl_rol
 insert into tbl_rol(nombre_rol,descrip_rol) values ('Seleccione el rol',''),('Administrador','Acceso total'),('Instructor','Acceso limitado'),
 ('Aprendiz','Solo acceso a Patrones');
-
 --Tabla intermedia entre usuario y rol--
 
 CREATE TABLE tbl_usuario_rol(
@@ -64,10 +60,8 @@ id_rol INT NOT NULL,
 FOREIGN KEY(id_usuario) REFERENCES tbl_usuario(id_usuario),
 FOREIGN KEY(id_rol) REFERENCES tbl_rol(id_rol)
 );
-
 select * from tbl_usuario_rol
-insert into tbl_usuario_rol values (1,2)
-
+insert into tbl_usuario_rol values (1,7)
 --Fin tabla intermedia usuario_rol--
 
 --Tabla programa--

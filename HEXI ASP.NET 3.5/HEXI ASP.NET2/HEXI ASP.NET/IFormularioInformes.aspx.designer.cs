@@ -10,7 +10,7 @@
 namespace HEXI_ASP.NET {
     
     
-    public partial class IFormularioInformes {
+    public partial class IFormularioInventario {
         
         /// <summary>
         /// Control usuarios.
