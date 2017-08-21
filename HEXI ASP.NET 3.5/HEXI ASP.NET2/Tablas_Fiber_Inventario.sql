@@ -52,6 +52,10 @@ FOREIGN KEY (id_inventario) REFERENCES tbl_inventarios (id_inventario),
 FOREIGN KEY (id_producto) REFERENCES tbl_productos (id_producto)
 );
 
+<<<<<<< HEAD
+=======
+select * from tbl_consumo_hilo
+>>>>>>> Andres
 --TABLA INVENTARIO HILOS--
 
 CREATE TABLE tbl_inventario_hilo(
@@ -155,6 +159,7 @@ FOREIGN KEY(id_consumo) REFERENCES tbl_consumos(id_consumo),
 FOREIGN KEY(id_inventario) REFERENCES tbl_inventarios(id_inventario)
 );
 
+<<<<<<< HEAD
 --TABLA DE INGRESOS DE PRODUCTOS --
 
 CREATE TABLE tbl_ingresos(
@@ -183,6 +188,17 @@ cantidad_hilo_defectuoso FLOAT NULL,
 detalles VARCHAR(50) NOT NULL,
 fecha_ingreso DATETIME NOT NULL);
 
+=======
+--TABLA DE PASO PARA EL REGISTRO--
+
+CREATE TABLE tbl_paso(
+id INT,
+referencia VARCHAR(20),
+cantidad float,
+consumo float, 
+resta float
+);
+>>>>>>> Andres
 
 
 

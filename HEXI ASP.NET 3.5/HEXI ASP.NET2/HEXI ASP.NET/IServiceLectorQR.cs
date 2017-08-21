@@ -43,6 +43,7 @@ namespace HEXI_ASP.NET
 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+<<<<<<< HEAD
         List<DTOInventario> tablapedidop(int referencia);
 
         [OperationContract]
@@ -60,5 +61,20 @@ namespace HEXI_ASP.NET
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> tablapedidoh(int referencia);
+=======
+        List<DTOInventario> tablahilos();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        List<DTOInventario> hilos(int id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        List<DTOInventario> buscarHilo(string referencia);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        List<DTOInventario> registrarhilo(int id, string referencia, string metros, string consumo);
+>>>>>>> Andres
     }
 }

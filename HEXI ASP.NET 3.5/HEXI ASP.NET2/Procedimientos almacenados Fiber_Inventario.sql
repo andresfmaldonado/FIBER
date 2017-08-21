@@ -59,26 +59,23 @@ and id_inventario = @id_inven and id_producto = @id_produc;
 END
 --FIN PROCEDURE--
 -------------------
-
+select * from tbl_consumo_hilo
 --PROCEDURE PARA REGISTRAR EL CONSUMO DE UN HILO------------------------------------------------
 CREATE PROCEDURE prc_insertar_consumo_hilos(
 @id_cons INT,
 @id_inven INT,
 @id_h INT,
-@metros FLOAT
+@cons FLOAT
 )
 AS
 BEGIN
+INSERT INTO tbl_consumo_hilo VALUES (@id_cons, @id_inven, @id_h, @cons);
 declare @cantidad_existente INT;
-
-INSERT INTO tbl_consumo_hilo VALUES (@id_cons, @id_inven,@id_h,@metros);
-
 set @cantidad_existente = (select metros_hilo from tbl_inventario_hilo 
 where id_inventario = @id_inven and id_hilo = @id_h);
-UPDATE tbl_inventario_hilo SET metros_hilo = @cantidad_existente - @metros
+UPDATE tbl_inventario_hilo SET metros_hilo = @cantidad_existente - @cons
 where id_inventario = @id_inven and id_hilo = @id_h;
 END
-
 --FIN PROCEDURE--
 
 --PROCEDURE PARA CONSULTAR HILO PARA CONSUMO--
@@ -113,6 +110,21 @@ END
 
 
 --FIN PROCEDURE--
+select * from tbl_inventario_hilo
+insert into tbl_inventario_hilo values (2,3,5)
+--PROCEDURE PARA BUSCAR HILO POR EL ID PARA CONSUMO----------------------------------------
+CREATE PROCEDURE prc_consultar_hilo_por_id_consumo(
+@id INT
+)
+AS
+BEGIN
+declare @inven int;
+set @inven = (select MAX(id_inventario) from tbl_inventario_hilo);
+SELECT H.id_hilo, H.referencia_hilo, H.tipo_hilo, H.titulo_hilo, H.color_hilo, IH.metros_hilo
+FROM tbl_hilos as H Inner Join tbl_inventario_hilo as IH On
+H.id_hilo = IH.id_hilo and IH.id_inventario = @inven and IH.id_hilo = @id 
+END
+
 
 
 --En veremos---
@@ -259,7 +271,26 @@ BEGIN
 INSERT INTO tbl_inventarios(referencia_inventario,observacion_inventario,
 fecha) VALUES (@ref,@observacion,CURRENT_TIMESTAMP);
 END
+--FIN PROCEDURE--
 
+--PROCEDURE PARA CONSULTAR EL ULTIMO INVENTARIO DE HILOS--
+CREATE PROCEDURE prc_consultar_maximo_id_inventario_hilo
+AS
+BEGIN
+SELECT MAX(I.id_inventario) as id_inventario FROM tbl_hilos as H INNER JOIN tbl_inventario_hilo as IH ON H.id_hilo = IH.id_hilo INNER JOIN tbl_inventarios as I ON IH.id_inventario = I.id_inventario;
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA CONSULTAR TODOS LOS HILOS DEL INVENTARIO--
+CREATE PROCEDURE prc_consultar_todos_hilos_inventario
+AS
+BEGIN
+declare @inven int;
+set @inven = (select MAX(id_inventario) from tbl_inventario_hilo);
+SELECT H.id_hilo, H.referencia_hilo, H.tipo_hilo, H.titulo_hilo, H.color_hilo, IH.metros_hilo
+FROM tbl_hilos as H Inner Join tbl_inventario_hilo as IH On
+H.id_hilo = IH.id_hilo and IH.id_inventario = @inven;
+END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA REGISTRAR EN EL INVENTARIO UN PRODUCTO--------------------------------
@@ -525,6 +556,7 @@ END
 
 --FIN PROCEDURE--
 
+<<<<<<< HEAD
 --PROCEDURE PARA REGISTRAR UN INGRESO---
 CREATE PROCEDURE prc_register_ingreso(@refer_pedido VARCHAR(15))
 AS
@@ -612,3 +644,18 @@ BEGIN
 SELECT id_pedido,(CAST(fecha_pedido AS VARCHAR(50))+' / '+ CAST(id_pedido AS VARCHAR(15))) AS pedido FROM tbl_pedidos WHERE categoria='Hilos';
 END
 --FIN PROCEDURE--
+=======
+--PROCEDURE PARA INSERTAR TABLA DE PASO--
+CREATE PROCEDURE prc_insertar_paso(
+@id int,
+@ref varchar(20),
+@cant float,
+@con float
+)
+AS
+BEGIN
+declare @res float;
+set @res = @cant - @con;
+INSERT INTO tbl_paso VALUES (@id,@ref,@cant,@con,@res);
+END
+>>>>>>> Andres

@@ -148,24 +148,6 @@ namespace HEXI_ASP.NET {
         protected global::System.Web.UI.WebControls.TextBox consumo;
         
         /// <summary>
-        /// registrar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button registrar;
-        
-        /// <summary>
-        /// Button2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
-        
-        /// <summary>
         /// Label4 control.
         /// </summary>
         /// <remarks>
@@ -184,6 +166,7 @@ namespace HEXI_ASP.NET {
         protected global::System.Web.UI.WebControls.TextBox buscar;
         
         /// <summary>
+<<<<<<< HEAD
         /// Button5 control.
         /// </summary>
         /// <remarks>
@@ -220,6 +203,8 @@ namespace HEXI_ASP.NET {
         protected global::System.Web.UI.WebControls.HiddenField _repostcheckcode;
 
 >>>>>>> JohanZapata
+=======
+>>>>>>> Andres
         /// fin_consumo control.
         /// </summary>
         /// <remarks>

@@ -139,6 +139,7 @@ namespace HEXI_ASP.NET
             return userestadist;
         }
 
+<<<<<<< HEAD
         public List<DTOInventario> tablapedidop(int referencia)
         {
             List<DTOInventario> tabla = new List<DTOInventario>();
@@ -199,6 +200,50 @@ namespace HEXI_ASP.NET
             datos.Detalles_Ingreso = detalles;
             result = proceso.registeringresohilo(datos);
             return result;
+=======
+        public List<DTOInventario> tablahilos()
+        {
+            List<DTOInventario> tabla = new List<DTOInventario>();
+            CADInventario procesos = new CADInventario();
+            tabla = procesos.tablahilos();
+            return tabla;
+
+
+        }
+
+        public List<DTOInventario> hilos(int id)
+        {
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+            datos.Id_Hilo = id;
+            hilos = procesos.hilos(datos);
+            return hilos;
+        }
+
+        public List<DTOInventario> buscarHilo(string referencia)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Referencia_Hilo = referencia;
+            hilo = proceso.buscarHilo(datos);
+            return hilo;
+
+        }
+        
+        public List<DTOInventario> registrarhilo(int id, string referencia, string metros, string consumo)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Hilo = id;
+            datos.Referencia_Hilo = referencia;
+            datos.Metros_Hilo = float.Parse(metros);
+            datos.Consumo = float.Parse(consumo);
+            hilo = proceso.registrarhilo(datos);
+            return hilo;
+>>>>>>> Andres
         }
     }
 }
