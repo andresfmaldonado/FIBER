@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace HEXI_ASP.NET
 {
-    public partial class IFormularioInformes : System.Web.UI.Page
+    public partial class IFormularioIngresos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,12 +32,17 @@ namespace HEXI_ASP.NET
                     Response.Expires = 0;
                     Response.Cache.SetExpires(DateTime.Now);
                     Response.Cache.SetValidUntilExpires(true);
+                    if (!IsPostBack)
+                    {
+                        CADInventario process = new CADInventario();
+                        process.CargarPedidosProductosSelect(DropDownList1);
+                        process.CargarPedidosHilosSelect(DropDownList2);
+                    }
                 }
                 else
                 {
                     Response.Redirect("default.aspx");
                 }
-
             }
         }
     }
