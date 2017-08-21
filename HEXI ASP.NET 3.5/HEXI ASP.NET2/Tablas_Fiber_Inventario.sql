@@ -47,7 +47,7 @@ FOREIGN KEY (id_inventario) REFERENCES tbl_inventarios (id_inventario),
 FOREIGN KEY (id_producto) REFERENCES tbl_productos (id_producto)
 );
 
-
+select * from tbl_consumo_hilo
 --TABLA INVENTARIO HILOS--
 
 CREATE TABLE tbl_inventario_hilo(
@@ -147,6 +147,16 @@ id_hilo INT NOT NULL,
 metros_hilos FLOAT NOT NULL,
 FOREIGN KEY(id_consumo) REFERENCES tbl_consumos(id_consumo),
 FOREIGN KEY(id_inventario) REFERENCES tbl_inventarios(id_inventario)
+);
+
+--TABLA DE PASO PARA EL REGISTRO--
+
+CREATE TABLE tbl_paso(
+id INT,
+referencia VARCHAR(20),
+cantidad float,
+consumo float, 
+resta float
 );
 
 

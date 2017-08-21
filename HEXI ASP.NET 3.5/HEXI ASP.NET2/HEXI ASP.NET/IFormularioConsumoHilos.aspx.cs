@@ -69,49 +69,48 @@ namespace HEXI_ASP.NET
             }
         }
 
-        
-
-        
-        
-        protected void registrar_Click(object sender, EventArgs e)
-        {
-            List<DTOInventario> hilo = new List<DTOInventario>();
-            hilo.Add(new DTOInventario
-            {
-                Id_Hilo = int.Parse(id.Text),
-                Referencia_Hilo = referencia.Text,
-                Metros_Hilo = float.Parse(metros.Text),
-                Consumo = int.Parse(consumo.Text),
-                Resta = int.Parse(metros.Text) - int.Parse(consumo.Text)
-            });
-            GVHilosTemp.DataSource = hilo;
-            GVHilosTemp.DataBind();
-
-
-
-        }
-
         protected void fin_consumo_Click(object sender, EventArgs e)
         {
             
             int id_u = Convert.ToInt32(Session["id_usuario"]);
+            int confirmacion = 0;
             DTOInventario inven = new DTOInventario();
             CADInventario inventario = new CADInventario();
             try
             {
                
                 inven.Id_Usuario = id_u;
+                inventario.InsertarConsumo(inven);
+                List<DTOInventario> hilos = new List<DTOInventario>();
+                hilos = inventario.consultarPaso();
+                int cont = hilos.Count;
+                int i = 0;
+                int id_consumo = inventario.maximoId_Consumo();
+                int id_inventario = inventario.maximoId_Inventario_Hilo();
+                while (i<cont)
+                {
+                    confirmacion = inventario.registrarConsumoHilo(hilos[i].Id_Hilo, hilos[i].Consumo, id_consumo, id_inventario);
+                    i += 1;
+                }
+                    
                 
+                
+                
+
             }
             catch
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "problema();", true);
 
             }
 
-            if (inventario.InsertarConsumo(inven) == 0)
+            if (confirmacion == 0)
             {
-
+                inventario.eliminarPaso();
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
+            }else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "problema();", true);
             }
         }
     }

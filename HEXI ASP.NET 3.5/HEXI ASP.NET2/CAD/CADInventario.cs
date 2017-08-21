@@ -21,7 +21,7 @@ namespace CAD
         SqlDataAdapter da;
         SqlDataReader dr;
         DataTable dt;
-        int confirmacion;
+        
 
         public CADInventario()
         {
@@ -92,7 +92,7 @@ namespace CAD
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@ref", inven.Referencia_Producto);
             dr = cmd.ExecuteReader();
-            while(dr.Read()){
+            while (dr.Read()) {
                 existe++;
             }
             dr.Close();
@@ -157,10 +157,10 @@ namespace CAD
                 cmd.Parameters.AddWithValue("@consu_pro", inven.Consumible);
                 cmd.ExecuteNonQuery();
             }
-            catch 
+            catch
             {
                 estado = 1;
-               
+
             }
             cnx.Close();
             return estado;
@@ -242,7 +242,7 @@ namespace CAD
             return estado;
         }
 
-        public int CompletarRegistroProductoParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia,TextBox nombre, TextBox descripcion, TextBox novedad, TextBox placa, TextBox serial, TextBox marca, TextBox modelo, TextBox valorUnitario, DropDownList consumible)
+        public int CompletarRegistroProductoParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia, TextBox nombre, TextBox descripcion, TextBox novedad, TextBox placa, TextBox serial, TextBox marca, TextBox modelo, TextBox valorUnitario, DropDownList consumible)
         {
             int estado = 0;
             cnx.Open();
@@ -299,10 +299,10 @@ namespace CAD
                 }
                 dr.Close();
             }
-            catch 
+            catch
             {
                 estado = 1;
-                
+
             }
             cnx.Close();
             return estado;
@@ -412,7 +412,7 @@ namespace CAD
             cnx.Close();
 
         }
-        
+
         public int ConsultarHiloPorRef(DTOInventario inven)
         {
             int existe = 0;
@@ -466,10 +466,10 @@ namespace CAD
                 cmd.Parameters.AddWithValue("@valor", inven.ValorMetro);
                 cmd.ExecuteNonQuery();
             }
-            catch 
+            catch
             {
                 estado = 1;
-                
+
             }
             cnx.Close();
             return estado;
@@ -498,7 +498,7 @@ namespace CAD
                 }
                 dr.Close();
             }
-            catch 
+            catch
             {
 
                 estado = 1;
@@ -611,7 +611,7 @@ namespace CAD
                 cmd.Parameters.AddWithValue("@fec", inven.Fecha_Pedido);
                 cmd.Parameters.AddWithValue("@desc", inven.Id_Producto);
                 cmd.Parameters.AddWithValue("@cant", inven.Cantidad_Producto);
-                
+
                 cmd.ExecuteNonQuery();
             }
             catch
@@ -672,7 +672,7 @@ namespace CAD
                 Product.ValorUnitario_Producto = int.Parse(dr["valorUnitario_producto"].ToString());
                 //Product.Consumible = int.Parse(dr["consumible"].ToString());
                 Producto.Add(Product);
-            }else
+            } else
             {
                 Producto.Add(null);
             }
@@ -698,7 +698,7 @@ namespace CAD
             {
                 DTOInventario Product = new DTOInventario();
                 Product.Referencia_Producto = dr["referencia_producto"].ToString();
-               //Product.Item_Producto = dr["item_producto"].ToString();
+                //Product.Item_Producto = dr["item_producto"].ToString();
                 Product.Nombre_Producto = dr["nombre_producto"].ToString();
                 Product.Descripcion_Producto = dr["descripcion_producto"].ToString();
                 Product.Novedad_Producto = dr["novedad_producto"].ToString();
@@ -809,6 +809,155 @@ namespace CAD
             return hilos;
         }
 
+        public List<DTOInventario> registrarhilo(DTOInventario datos)
+        {
+            int confirmacion = 0;
+            List<DTOInventario> registro = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_insertar_paso";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Hilo);
+            cmd.Parameters.AddWithValue("@ref", datos.Referencia_Hilo);
+            cmd.Parameters.AddWithValue("@cant", datos.Metros_Hilo);
+            cmd.Parameters.AddWithValue("@con", datos.Consumo);
+            confirmacion = cmd.ExecuteNonQuery();
+            if (confirmacion > 0)
+            {
+                
+                cmd.CommandText = "select * from tbl_paso";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    registro.Add(new DTOInventario
+                    {
+                        Id_Hilo = int.Parse(dr["id"].ToString()),
+                        Referencia_Hilo = dr["referencia"].ToString(),
+                        Metros_Hilo = float.Parse(dr["cantidad"].ToString()),
+                        Consumo = float.Parse(dr["consumo"].ToString()),
+                        Resta = float.Parse(dr["resta"].ToString())
+                    });
+                }
+               
+                
+            }
+            dr.Close();
+            cnx.Close();
+            return registro;
+
+        }
+
+        public List<DTOInventario> consultarPaso()
+        {
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "SELECT * FROM tbl_paso";
+            cmd.CommandType = CommandType.Text;
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                hilos.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id"].ToString()),
+                    Referencia_Hilo = dr["referencia"].ToString(),
+                    Metros_Hilo = float.Parse(dr["cantidad"].ToString()),
+                    Consumo = float.Parse(dr["consumo"].ToString()),
+                    Resta = float.Parse(dr["resta"].ToString())
+                });
+            }
+            dr.Close();
+            cnx.Close();
+            return hilos;
+
+        }
+        public int maximoId_Consumo()
+        {
+            int id_consumo = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "SELECT MAX(id_consumo) as id_consumo FROM tbl_consumos";
+            cmd.CommandType = CommandType.Text;
+            
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                id_consumo = int.Parse(dr["id_consumo"].ToString());
+            }
+            cnx.Close();
+            dr.Close();
+            return id_consumo;
+        }
+
+        public int maximoId_Inventario_Hilo()
+        {
+            int id_inventario = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_maximo_id_inventario_hilo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                id_inventario = int.Parse(dr["id_inventario"].ToString());
+            }
+            cnx.Close();
+            dr.Close();
+            return id_inventario;
+        }
+
+        public int registrarConsumoHilo(int Id_Hilo, float Consumo, int id_consumo, int id_inventario)
+        {
+            int estado = 0;
+            try
+            {
+                cnx.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "prc_insertar_consumo_hilos";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_cons", id_consumo);
+                cmd.Parameters.AddWithValue("@id_inven", id_inventario);
+                cmd.Parameters.AddWithValue("@id_h", Id_Hilo);
+                cmd.Parameters.AddWithValue("@cons", Consumo);
+            
+                cmd.ExecuteNonQuery();
+            }catch
+            {
+                estado = 1;
+            }
+            cnx.Close();
+            return estado;
+           
+        }
+
+        public int eliminarPaso()
+        {
+            int estado = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "DELETE FROM tbl_paso";
+            cmd.CommandType = CommandType.Text;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = 1;
+            }
+            cnx.Close();
+            
+            return estado;
+
+        }
     }
     
 }

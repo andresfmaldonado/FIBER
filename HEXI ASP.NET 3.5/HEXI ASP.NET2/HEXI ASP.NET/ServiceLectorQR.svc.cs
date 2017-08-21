@@ -168,5 +168,18 @@ namespace HEXI_ASP.NET
             return hilo;
 
         }
+        
+        public List<DTOInventario> registrarhilo(int id, string referencia, string metros, string consumo)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Hilo = id;
+            datos.Referencia_Hilo = referencia;
+            datos.Metros_Hilo = float.Parse(metros);
+            datos.Consumo = float.Parse(consumo);
+            hilo = proceso.registrarhilo(datos);
+            return hilo;
+        }
     }
 }

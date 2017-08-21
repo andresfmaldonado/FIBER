@@ -12,6 +12,23 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/styles2.css" rel="stylesheet" />
     <link href="css/stacktable.css" rel="stylesheet" />
+    <link href="css/sweetalert2.css" rel="stylesheet" />
+    <script src="jvscript/sweetalert2.js"></script>
+    <script>
+        function registro() {
+            swal("Registro éxitoso!", "", "success");
+        }
+        function problema() {
+            swal('Oops...', 'Ocurrió un error inesperado!', 'info');
+        }
+        function campos() {
+            swal('Oops...', 'Le hizo falta llenar el campo de consumo!', 'warning');
+        }
+        function seleccionarHIlo() {
+            swal('Oops...', 'No has seleccionado ningun hilo', 'warning');
+        }
+
+    </script>
     <title>Fiber|Consumo Hilos</title>
 </head>
 <body>
@@ -55,19 +72,19 @@
                 <div class="form-group">
                     <asp:Label ID="Label1" class="control-label col-sm-2" runat="server" Text="Referencia:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox ID="referencia" disabled="true" type="text" class="form-control" placeholder="Referencia del hilo" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="referencia" ReadOnly="true" type="text" class="form-control" placeholder="Referencia del hilo" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label3" class="control-label col-sm-2" runat="server" Text="Color:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="color" placeholder="Color del hilo" disabled="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="color" placeholder="Color del hilo" ReadOnly="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label6" class="control-label col-sm-2" runat="server" Text="Título:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="titulo" placeholder="Título del hilo" disabled="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="titulo" placeholder="Título del hilo" ReadOnly="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
 
@@ -76,13 +93,13 @@
                 <div class="form-group">
                     <asp:Label ID="Label5" class="control-label col-sm-2" runat="server" Text="Tipo:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="tipo" placeholder="Tipo del hilo" disabled="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="tipo" placeholder="Tipo del hilo" ReadOnly="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label7" class="control-label col-sm-2" runat="server" Text="Metros:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="metros" placeholder="Metros del hilo" disabled="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="metros" placeholder="Metros del hilo" ReadOnly="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
@@ -96,7 +113,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-1 col-center">
                 <div class="btn-group">
-                    <asp:Button ID="registrar" OnClick="registrar_Click" type="button" class="btn btn-default" runat="server" Text="Registrar" />
+                    <input id="registrar" type="button" class="btn btn-default" value="Registrar" />
                 </div>
             </div>
 
@@ -118,35 +135,8 @@
         <div class="container show-top-margin separate-rows tall-rows">
             <div class="row show-grid">
                 <div class="col-md-12">
-                    <asp:GridView ID="GVHilosTemp" AutoGenerateColumns="false" CssClass="table table-striped table-bordered dt-responsive nowrap" CellSpacing="0" Width="100%" DataKeyNames="id_hilo"  runat="server">
-                        <Columns>
-                            <asp:TemplateField HeaderText="ID">
-                                <ItemTemplate>
-                                    <asp:Label ID="ID_HILO" runat="server" Text='<% # Bind("id_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="REFERENCIA">
-                                <ItemTemplate>
-                                    <asp:Label ID="REFERENCIA_HILO" runat="server" Text='<% # Bind("referencia") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="METROS">
-                                <ItemTemplate>
-                                    <asp:Label ID="METROS_HILO" runat="server" Text='<% # Bind("metros") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="CONSUMO">
-                                <ItemTemplate>
-                                    <asp:Label ID="CONSUMO" runat="server" Text='<% # Bind("consumo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="CANTIDAD RESTANTE">
-                                <ItemTemplate>
-                                    <asp:Label ID="RESTA" runat="server" Text='<% # Bind("resta") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+                    <table class="table table-bordered table-hover table-striped" id="hiloRegistro">
+                    </table>
                 </div>
             </div>
 
@@ -314,7 +304,7 @@
         $('#buscarHilo').click(function () {
             ref = $('#buscar').val();
             $.ajax({
-                method: "POST",
+                type: "POST",
                 data: '{"referencia":"'+ref+'"}',
                 url: "ServiceLectorQR.svc/buscarHilo",
                 contentType: "application/json; charset=utf-8",
@@ -366,7 +356,41 @@
             $('#modalOneHilo').modal('show');
         });
         
-       
+        $('#registrar').click(function () {
+            if ($("#id").val() == "") {
+                seleccionarHIlo();
+            } else {
+                if ($("#consumo").val() == "") {
+                    campos();
+                } else {
+                    var dataString = '{"id":"' + $("#id").val() + '","referencia":"' + $("#referencia").val() + '", "metros":"' + $("#metros").val() + '","consumo" : "' + $("#consumo").val() + '" }';
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        data: dataString,
+                        url: "ServiceLectorQR.svc/registrarhilo",
+                        contentType: "application/json; charset=utf-8",
+                        processdata: true,
+                        success: function (Dato) {
+                            console.log(Dato.registrarhiloResult);
+                            item = Dato.registrarhiloResult;
+                            $("#hiloRegistro").html('');
+                            $("#hiloRegistro").append('<thead><tr><th>ID</th><th>Referencia</th><th>Metros</th><th>Consumo</th><th>Resta</th></tr></thead>');
+                            $("#hiloRegistro").append('<tbody></tbody>');
+                            $.each(item, function (index, value) {
+                                $("#hiloRegistro").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Metros_Hilo + '</td><td>' + value.Consumo + '</td><td>' + value.Resta + '</td></tr>');
+                            });
+                            $(".form-control").val('');
+                        },
+                        error: function (Mensaje) {
+                            alert("Error al llamar el servicio: " + Mensaje.status + " " + Mensaje.statusText);
+                        }
+                    });
+                }
+                
+            }
+            
+        });
        
     </script>
     <script type="text/javascript">

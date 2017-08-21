@@ -97,8 +97,8 @@ namespace DTO
         public int Id_Consumo { get; set; }
         public DateTime Fecha_Consumo { get; set; }
         public int Id_Usuario { get; set; }
-        public int Consumo { get; set; }
-        public int Resta { get; set; }
+        public float Consumo { get; set; }
+        public float Resta { get; set; }
 
 
 

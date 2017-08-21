@@ -148,15 +148,6 @@ namespace HEXI_ASP.NET {
         protected global::System.Web.UI.WebControls.TextBox consumo;
         
         /// <summary>
-        /// registrar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button registrar;
-        
-        /// <summary>
         /// Label4 control.
         /// </summary>
         /// <remarks>
@@ -173,15 +164,6 @@ namespace HEXI_ASP.NET {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox buscar;
-        
-        /// <summary>
-        /// GVHilosTemp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVHilosTemp;
         
         /// <summary>
         /// fin_consumo control.
