@@ -2,6 +2,7 @@
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -138,6 +139,68 @@ namespace HEXI_ASP.NET
             return userestadist;
         }
 
+<<<<<<< HEAD
+        public List<DTOInventario> tablapedidop(int referencia)
+        {
+            List<DTOInventario> tabla = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Pedido = referencia;
+            tabla = proceso.tablapedidosproductos(datos);
+            return tabla;
+        }
+
+        public List<DTOInventario> tablapedidoh(int referencia)
+        {
+            List<DTOInventario> tabla = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Pedido = referencia;
+            tabla = proceso.tablapedidoshilos(datos);
+            return tabla;
+        }
+
+        public List<string> regisingre(int referenciap)
+        {
+            List<string> respuesta = new List<string>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Pedido = referenciap;
+            respuesta = proceso.registeringreso(datos);
+            return respuesta;
+        }
+
+        public int regisingreproduct(int idiped, int idi, int idpro, int cantid_ingreso, int cantidad_defectuosa, string detalles)
+        {
+            int result = 0;
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Pedido = idiped;
+            datos.Id_Ingreso = idi;
+            datos.Id_Producto = idpro;
+            datos.Cantidad_Ingreso = cantid_ingreso;
+            datos.Cantidad_Defectuoso = cantidad_defectuosa;
+            datos.Detalles_Ingreso = detalles;
+            result = proceso.registeringresoproducto(datos);
+            return result;
+        }
+
+        public int regisingrehilo(int idiped, int idi, int idh, float cantid_ingreso, float cantidad_defectuosa, string detalles)
+        {
+            int result = 0;
+            var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            culture.NumberFormat.NumberDecimalSeparator = ".";
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Pedido = idiped;
+            datos.Id_Ingreso = idi;
+            datos.Id_Hilo = idh;
+            datos.Cantidad_Ingreso_Hilo = cantid_ingreso;
+            datos.Cantidad_Defectuoso_Hilo = cantidad_defectuosa;
+            datos.Detalles_Ingreso = detalles;
+            result = proceso.registeringresohilo(datos);
+            return result;
+=======
         public List<DTOInventario> tablahilos()
         {
             List<DTOInventario> tabla = new List<DTOInventario>();
@@ -180,6 +243,7 @@ namespace HEXI_ASP.NET
             datos.Consumo = float.Parse(consumo);
             hilo = proceso.registrarhilo(datos);
             return hilo;
+>>>>>>> Andres
         }
     }
 }

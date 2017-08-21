@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CAD;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace HEXI_ASP.NET
 {
-    public partial class PproncipalInventariosAdmin : System.Web.UI.Page
+    public partial class History : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,35 +22,11 @@ namespace HEXI_ASP.NET
             {
                 switch (Convert.ToString(Session["rol"]))
                 {
-                    case "SuperAdministrador":
-                        usuarios.Visible = true;
-                        productos.Visible = true;
-                        consumos.Visible = true;
-                        pedidos.Visible = true;
-                        inventario.Visible = true;
-                        hilos.Visible = true;
-                        scanner.Visible = true;
-                        ingresos.Visible = true;
-                        break;
                     case "Administrador":
                         usuarios.Visible = true;
-                        productos.Visible = true;
-                        consumos.Visible = true;
-                        pedidos.Visible = true;
-                        inventario.Visible = true;
-                        hilos.Visible = true;
-                        scanner.Visible = true;
-                        ingresos.Visible = true;
                         break;
                     case "Instructor":
                         usuarios.Visible = false;
-                        productos.Visible = false;
-                        consumos.Visible = true;
-                        pedidos.Visible = false;
-                        inventario.Visible = false;
-                        hilos.Visible = false;
-                        scanner.Visible = true;
-                        ingresos.Visible = false;
                         break;
                     default:
                         Response.Redirect("default.aspx");
@@ -65,6 +43,13 @@ namespace HEXI_ASP.NET
                 Response.Expires = 0;
                 Response.Cache.SetExpires(DateTime.Now);
                 Response.Cache.SetValidUntilExpires(true);
+                if (!IsPostBack)
+                {
+                    DTOUsuario u = new DTOUsuario();
+                    CADUsuario process = new CADUsuario();
+                    u.Id_u_logueado = int.Parse(id_usuario);
+                    process.CargarHistorialDeUsuario(u, BulletedList1);
+                }
             }
         }
     }

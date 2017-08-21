@@ -127,6 +127,13 @@
                 </div>
             </div>
             <div class="form-group">
+                <asp:Label ID="Label9" class="control-label col-sm-2" runat="server" Text="Metros:"></asp:Label>
+                <div class="col-sm-10">
+                    <asp:TextBox ID="tmetros" onkeyup="validacion('tmetros');" type="text" class="form-control" placeholder="Cantidad de metros" runat="server" MaxLength="10"></asp:TextBox>
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="form-group">
                 <asp:Label ID="Label5" class="control-label col-sm-2" runat="server" Text="Valor por metro:"></asp:Label>
                 <div class="col-sm-10">
                     <asp:TextBox ID="valor" onkeyup="validacion('valor');" type="text" class="form-control" placeholder="Valor por metro" runat="server" MaxLength="10"></asp:TextBox>
@@ -257,14 +264,14 @@
         $("#btn_Actualizar").click(verificarmodifi);
         $("#btn_Buscar").click(buscar);
         function verificarmodifi() {
-            var c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0;
+            var c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
             c1 = validacion("referencia");
             c2 = validacion("tipo");
             c3 = validacion("titulo");
             c4 = validacion("color");
             c5 = validacion("valor");
-            c6 = validacion("codigo");
-            if (c1 == false || c2 == false || c3 == false || c4 == false || c5 == false) {
+            c6 = validacion("tmetros");
+            if (c1 == false || c2 == false || c3 == false || c4 == false || c5 == false || c6 === false) {
                 $("#error").show();
                 return false;
             } else {
@@ -272,14 +279,15 @@
             }
         }
         function verificar() {
-            var v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0;
+            var v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0;
             v1 = validacion("referencia");
             v2 = validacion("tipo");
             v3 = validacion("titulo");
             v4 = validacion("color");
             v5 = validacion("valor");
-            v6 = validacion("codigo");
-            if (v1 === false || v2 === false || v3 === false || v4 === false || v5 === false) {
+            v6 = validacion("tmetros");
+           // v7 = validacion("metros");
+            if (v1 === false || v2 === false || v3 === false || v4 === false || v5 === false || v6 === false) {
                 $("#error").show();
                 return false;
             } else {
@@ -397,6 +405,32 @@
                     }
                 }
             }
+
+            if (campo === "tmetros") {
+                mt = document.getElementById(campo).value;
+                if (mt == null || mt.length == 0 || /^\s+$/.test(mt)) {
+                    $("#glypcn" + campo).remove();
+                    $("#" + campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                    $('#' + campo).parent().children('span').text("Ingrese la cantidad de metros.").show();
+                    $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                    return false;
+                } else {
+                    if (/^[0-9]+([.][0-9]+)?$/.test(mt) == false) {
+                        $("#glypcn" + campo).remove();
+                        $('#' + campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                        $('#' + campo).parent().children('span').text("Solo se permiten caracteres numéricos y decimales").show();
+                        $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                        return false;
+                    } else {
+                        $("#glypcn" + campo).remove();
+                        $('#' + campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                        $('#' + campo).parent().children('span').hide();
+                        $('#' + campo).parent().append("<span id='glypcn" + campo + "' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+                        return true;
+                    }
+                }
+            }
+
             if (campo === "valor") {
                 pes = document.getElementById(campo).value;
                 if (pes == null || pes.length == 0 || /^\s+$/.test(pes)) {
