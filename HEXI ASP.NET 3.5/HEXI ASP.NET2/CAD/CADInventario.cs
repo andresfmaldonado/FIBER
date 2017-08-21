@@ -246,11 +246,7 @@ namespace CAD
             return estado;
         }
 
-<<<<<<< HEAD
-        public int CompletarRegistroProductoParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia,TextBox nombre, TextBox descripcion, TextBox novedad, TextBox placa, TextBox serial, TextBox marca, TextBox modelo,TextBox cantidad, TextBox valorUnitario, DropDownList consumible)
-=======
         public int CompletarRegistroProductoParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia, TextBox nombre, TextBox descripcion, TextBox novedad, TextBox placa, TextBox serial, TextBox marca, TextBox modelo, TextBox valorUnitario, DropDownList consumible)
->>>>>>> Andres
         {
             int estado = 0;
             cnx.Open();
@@ -493,7 +489,7 @@ namespace CAD
             {
                 cmd = new SqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "[prc_buscar_hilo_para_consumo]";
+                cmd.CommandText = "prc_buscar_hilo_para_consumo";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", inven.Id_Hilo);
                 dr = cmd.ExecuteReader();
@@ -504,12 +500,7 @@ namespace CAD
                     tipo.Text = dr["tipo_hilo"].ToString();
                     titulo.Text = dr["titulo_hilo"].ToString();
                     color.Text = dr["color_hilo"].ToString();
-<<<<<<< HEAD
-                    metrosh.Text = dr["metros_hilo"].ToString();
-                    valormetros.Text = dr["valorMetro"].ToString();
-=======
                     metros.Text = dr["metros_hilo"].ToString();
->>>>>>> Andres
                 }
                 dr.Close();
             }
@@ -746,7 +737,6 @@ namespace CAD
             return Productos;
         }
 
-<<<<<<< HEAD
 
         //POR ADAPTAR AL SISTEMA
         public void CargarPedidosProductosSelect(DropDownList pedidos)
@@ -862,7 +852,6 @@ namespace CAD
                 cmd.ExecuteNonQuery();
             }
             catch
-=======
         public List<DTOInventario> tablahilos()
         {
             List<DTOInventario> consumos = new List<DTOInventario>();
@@ -1062,13 +1051,11 @@ namespace CAD
             
                 cmd.ExecuteNonQuery();
             }catch
->>>>>>> Andres
             {
                 estado = 1;
             }
             cnx.Close();
             return estado;
-<<<<<<< HEAD
         }
 
         public int registeringresohilo(DTOInventario datos)
@@ -1087,7 +1074,6 @@ namespace CAD
                 cmd.Parameters.AddWithValue("@cantid_ingreso", datos.Cantidad_Ingreso_Hilo);
                 cmd.Parameters.AddWithValue("@cantid_defectuoso", datos.Cantidad_Defectuoso_Hilo);
                 cmd.Parameters.AddWithValue("@detalles", datos.Detalles_Ingreso);
-=======
            
         }
 
@@ -1101,7 +1087,6 @@ namespace CAD
             cmd.CommandType = CommandType.Text;
             try
             {
->>>>>>> Andres
                 cmd.ExecuteNonQuery();
             }
             catch
@@ -1109,16 +1094,9 @@ namespace CAD
                 estado = 1;
             }
             cnx.Close();
-<<<<<<< HEAD
             return estado;
         }
 
-=======
-            
-            return estado;
-
-        }
->>>>>>> Andres
     }
     
 }
