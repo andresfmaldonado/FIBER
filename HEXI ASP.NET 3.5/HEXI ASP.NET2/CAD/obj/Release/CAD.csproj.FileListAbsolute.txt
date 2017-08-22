@@ -1,0 +1,7 @@
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\Release\CAD.dll
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\Release\CAD.pdb
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\Release\DTO.dll
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\Release\DTO.pdb
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Release\CAD.csprojResolveAssemblyReference.cache
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Release\CAD.dll
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Release\CAD.pdb

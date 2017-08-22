@@ -1,14 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="IFormularioInformes.aspx.cs" Inherits="HEXI_ASP.NET.IFormularioInventario" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="IFormularioInformes.aspx.cs" Inherits="HEXI_ASP.NET.IFormularioInformes" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="Imagenes/icono_pagina_fiber.png" type="image/png" />
-     <title>Fiber|Informes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Fiber|Informes</title>
     <meta name="Author" content="Johan Esteban Zapata Herrera" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -29,7 +26,7 @@
     </script>
 </head>
 <body>
-     <div id="page-wrapper">
+    <div id="page-wrapper">
 
         <!-- Header -->
         <header id="header" class="alt">
@@ -399,11 +396,11 @@
                     if (Datos.GetProductsInformResult[0] != null) {
                         // alert(JSON.stringify(Dato.GetProductResult[0].Referencia_Producto));
                         $("#getinformes").html('');
-                        $("#getinformes").append("<thead><tr><th>Referencia</th><th>Nombre</th><th>Descripción</th><th>Novedad</th><th>Placa</th><th>Serial</th><th>Marca</th><th>Modelo</th><th>Valor unitario</th><th>Consumible</th></tr></thead><tbody></tbody>");
+                        $("#getinformes").append("<thead><tr><th>Referencia</th><th>Descripción</th><th>Novedad</th><th>Placa</th><th>Serial</th><th>Marca</th><th>Modelo</th><th>Unidad</th><th>Valor unitario</th><th>Consumible</th></tr></thead><tbody></tbody>");
                         $.each(Datos.GetProductsInformResult, function (index, value) {
                             console.log('Index:' + index + ', Value:' + value);
                             /* Vamos agregando a nuestra tabla las filas necesarias */
-                            $("#getinformes").append("<tr><td>" + value.Referencia_Producto + "</td><td>" + value.Nombre_Producto + "</td><td>" + value.Descripcion_Producto + "</td><td>" + value.Novedad_Producto + "</td><td>" + value.Placa_Producto + "</td><td>" + value.Serial_Producto + "</td><td>" + value.Marca_Producto + "</td><td>" + value.Modelo_Producto + "</td><td>" + value.ValorUnitario_Producto + "</td><td>" + value.Consumible + "</td></tr>");
+                            $("#getinformes").append("<tr><td>" + value.Referencia_Producto + "</td><td>" + value.Descripcion_Producto + "</td><td>" + value.Novedad_Producto + "</td><td>" + value.Placa_Producto + "</td><td>" + value.Serial_Producto + "</td><td>" + value.Marca_Producto + "</td><td>" + value.Modelo_Producto + "</td><td>" + value.Cantidad_Producto + "</td><td>" + value.ValorUnitario_Producto + "</td><td>" + value.Consumible + "</td></tr>");
                         });
                         
                     } else {
@@ -419,6 +416,6 @@
                 }// When Service call fails
             });
         }
-    </script> 
+    </script>
 </body>
 </html>

@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo es utilizado por el proceso de paquete/publicación de nuestro proyecto Web. Puede personalizar el comportamiento de este proceso
+editando este archivo MSBuild. Para conocer más acerca de esto, visite http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\wwwroot\HEXI</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="ApplicationInsights.config">
+      <publishTime>08/09/2017 10:17:38</publishTime>
+    </File>
+    <File Include="bin/ApplicationInsights.config">
+      <publishTime>08/09/2017 10:17:38</publishTime>
+    </File>
+    <File Include="bin/CAD.dll">
+      <publishTime>08/13/2017 22:03:44</publishTime>
+    </File>
+    <File Include="bin/DTO.dll">
+      <publishTime>08/09/2017 20:54:58</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>05/29/2015 21:25:26</publishTime>
+    </File>
+    <File Include="bin/Gma.QrCodeNet.Encoding.dll">
+      <publishTime>03/17/2013 13:26:30</publishTime>
+    </File>
+    <File Include="bin/HEXI ASP.NET.dll">
+      <publishTime>08/13/2017 22:04:05</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
+      <publishTime>07/12/2015 19:04:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.DependencyCollector.dll">
+      <publishTime>10/03/2016 14:26:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
+      <publishTime>10/03/2016 14:26:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
+      <publishTime>09/03/2016 12:00:14</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Web.dll">
+      <publishTime>10/03/2016 14:26:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.WindowsServer.dll">
+      <publishTime>10/03/2016 14:26:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ApplicationInsights.dll">
+      <publishTime>09/03/2016 11:57:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>06/15/2015 02:06:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.WebForms.dll">
+      <publishTime>05/29/2015 21:27:38</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="css/bootstrap-datetimepicker.min.css">
+      <publishTime>08/09/2017 10:17:58</publishTime>
+    </File>
+    <File Include="css/bootstrap.css">
+      <publishTime>08/09/2017 10:17:58</publishTime>
+    </File>
+    <File Include="css/bootstrap.min.css">
+      <publishTime>08/09/2017 10:17:58</publishTime>
+    </File>
+    <File Include="css/dataTables.bootstrap.min.css">
+      <publishTime>08/09/2017 10:17:58</publishTime>
+    </File>
+    <File Include="css/DateTimePicker.css">
+      <publishTime>08/09/2017 10:17:58</publishTime>
+    </File>
+    <File Include="css/font-awesome.min1.css">
+      <publishTime>08/09/2017 10:17:59</publishTime>
+    </File>
+    <File Include="css/fonts1/fontawesome-webfont.eot">
+      <publishTime>08/09/2017 10:17:59</publishTime>
+    </File>
+    <File Include="css/fonts1/fontawesome-webfont.svg">
+      <publishTime>08/09/2017 10:17:59</publishTime>
+    </File>
+    <File Include="css/fonts1/fontawesome-webfont.ttf">
+      <publishTime>08/09/2017 10:17:59</publishTime>
+    </File>
+    <File Include="css/fonts1/fontawesome-webfont.woff">
+      <publishTime>08/09/2017 10:17:59</publishTime>
+    </File>
+    <File Include="css/fonts1/fontawesome-webfont.woff2">
+      <publishTime>08/09/2017 10:17:59</publishTime>
+    </File>
+    <File Include="css/fonts1/FontAwesome.otf">
+      <publishTime>08/09/2017 10:17:59</publishTime>
+    </File>
+    <File Include="css/ie8.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="css/Jcrop.css">
+      <publishTime>08/09/2017 10:17:58</publishTime>
+    </File>
+    <File Include="css/main1.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="css/select2-bootstrap.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="css/select2.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="css/stacktable.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="css/styleLogos.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="css/styles2.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="css/styleventanaemergente.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="css/sweetalert2.css">
+      <publishTime>08/09/2017 10:18:00</publishTime>
+    </File>
+    <File Include="default.aspx">
+      <publishTime>08/10/2017 10:26:54</publishTime>
+    </File>
+    <File Include="FiberInicioAdmin.aspx">
+      <publishTime>08/10/2017 10:26:54</publishTime>
+    </File>
+    <File Include="FolderCodeQr.aspx">
+      <publishTime>08/09/2017 10:17:39</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>08/09/2017 10:17:40</publishTime>
+    </File>
+    <File Include="Iconos/cancel.svg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/close.svg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/creamos-lo-intangible-opt.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Entypo_e753%281%29_1024.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Entypo_e759%289%29_1024.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Entypo_e771%280%29_1024.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/favicon %282%29.ico">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/fiber.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Fiber1.jpg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Fiber1.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Fiber_Diseño.jpg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Fiber_diseño.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Fiber_Inventario.jpg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Fiber_Inventario.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Fiber_Patrones.jpg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Fiber_Patrones.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/FontAwesome_f029%280%29_225.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/FontAwesome_f180%280%29_160.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/icon45.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/icon47.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/icon9.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/icono-inventario.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Material Iconse5c41024.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/octicons_f0641024.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/profile.jpg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/profileaprendiz.jpg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/profileinstructor.jpg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Typicons_e07b%280%29_1024.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Typicons_e112%280%29_1024.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Iconos/Typicons_e11248.png">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="IFormularioConsumoHilos.aspx">
+      <publishTime>08/10/2017 10:29:58</publishTime>
+    </File>
+    <File Include="IFormularioConsumoProductos.aspx">
+      <publishTime>08/09/2017 10:45:14</publishTime>
+    </File>
+    <File Include="IFormularioHilos.aspx">
+      <publishTime>08/10/2017 10:26:54</publishTime>
+    </File>
+    <File Include="IFormularioInformes.aspx">
+      <publishTime>08/09/2017 11:47:06</publishTime>
+    </File>
+    <File Include="IFormularioPedidosHilos.aspx">
+      <publishTime>08/09/2017 10:45:58</publishTime>
+    </File>
+    <File Include="IFormularioPedidosProductos.aspx">
+      <publishTime>08/09/2017 10:46:17</publishTime>
+    </File>
+    <File Include="IFormularioProductos.aspx">
+      <publishTime>08/10/2017 10:26:54</publishTime>
+    </File>
+    <File Include="IFormularioUsuarios.aspx">
+      <publishTime>08/09/2017 10:17:43</publishTime>
+    </File>
+    <File Include="Imagenes/68325237-hardware-wallpapers.jpg">
+      <publishTime>08/09/2017 10:17:44</publishTime>
+    </File>
+    <File Include="Imagenes/72.jpg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/arrow.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/arrow1.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/arrow5.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/banner.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/bg04.jpg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/close.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/cursos_informatica_bonificados.jpg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/dark-arrow.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/icono_pagina_fiber.png">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/icono_pagina_hexi.png">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/Imagen9.png">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/loader.gif">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/Logo5.png">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/LogoFIBER.png">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/poptrox-closer.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/poptrox-closer5.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/poptrox-nav.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/poptrox-nav5.svg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/seguridad-informatica-linalca.jpg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/select2.png">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/select2x2.png">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="Imagenes/Sources-of-New-Business-Ideas.jpg">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="IServiceLectorQR.cs">
+      <publishTime>08/09/2017 11:06:43</publishTime>
+    </File>
+    <File Include="jvscript/animacion.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="jvscript/bootstrap-datetimepicker.es-CO.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="jvscript/bootstrap-datetimepicker.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="jvscript/bootstrap-datetimepicker.min.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="jvscript/bootstrap.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="jvscript/bootstrap.min.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="jvscript/dataTables.bootstrap.min.js">
+      <publishTime>08/09/2017 10:18:02</publishTime>
+    </File>
+    <File Include="jvscript/dataTables.responsive.min.js">
+      <publishTime>08/09/2017 10:18:02</publishTime>
+    </File>
+    <File Include="jvscript/DateTimePicker.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="jvscript/html5-qrcode.min.js">
+      <publishTime>08/09/2017 10:18:02</publishTime>
+    </File>
+    <File Include="jvscript/index.js">
+      <publishTime>08/09/2017 10:18:02</publishTime>
+    </File>
+    <File Include="jvscript/index1.js">
+      <publishTime>08/09/2017 10:18:02</publishTime>
+    </File>
+    <File Include="jvscript/Jcrop.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="jvscript/jquery-3.1.0.js">
+      <publishTime>08/09/2017 10:18:02</publishTime>
+    </File>
+    <File Include="jvscript/jquery.dataTables.min.js">
+      <publishTime>08/09/2017 10:18:02</publishTime>
+    </File>
+    <File Include="jvscript/js1/ie/backgroundsize.min.htc">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/ie/html5shiv.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/ie/PIE.htc">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/ie/respond.min.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/jquery.min.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/jquery.poptrox.min.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/jquery.scrollex.min.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/jquery.scrolly.min.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/main.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/skel.min.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/js1/util.js">
+      <publishTime>08/09/2017 10:18:03</publishTime>
+    </File>
+    <File Include="jvscript/main3.js">
+      <publishTime>08/09/2017 10:18:04</publishTime>
+    </File>
+    <File Include="jvscript/responsive.bootstrap.min.js">
+      <publishTime>08/09/2017 10:18:04</publishTime>
+    </File>
+    <File Include="jvscript/scripts.js">
+      <publishTime>08/09/2017 10:18:04</publishTime>
+    </File>
+    <File Include="jvscript/select2.js">
+      <publishTime>08/09/2017 10:18:04</publishTime>
+    </File>
+    <File Include="jvscript/stacktable.min.js">
+      <publishTime>08/09/2017 10:18:04</publishTime>
+    </File>
+    <File Include="jvscript/sweetalert2.js">
+      <publishTime>08/09/2017 10:18:04</publishTime>
+    </File>
+    <File Include="jvscript/ValidacionesJS.js">
+      <publishTime>08/09/2017 10:18:01</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>08/09/2017 10:18:04</publishTime>
+    </File>
+    <File Include="PAsistencia.aspx">
+      <publishTime>08/09/2017 10:17:45</publishTime>
+    </File>
+    <File Include="PConsumo.aspx">
+      <publishTime>08/09/2017 10:17:46</publishTime>
+    </File>
+    <File Include="PDesignPatrones.aspx">
+      <publishTime>08/10/2017 10:26:54</publishTime>
+    </File>
+    <File Include="PerfilAdmin.aspx">
+      <publishTime>08/09/2017 10:50:12</publishTime>
+    </File>
+    <File Include="PFormularioAsistencia.aspx">
+      <publishTime>08/09/2017 10:50:38</publishTime>
+    </File>
+    <File Include="PFormularioUsuarios.aspx">
+      <publishTime>08/09/2017 11:22:23</publishTime>
+    </File>
+    <File Include="PPedidos.aspx">
+      <publishTime>08/09/2017 10:17:49</publishTime>
+    </File>
+    <File Include="PprincipalInventariosAdmin.aspx">
+      <publishTime>08/09/2017 11:45:51</publishTime>
+    </File>
+    <File Include="PreguntasFrecuentes.aspx">
+      <publishTime>08/09/2017 10:17:55</publishTime>
+    </File>
+    <File Include="QR.aspx">
+      <publishTime>08/13/2017 21:50:38</publishTime>
+    </File>
+    <File Include="ServiceLectorQR.svc">
+      <publishTime>08/09/2017 10:17:55</publishTime>
+    </File>
+    <File Include="SitioWeb/css/scrolling-nav.css">
+      <publishTime>08/09/2017 10:17:56</publishTime>
+    </File>
+    <File Include="SitioWeb/js/jquery.easing.min">
+      <publishTime>08/09/2017 10:17:57</publishTime>
+    </File>
+    <File Include="SitioWeb/js/scrolling-nav.js">
+      <publishTime>08/09/2017 10:17:58</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/13/2017 22:04:18</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

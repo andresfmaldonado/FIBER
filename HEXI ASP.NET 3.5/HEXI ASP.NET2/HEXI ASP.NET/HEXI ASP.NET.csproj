@@ -117,6 +117,11 @@
     <Content Include="css\styles2.css" />
     <Content Include="css\styleventanaemergente.css" />
     <Content Include="css\sweetalert2.css" />
+    <Content Include="History.aspx" />
+    <Content Include="Iconos\Entypo_f330%280%29_225.png" />
+    <Content Include="Iconos\octicons_f064%280%29_225.png" />
+    <Content Include="IFormularioInformes.aspx" />
+    <Content Include="IFormularioIngresos.aspx" />
     <Content Include="PDesignPatrones.aspx" />
     <Content Include="FiberInicioAdmin.aspx" />
     <Content Include="FolderCodeQr.aspx" />
@@ -256,6 +261,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="History.aspx.cs">
+      <DependentUpon>History.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="History.aspx.designer.cs">
+      <DependentUpon>History.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IFormularioInformes.aspx.cs">
+      <DependentUpon>IFormularioInformes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IFormularioInformes.aspx.designer.cs">
+      <DependentUpon>IFormularioInformes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IFormularioIngresos.aspx.cs">
+      <DependentUpon>IFormularioIngresos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IFormularioIngresos.aspx.designer.cs">
+      <DependentUpon>IFormularioIngresos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PDesignPatrones.aspx.cs">
       <DependentUpon>PDesignPatrones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

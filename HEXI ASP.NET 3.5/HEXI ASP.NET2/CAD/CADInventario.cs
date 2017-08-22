@@ -1,10 +1,10 @@
 ﻿using DTO;
-
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -153,6 +153,7 @@ namespace CAD
                 cmd.Parameters.AddWithValue("@serial_pro", inven.Serial_Producto);
                 cmd.Parameters.AddWithValue("@marca_pro", inven.Marca_Producto);
                 cmd.Parameters.AddWithValue("@mod_pro", inven.Modelo_Producto);
+                cmd.Parameters.AddWithValue("@cantid", inven.Cantidad_Producto);
                 cmd.Parameters.AddWithValue("@val_pro", inven.ValorUnitario_Producto);
                 cmd.Parameters.AddWithValue("@consu_pro", inven.Consumible);
                 cmd.ExecuteNonQuery();
@@ -184,6 +185,7 @@ namespace CAD
                 cmd.Parameters.AddWithValue("@serial_pro", inventario.Serial_Producto);
                 cmd.Parameters.AddWithValue("@marca_pro", inventario.Marca_Producto);
                 cmd.Parameters.AddWithValue("@mod_pro", inventario.Modelo_Producto);
+                cmd.Parameters.AddWithValue("@cantid", inventario.Cantidad_Producto);
                 cmd.Parameters.AddWithValue("@val_pro", inventario.ValorUnitario_Producto);
                 cmd.Parameters.AddWithValue("@consu_pro", inventario.Consumible);
                 cmd.ExecuteNonQuery();
@@ -231,6 +233,7 @@ namespace CAD
                 cmd.Parameters.AddWithValue("@tipo_hi", inven.Tipo_Hilo);
                 cmd.Parameters.AddWithValue("@titulo_hi", inven.Titulo_Hilo);
                 cmd.Parameters.AddWithValue("@color_hi", inven.Color_Hilo);
+                cmd.Parameters.AddWithValue("@m_hilo", inven.Metros_Hilo);
                 cmd.Parameters.AddWithValue("@valor", inven.ValorMetro);
                 cmd.ExecuteNonQuery();
             }
@@ -242,7 +245,7 @@ namespace CAD
             return estado;
         }
 
-        public int CompletarRegistroProductoParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia,TextBox nombre, TextBox descripcion, TextBox novedad, TextBox placa, TextBox serial, TextBox marca, TextBox modelo, TextBox valorUnitario, DropDownList consumible)
+        public int CompletarRegistroProductoParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia,TextBox nombre, TextBox descripcion, TextBox novedad, TextBox placa, TextBox serial, TextBox marca, TextBox modelo,TextBox cantidad, TextBox valorUnitario, DropDownList consumible)
         {
             int estado = 0;
             cnx.Open();
@@ -265,6 +268,7 @@ namespace CAD
                     serial.Text = dr["serial_producto"].ToString();
                     marca.Text = dr["marca_producto"].ToString();
                     modelo.Text = dr["modelo_producto"].ToString();
+                    cantidad.Text = dr["cantidad_producto"].ToString();
                     valorUnitario.Text = dr["valorUnitario_producto"].ToString();
                     consumible.Text = dr["consumible"].ToString();
                 }
@@ -412,7 +416,6 @@ namespace CAD
             cnx.Close();
 
         }
-        
         public int ConsultarHiloPorRef(DTOInventario inven)
         {
             int existe = 0;
@@ -463,6 +466,7 @@ namespace CAD
                 cmd.Parameters.AddWithValue("@tipo_hi", inven.Tipo_Hilo);
                 cmd.Parameters.AddWithValue("@titulo_hi", inven.Titulo_Hilo);
                 cmd.Parameters.AddWithValue("@color_hi", inven.Color_Hilo);
+                cmd.Parameters.AddWithValue("@m_hilo", inven.Metros_Hilo);
                 cmd.Parameters.AddWithValue("@valor", inven.ValorMetro);
                 cmd.ExecuteNonQuery();
             }
@@ -475,7 +479,7 @@ namespace CAD
             return estado;
         }
 
-        public int CompletarRegistroHilosParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia, TextBox tipo, TextBox titulo, TextBox color, TextBox metros)
+        public int CompletarRegistroHilosParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia, TextBox tipo, TextBox titulo, TextBox color, TextBox metrosh , TextBox valormetros)
         {
             int estado = 0;
             cnx.Open();
@@ -494,7 +498,8 @@ namespace CAD
                     tipo.Text = dr["tipo_hilo"].ToString();
                     titulo.Text = dr["titulo_hilo"].ToString();
                     color.Text = dr["color_hilo"].ToString();
-                    metros.Text = dr["valorMetro"].ToString();
+                    metrosh.Text = dr["metros_hilo"].ToString();
+                    valormetros.Text = dr["valorMetro"].ToString();
                 }
                 dr.Close();
             }
@@ -668,6 +673,7 @@ namespace CAD
                 Product.Placa_Producto = dr["placa_producto"].ToString();
                 Product.Serial_Producto = dr["serial_producto"].ToString();
                 Product.Marca_Producto = dr["marca_producto"].ToString();
+                Product.Cantidad_Producto = int.Parse(dr["cantidad_producto"].ToString());
                 Product.Modelo_Producto = dr["modelo_producto"].ToString();
                 Product.ValorUnitario_Producto = int.Parse(dr["valorUnitario_producto"].ToString());
                 //Product.Consumible = int.Parse(dr["consumible"].ToString());
@@ -729,6 +735,155 @@ namespace CAD
             cnx.Close();
             return Productos;
         }
+
+
+        //POR ADAPTAR AL SISTEMA
+        public void CargarPedidosProductosSelect(DropDownList pedidos)
+        {
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_pedidos_select";
+            cmd.CommandType = CommandType.StoredProcedure;
+            da = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            da.Fill(dt);
+            pedidos.DataTextField = "pedido";
+            pedidos.DataValueField = "id_pedido";
+            pedidos.DataSource = dt;
+            pedidos.DataBind();
+            cnx.Close();
+        }
+
+        public void CargarPedidosHilosSelect(DropDownList pedidos)
+        {
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_pedidos_hilos_select";
+            cmd.CommandType = CommandType.StoredProcedure;
+            da = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            da.Fill(dt);
+            pedidos.DataTextField = "pedido";
+            pedidos.DataValueField = "id_pedido";
+            pedidos.DataSource = dt;
+            pedidos.DataBind();
+            cnx.Close();
+        }
+
+        public List<DTOInventario> tablapedidosproductos(DTOInventario datos)
+        {
+            List<DTOInventario> pedidos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_verifi_pedido";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@refer_ped", datos.Id_Pedido);
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                pedidos.Add(new DTOInventario { Id_Producto = int.Parse(dr["id_producto"].ToString()), Referencia_Producto = dr["referencia_producto"].ToString(), Nombre_Producto = dr["nombre_producto"].ToString(), Cantidad_Producto = int.Parse(dr["cantidad_producto"].ToString()), Estado_Pedido = dr["estado"].ToString() });
+            }
+            dr.Close();
+            cnx.Close();
+            return pedidos;
+        }
+
+        public List<DTOInventario> tablapedidoshilos(DTOInventario datos)
+        {
+            List<DTOInventario> pedidos = new List<DTOInventario>();
+            var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            culture.NumberFormat.NumberDecimalSeparator = ".";
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_verifi_pedido_hilo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@refer_ped", datos.Id_Pedido);
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                pedidos.Add(new DTOInventario { Id_Hilo = int.Parse(dr["id_hilo"].ToString()), Referencia_Hilo = dr["referencia_hilo"].ToString(), Titulo_Hilo = int.Parse(dr["titulo_hilo"].ToString()), Color_Hilo = dr["color_hilo"].ToString(), Metros_Hilo = float.Parse(dr["metros_hilo"].ToString(),culture), Estado_Pedido = dr["estado"].ToString() });
+            }
+            dr.Close();
+            cnx.Close();
+            return pedidos;
+        }
+
+        public List<string> registeringreso(DTOInventario datos)
+        {
+            List<string> datosregister = new List<string>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_register_ingreso";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@refer_pedido", datos.Id_Pedido);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                datosregister.Add(dr["Codigopedido"].ToString());
+                datosregister.Add(dr["Codigoingreso"].ToString());
+            }
+            dr.Close();
+            cnx.Close();
+            return datosregister;
+        }
+
+        public int registeringresoproducto(DTOInventario datos)
+        {
+            int estado = 0;
+            cnx.Open();
+            try
+            {
+                cmd = new SqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "prc_insertar_ingreso_producto";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idiped", datos.Id_Pedido);
+                cmd.Parameters.AddWithValue("@idi", datos.Id_Ingreso);
+                cmd.Parameters.AddWithValue("@idpro", datos.Id_Producto);
+                cmd.Parameters.AddWithValue("@cantid_ingreso", datos.Cantidad_Ingreso);
+                cmd.Parameters.AddWithValue("@cantid_defectuoso", datos.Cantidad_Defectuoso);
+                cmd.Parameters.AddWithValue("@detalles", datos.Detalles_Ingreso);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = 1;
+            }
+            cnx.Close();
+            return estado;
+        }
+
+        public int registeringresohilo(DTOInventario datos)
+        {
+            int estado = 0;
+            cnx.Open();
+            try
+            {
+                cmd = new SqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "prc_insertar_ingreso_hilo";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idiped", datos.Id_Pedido);
+                cmd.Parameters.AddWithValue("@idi", datos.Id_Ingreso);
+                cmd.Parameters.AddWithValue("@idhi", datos.Id_Hilo);
+                cmd.Parameters.AddWithValue("@cantid_ingreso", datos.Cantidad_Ingreso_Hilo);
+                cmd.Parameters.AddWithValue("@cantid_defectuoso", datos.Cantidad_Defectuoso_Hilo);
+                cmd.Parameters.AddWithValue("@detalles", datos.Detalles_Ingreso);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = 1;
+            }
+            cnx.Close();
+            return estado;
+        }
+
     }
     
 }

@@ -31,6 +31,15 @@ namespace HEXI_ASP.NET {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl productos;
         
         /// <summary>
+        /// Control ingresos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ingresos;
+        
+        /// <summary>
         /// Control consumos.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace HEXI_ASP.NET {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl hilos;
+        
+        /// <summary>
+        /// Control historial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl historial;
         
         /// <summary>
         /// Control scanner.

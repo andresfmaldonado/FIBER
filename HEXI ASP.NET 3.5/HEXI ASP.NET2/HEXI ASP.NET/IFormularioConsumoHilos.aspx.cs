@@ -74,10 +74,10 @@ namespace HEXI_ASP.NET
             CADInventario inventario = new CADInventario();
             DTOInventario inven = new DTOInventario();
             inven.Id_Hilo = int.Parse(GVHilos.DataKeys[e.NewEditIndex].Values[0].ToString());
-            if (inventario.CompletarRegistroHilosParaModificar(inven, id, referencia, tipo, titulo, color,metros)== 0)
+            /*if (inventario.CompletarRegistroHilosParaModificar(inven, id, referencia, tipo, titulo, color,,metros)== 0)
             {
 
-            }
+            }*/
         }
 
         protected void Button5_Click(object sender, EventArgs e)
@@ -104,23 +104,19 @@ namespace HEXI_ASP.NET
             }
             buscar.Text = "";
         }
-        Dictionary<string, object> list = new Dictionary<string, object>();
-        int cant_prod = 0;
+
         protected void registrar_Click(object sender, EventArgs e)
         {
             Dictionary<string, object> list_consumos = new Dictionary<string, object>();
             list_consumos.Add("id", id.Text);
-            list_consumos.Add("referencia", referencia.Text);
             list_consumos.Add("metros", metros.Text);
-            cant_prod += 1;
-            list.Add("product" + cant_prod, list_consumos);
-            GVHilosTemp.DataSource = list["product"+cant_prod];
-            GVHilosTemp.EditIndex = -1;
-           // GVHilosTemp.DataBind();
-            
-
-
-
+            id.Text = "";
+            referencia.Text = "";
+            color.Text = "";
+            tipo.Text = "";
+            titulo.Text = "";
+            metros.Text = "";
+            consumo.Text = Convert.ToString(list_consumos["metros"]);
         }
 
         protected void fin_consumo_Click(object sender, EventArgs e)

@@ -1,0 +1,5 @@
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\bin\Release\DTO.dll
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\bin\Release\DTO.pdb
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Release\DTO.csprojResolveAssemblyReference.cache
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Release\DTO.dll
+C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Release\DTO.pdb

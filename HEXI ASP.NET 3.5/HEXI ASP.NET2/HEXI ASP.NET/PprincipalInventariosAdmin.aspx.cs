@@ -28,6 +28,7 @@ namespace HEXI_ASP.NET
                         inventario.Visible = true;
                         hilos.Visible = true;
                         scanner.Visible = true;
+                        ingresos.Visible = true;
                         break;
                     case "Administrador":
                         usuarios.Visible = true;
@@ -37,6 +38,7 @@ namespace HEXI_ASP.NET
                         inventario.Visible = true;
                         hilos.Visible = true;
                         scanner.Visible = true;
+                        ingresos.Visible = true;
                         break;
                     case "Instructor":
                         usuarios.Visible = false;
@@ -46,6 +48,7 @@ namespace HEXI_ASP.NET
                         inventario.Visible = false;
                         hilos.Visible = false;
                         scanner.Visible = true;
+                        ingresos.Visible = false;
                         break;
                     default:
                         Response.Redirect("default.aspx");

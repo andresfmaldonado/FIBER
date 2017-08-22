@@ -1,5 +1,4 @@
-﻿using DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Net.Mail;
 using System.Net;
+using DTO;
 using System.Web.Security;
 
 namespace CAD
@@ -927,6 +927,49 @@ namespace CAD
             return estadist;
         }
 
+        public void InsertarHistorial(DTOUsuario history)
+        {
+            cnx.Open();
+            try
+            {
+                cmd = new SqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "prc_history";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@user", history.Id_u_logueado);
+                cmd.Parameters.AddWithValue("@description",history.Descripcion_history);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
 
+            }
+            cnx.Close();
+        }
+
+        public void CargarHistorialDeUsuario(DTOUsuario user, BulletedList historial)
+        {
+            cnx.Open();
+            try
+            {
+                cmd = new SqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "prc_cargar_history";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idus", user.Id_u_logueado);
+                dt = new DataTable();
+                da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                historial.DataTextField = "history";
+                historial.DataSource = dt;
+                historial.DataBind();
+            
+            }
+            catch
+            {
+
+            }
+            cnx.Close();
+        }
     }
 }
