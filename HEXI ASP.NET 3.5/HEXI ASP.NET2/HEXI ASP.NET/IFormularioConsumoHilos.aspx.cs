@@ -115,7 +115,9 @@ namespace HEXI_ASP.NET
             cant_prod += 1;
             list.Add("product" + cant_prod, list_consumos);
             GVHilosTemp.DataSource = list["product"+cant_prod];
-            GVHilosTemp.DataBind();
+            GVHilosTemp.EditIndex = -1;
+           // GVHilosTemp.DataBind();
+            
 
 
 

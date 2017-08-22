@@ -1,0 +1,52 @@
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\obj\Debug\HEXI ASP.NET.csprojResolveAssemblyReference.cache
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\ApplicationInsights.config
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\csc.exe
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\vbc.exe
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\VBCSCompiler.exe
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\HEXI ASP.NET.dll.config
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\HEXI ASP.NET.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\HEXI ASP.NET.pdb
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\CAD.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\DTO.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Gma.QrCodeNet.Encoding.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.Web.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.ApplicationInsights.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.ReportViewer.WebForms.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.SqlServer.Types.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\DTO.pdb
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Gma.QrCodeNet.Encoding.pdb
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Gma.QrCodeNet.Encoding.xml
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.Web.xml
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.ApplicationInsights.xml
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\de\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\es\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\fr\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\it\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\ja\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\ko\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\pt\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\ru\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\obj\Debug\HEXI ASP.NET.dll
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\obj\Debug\HEXI ASP.NET.pdb
+C:\Users\USER\Desktop\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\CAD.pdb
