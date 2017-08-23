@@ -86,7 +86,7 @@ select * from tbl_inventario_hilo
 select * from tbl_hilos
 
 CREATE PROCEDURE prc_buscar_hilo_para_consumo(
-@id VARCHAR(10)
+@id INT
 )
 AS
 BEGIN

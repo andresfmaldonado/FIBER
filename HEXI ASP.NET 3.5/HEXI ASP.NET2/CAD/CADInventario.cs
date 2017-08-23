@@ -883,6 +883,59 @@ namespace CAD
             cnx.Close();
             return estado;
         }
+        public List<DTOInventario> consultarHiloReferenciaConsumo(DTOInventario datos)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_hilo_por_referencia_consumo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ref", datos.Referencia_Hilo);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                hilo.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id_hilo"].ToString()),
+                    Referencia_Hilo = dr["referencia_hilo"].ToString(),
+                    Tipo_Hilo = dr["tipo_hilo"].ToString(),
+                    Titulo_Hilo = int.Parse(dr["titulo_hilo"].ToString()),
+                    Color_Hilo = dr["color_hilo"].ToString(),
+                    Metros_Hilo = float.Parse(dr["metros_hilo"].ToString())
+                });
+            }
+            cnx.Close();
+            dr.Close();
+            return hilo;
+            
+        }
+
+        public List<DTOInventario> consultarHiloIdConsumo(DTOInventario datos)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            cnx.Open();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_buscar_hilo_para_consumo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Hilo);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                 hilo.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id_hilo"].ToString()),
+                    Referencia_Hilo = dr["referencia_hilo"].ToString(),
+                    Tipo_Hilo = dr["tipo_hilo"].ToString(),
+                    Titulo_Hilo = int.Parse(dr["titulo_hilo"].ToString()),
+                    Color_Hilo = dr["color_hilo"].ToString(),
+                    Metros_Hilo = float.Parse(dr["metros_hilo"].ToString())
+                });
+            }
+            cnx.Close();
+            dr.Close();
+            return hilo;
+        }
 
     }
     

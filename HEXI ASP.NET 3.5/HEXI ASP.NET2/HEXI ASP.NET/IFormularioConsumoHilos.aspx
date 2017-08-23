@@ -96,75 +96,34 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-1 col-center">
                 <div class="btn-group">
-                    <asp:Button ID="registrar" OnClick="registrar_Click" type="button" class="btn btn-default" runat="server" Text="Registrar" />
+                    <input id="registrar" type="button" class="btn btn-default" value="Registrar" />
                 </div>
             </div>
-            <div class="col-sm-offset-1 col-sm-1 col-center">
-                <div class="btn-group">
-                    <asp:Button ID="Button2" type="button" class="btn btn-default" runat="server" Text="Completar" />
-                </div>
-            </div>
+            
 
         </div>
         &nbsp
      <div class="form-group">
          <asp:Label ID="Label4" class="control-label col-sm-2" runat="server" Text="Buscar:"></asp:Label>
          <div class="col-sm-8">
-             <asp:TextBox ID="buscar" type="text" class="form-control" placeholder="Nombre Hilo" runat="server"></asp:TextBox>
+             <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Nombre Hilo" runat="server"></asp:TextBox>
          </div>
          <div class=" col-md-2">
-             <asp:Button ID="Button5" OnClick="Button5_Click" type="button" class="btn btn-default" runat="server" Text="Buscar" />
+             <input id="buscar" type="button" class="btn btn-default" value="Buscar" />
          </div>
      </div>
-        <div class="container show-top-margin separate-rows tall-rows">
-            <div class="row show-grid">
-                <div class="col-md-12">
-                    <asp:GridView ID="GVHilos" AutoGenerateColumns="false" CssClass="table table-striped table-bordered dt-responsive nowrap" CellSpacing="0" Width="100%" DataKeyNames="id_hilo" OnRowEditing="GVUsuarios_RowEditing" runat="server">
-                        <Columns>
-                            <asp:TemplateField HeaderText="ID">
-                                <ItemTemplate>
-                                    <asp:Label ID="ID_HILO" runat="server" Text='<% # Bind("id_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="REFERENCIA">
-                                <ItemTemplate>
-                                    <asp:Label ID="REFERENCIA_HILO" runat="server" Text='<% # Bind("referencia_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="TIPO">
-                                <ItemTemplate>
-                                    <asp:Label ID="TIPO_HILO" runat="server" Text='<% # Bind("tipo_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="TITULO">
-                                <ItemTemplate>
-                                    <asp:Label ID="TITULO_HILO" runat="server" Text='<% # Bind("titulo_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="COLOR">
-                                <ItemTemplate>
-                                    <asp:Label ID="COLOR_HILO" runat="server" Text='<% # Bind("color_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="METROS">
-                                <ItemTemplate>
-                                    <asp:Label ID="METROS_HILO" runat="server" Text='<% # Bind("metros_hilo") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:CommandField ButtonType="Button" ShowEditButton="true" ControlStyle-CssClass="btn btn-info" />
-                        </Columns>
-                    </asp:GridView>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-1 col-sm-1 col-center">
-                <div class="btn-group">
-                    <asp:Button ID="fin_consumo" type="button" class="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
-                </div>
-            </div>
+     <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-1 col-center">
+            <div class="btn-group">
+                <asp:Button ID="fin_consumo" type="button" class="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
             </div>
         </div>
-        <asp:HiddenField runat="server" ID="_repostcheckcode" />
+         <div class="col-sm-offset-1 col-sm-1 col-center">
+            <div class="btn-group">
+                <input id="verTodos" type="button" class="btn btn-default" value="Ver todos" />
+            </div>
+         </div>
+     </div>   
     </form>
     <div class="form-group">
         <div class="col-sm-12">
@@ -174,6 +133,24 @@
             <span id="footer">Fiber&copy; Producto: <a href="#">HEXI</a></span>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade bs-example-bg" id="modalBuscar" tabindex="-1" role="dialog" aria-labelledby="modalBuscarLabel" data-backdrop="static">
+        <div class="modal-dialog modal-bg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="table-responsive shop" id="tablaHilo">
+                        <div class="panel panel-default">
+                            <!-- Table -->
+                            <table class="table" id="hilo">
+             
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal -->
     <script>$('[data-toggle="tooltip"]').tooltip(); </script>
     <script src="jvscript/jquery-3.1.0.js"></script>
 
@@ -215,5 +192,59 @@
     <script src="jvscript/jquery-3.1.0.js"></script>
     <script src="jvscript/bootstrap.js"></script>
     <script src="jvscript/animacion.js"></script>
+    <script>
+        $("#buscar").click(function () {
+            var dataString = '{"referencia":"' + $("#txtbuscar").val(); +'"}';
+            $.ajax({
+                type: "POST",
+                url: "ServiceLectorQR.svc/hilo",
+                data: dataString,
+                contentType: "application/json; charset=ut-8",
+                dataType: "json",
+                processdata: true,
+                success: function (Dato) {
+                    console.log(Dato.hiloResult);
+                    item = Dato.hiloResult;
+                    $("#hilo").html('');
+                    $("#hilo").append('<thead class="text-center"><tr><th>Id</th><th>Referencia</th><th>Tipo</th><th>Titulo</th><th>Color</th><th>Metros</th><th>Accion</th></tr></thead>');
+                    $("#hilo").append('<tbody></tbody>');
+                    $each(item, function (index, value) {
+                        $("#hilo").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Tipo_Hilo + '</td><td>' + value.Titulo_Hilo + '</td><td>' + value.Color_Hilo + '</td><td>' + value.Metros_Hilo + '</td><td><button id="seleccionarHilo" class="btn btn-default" value="'+value.Id_Hilo+'">Seleccionar</button></td></tr>');
+                    });
+                    $("#modalBuscar").modal('show');
+                    $("#seleccionarHilo").click(function () {
+                        var dataString2 = '{"id":"' + $("#seleccionarHilo").val() + '"}';
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceLectorQR.svc/hilo_por_id",
+                            data: dataString2,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            processdata: true,
+                            success: function (Dato) {
+                                console.log(Dato.hilo_por_idResult);
+                                item = Dato.hilo_por_idResult;
+                                $.each(item, function (index, value) {
+                                    $("#id").val(value.Id_Hilo);
+                                    $("#referencia").val(value.Referencia_Hilo);
+                                    $("#tipo").val(value.Tipo_Hilo);
+                                    $("#titulo").val(value.Titulo_Hilo);
+                                    $("#color").val(value.Color_Hilo);
+                                    $("#metros").val(value.Metros_Hilo);
+                                });
+                                $("#modalBuscar").modal('hide');
+                            },
+                            error: function (Mensaje) {
+                                alert("ERROR al llamar al servicio2 " + Mensaje.status + " " + Mensaje.statusText);
+                            }
+                        });
+                    });
+                },
+                error: function (Mensaje) {
+                    alert("ERROR al llamar el servicio" + Mensaje.status + " " + Mensaje.statusText);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

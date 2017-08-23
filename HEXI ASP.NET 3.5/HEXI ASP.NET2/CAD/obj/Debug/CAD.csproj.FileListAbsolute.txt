@@ -5,3 +5,10 @@ C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\D
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Debug\CAD.csprojResolveAssemblyReference.cache
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Debug\CAD.dll
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Debug\CAD.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\Debug\CAD.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\Debug\CAD.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\Debug\DTO.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\bin\Debug\DTO.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Debug\CAD.csprojResolveAssemblyReference.cache
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Debug\CAD.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\CAD\obj\Debug\CAD.pdb

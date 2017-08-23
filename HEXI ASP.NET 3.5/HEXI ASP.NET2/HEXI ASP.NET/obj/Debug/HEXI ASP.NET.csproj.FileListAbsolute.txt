@@ -40,3 +40,44 @@ C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\es\Microsoft.ReportViewer.WebForms.resources.dll
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\obj\Debug\HEXI ASP.NET.dll
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\obj\Debug\HEXI ASP.NET.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\ApplicationInsights.config
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\csc.exe
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\vbc.exe
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\VBCSCompiler.exe
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\HEXI ASP.NET.dll.config
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\HEXI ASP.NET.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\HEXI ASP.NET.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\CAD.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\DTO.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Gma.QrCodeNet.Encoding.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.Web.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.ApplicationInsights.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\CAD.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\DTO.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Gma.QrCodeNet.Encoding.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Gma.QrCodeNet.Encoding.xml
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.Web.xml
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.ApplicationInsights.xml
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\bin\es\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\obj\Debug\HEXI ASP.NET.csprojResolveAssemblyReference.cache
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\obj\Debug\HEXI ASP.NET.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\HEXI ASP.NET\obj\Debug\HEXI ASP.NET.pdb

@@ -3,3 +3,8 @@ C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\bin\D
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Debug\DTO.dll
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Debug\DTO.pdb
 C:\Users\USUARIO\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\bin\Debug\DTO.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\bin\Debug\DTO.pdb
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Debug\DTO.dll
+C:\Users\APRENDIZ\Documents\GitHub\FIBER\HEXI ASP.NET 3.5\HEXI ASP.NET2\DTO\obj\Debug\DTO.pdb

@@ -200,5 +200,24 @@ namespace HEXI_ASP.NET
             result = proceso.registeringresohilo(datos);
             return result;
         }
+
+        public List<DTOInventario> hilo(string referencia){
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Referencia_Hilo = referencia;
+            hilo = proceso.consultarHiloReferenciaConsumo(datos);
+            return hilo;
+        }
+
+        public List<DTOInventario> hilo_por_id(int id)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Hilo = id;
+            hilo = proceso.consultarHiloIdConsumo(datos);
+            return hilo;
+        }
     }
 }
