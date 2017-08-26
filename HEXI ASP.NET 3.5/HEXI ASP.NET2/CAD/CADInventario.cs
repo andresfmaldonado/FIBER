@@ -915,6 +915,7 @@ namespace CAD
         {
             List<DTOInventario> hilo = new List<DTOInventario>();
             cnx.Open();
+            cmd = new SqlCommand();
             cmd.Connection = cnx;
             cmd.CommandText = "prc_buscar_hilo_para_consumo";
             cmd.CommandType = CommandType.StoredProcedure;
@@ -936,6 +937,203 @@ namespace CAD
             dr.Close();
             return hilo;
         }
+
+        public List<DTOInventario> registrarHilosPaso(DTOInventario datos)
+        {
+            int estado = 0;
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_insertar_paso";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Hilo);
+            cmd.Parameters.AddWithValue("@ref", datos.Referencia_Hilo);
+            cmd.Parameters.AddWithValue("@cant", datos.Metros_Hilo);
+            cmd.Parameters.AddWithValue("@con", datos.Consumo);
+            cmd.Parameters.AddWithValue("@res", datos.Resta);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch 
+            {
+                estado = 1;
+            }
+            if (estado == 0)
+            {
+                cmd.CommandText = "select * from tbl_paso";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    hilos.Add(new DTOInventario
+                    {
+                        Id_Hilo = int.Parse(dr["id"].ToString()),
+                        Referencia_Hilo = dr["referencia"].ToString(),
+                        Metros_Hilo = float.Parse(dr["cantidad"].ToString()),
+                        Consumo = float.Parse(dr["consumo"].ToString()),
+                        Resta = float.Parse(dr["resta"].ToString())
+                    });
+                }
+                dr.Close();
+            }
+            cnx.Close();
+            return hilos;
+            
+        }
+
+        public int consultarMaximoConsumo()
+        {
+            int id_con = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_maximo_consumo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                id_con = int.Parse(dr["id_consumo"].ToString());
+            }
+            cnx.Close();
+            dr.Close();
+            return id_con;
+
+        }
+
+        public int consultarMaximoInventarioHilo()
+        {
+            int id_inven = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_maximo_id_inventario_hilo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                id_inven = int.Parse(dr["id_inventario"].ToString());
+            }
+            cnx.Close();
+            dr.Close();
+            return id_inven;
+        }
+
+        public int InsertarConsumoHilo(DTOInventario datos)
+        {
+            int estado = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_insertar_consumo_hilos";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id_cons", datos.Id_Consumo);
+            cmd.Parameters.AddWithValue("@id_inven", datos.Id_Inventario);
+            cmd.Parameters.AddWithValue("@id_h", datos.Id_Hilo);
+            cmd.Parameters.AddWithValue("@cons", datos.Consumo);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = 1;
+            }
+            cnx.Close();
+
+            return estado;
+        }
+
+        public int EliminarPaso()
+        {
+            int estado = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "Delete from tbl_paso";
+            cmd.CommandType = CommandType.Text;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = 1;
+            }
+            cnx.Close();
+            return estado;
+        }
+
+        public List<DTOInventario> consultarTodosHilos()
+        {
+            List<DTOInventario> todosHilos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultarTodosHilos";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                todosHilos.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id_hilo"].ToString()),
+                    Referencia_Hilo = dr["referencia_hilo"].ToString(),
+                    Tipo_Hilo = dr["tipo_hilo"].ToString(),
+                    Titulo_Hilo = int.Parse(dr["titulo_hilo"].ToString()),
+                    Color_Hilo = dr["color_hilo"].ToString(),
+                    Metros_Hilo = float.Parse(dr["metros_hilo"].ToString())
+                });
+            }
+            cnx.Close();
+            dr.Close();
+            return todosHilos;
+        }
+
+        public List<DTOInventario> olvidarHilo(DTOInventario datos)
+        {
+            int estado = 0;
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_olvidar_hilo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Hilo);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = 1;
+            }
+            if (estado == 0)
+            {
+                cmd.CommandText = "select * from tbl_paso";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    hilos.Add(new DTOInventario
+                    {
+                        Id_Hilo = int.Parse(dr["id"].ToString()),
+                        Referencia_Hilo = dr["referencia"].ToString(),
+                        Metros_Hilo = float.Parse(dr["cantidad"].ToString()),
+                        Consumo = float.Parse(dr["consumo"].ToString()),
+                        Resta = float.Parse(dr["resta"].ToString())
+                    });
+                }
+                dr.Close();
+            }
+            
+            cnx.Close();
+            return hilos;
+
+        }
+
+        
 
     }
     

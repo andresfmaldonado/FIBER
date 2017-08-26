@@ -69,77 +69,48 @@ namespace HEXI_ASP.NET
             }
         }
 
-        protected void GVUsuarios_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            CADInventario inventario = new CADInventario();
-            DTOInventario inven = new DTOInventario();
-            inven.Id_Hilo = int.Parse(GVHilos.DataKeys[e.NewEditIndex].Values[0].ToString());
-            /*if (inventario.CompletarRegistroHilosParaModificar(inven, id, referencia, tipo, titulo, color,,metros)== 0)
-            {
+       
 
-            }*/
-        }
+       
 
-        protected void Button5_Click(object sender, EventArgs e)
-        {
-            DTOInventario inven = new DTOInventario();
-            CADInventario inventario = new CADInventario();
-            int refe = 0;
-            try
-            {
-                inven.Referencia_Hilo = buscar.Text;
-                refe = inventario.ConsultarHiloPorRefConsumo(inven);
-            }
-            catch
-            {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
-            }
-
-            if (refe > 0)
-            {
-                inventario.BuscarHiloYCargarloAlGVConsumo(inven, GVHilos);
-            }else
-            {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "noregist", "noregistrado();", true);
-            }
-            buscar.Text = "";
-        }
-
-        protected void registrar_Click(object sender, EventArgs e)
-        {
-            Dictionary<string, object> list_consumos = new Dictionary<string, object>();
-            list_consumos.Add("id", id.Text);
-            list_consumos.Add("metros", metros.Text);
-            id.Text = "";
-            referencia.Text = "";
-            color.Text = "";
-            tipo.Text = "";
-            titulo.Text = "";
-            metros.Text = "";
-            consumo.Text = Convert.ToString(list_consumos["metros"]);
-        }
+        
 
         protected void fin_consumo_Click(object sender, EventArgs e)
         {
             
             int id_u = Convert.ToInt32(Session["id_usuario"]);
-            DTOInventario inven = new DTOInventario();
-            CADInventario inventario = new CADInventario();
-            try
-            {
-               
-                inven.Id_Usuario = id_u;
-                
-            }
-            catch
-            {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
 
-            }
+            datos.Id_Usuario = id_u;
 
-            if (inventario.InsertarConsumo(inven) == 0)
+            if (proceso.InsertarConsumo(datos) == 0)
             {
+                int id_con = proceso.consultarMaximoConsumo();
+                int id_inven = proceso.consultarMaximoInventarioHilo();
+                if (id_con > 0 && id_inven > 0)
+                {
+                    datos.Id_Consumo = id_con;
+                    datos.Id_Inventario = id_inven;
+                    if (proceso.InsertarConsumoHilo(datos) == 0)
+                    {
+                        if(proceso.EliminarPaso() == 0)
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                        }
 
+                    }else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                    }
+                }else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                }
             }
         }
     }

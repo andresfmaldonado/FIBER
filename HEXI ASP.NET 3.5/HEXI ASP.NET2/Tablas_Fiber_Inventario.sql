@@ -22,6 +22,8 @@ metros_hilo FLOAT,
 valorMetro FLOAT NOT NULL
 );
 
+
+
 --TABLA PRODUCTOS--
 
 CREATE TABLE tbl_productos(
@@ -153,6 +155,14 @@ id_hilo INT NOT NULL,
 metros_hilos FLOAT NOT NULL,
 FOREIGN KEY(id_consumo) REFERENCES tbl_consumos(id_consumo),
 FOREIGN KEY(id_inventario) REFERENCES tbl_inventarios(id_inventario)
+);
+
+--TABLA DE PASO--
+CREATE TABLE tbl_paso(
+id int not null,
+referencia varchar(20) not null,
+cantidad float not null,
+consumo float
 );
 
 --TABLA DE INGRESOS DE PRODUCTOS --

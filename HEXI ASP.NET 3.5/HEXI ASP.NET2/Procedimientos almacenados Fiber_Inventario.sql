@@ -13,6 +13,15 @@ END
 
 --FIN PROCEDURE--
 
+--PROCEDURE PARA CONSULTAR EL MAXIMO CONSUMO--
+CREATE PROCEDURE prc_consultar_maximo_consumo
+AS
+BEGIN
+SELECT MAX(id_consumo) as id_consumo FROM tbl_consumos;
+END
+--FIN PROCEDURE--
+
+
 --PROCEDURE PARA CONSULTAR CONSUMOS PRODUCTOS--
 CREATE PROCEDURE prc_consultar_consumos
 AS
@@ -20,6 +29,29 @@ BEGIN
 SELECT C.id_consumo, C.fecha, U.nombre_usuario 
 FROM tbl_usuario as U INNER JOIN tbl_consumos as C On
 U.id_usuario = C.id_usuario; 
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA CONSULTAR TODOS LOS HILOS--
+CREATE PROCEDURE prc_consultarTodosHilos
+AS
+BEGIN
+declare @inven int;
+set @inven = (select MAX(id_inventario) from tbl_inventario_hilo);
+SELECT H.id_hilo, H.referencia_hilo, H.tipo_hilo, H.titulo_hilo, H.color_hilo, IH.metros_hilo
+FROM tbl_hilos as H Inner Join tbl_inventario_hilo as IH On
+H.id_hilo = IH.id_hilo and IH.id_inventario = @inven;
+END
+--FIN PROCEDURE--
+select * from tbl_paso
+delete from tbl_paso
+--PROCEDURE OlVIDAR HILO DE TABLA PASO--
+CREATE PROCEDURE prc_olvidar_hilo(
+@id int
+)
+AS
+BEGIN
+DELETE FROM tbl_paso WHERE id = @id;
 END
 --FIN PROCEDURE--
 
@@ -65,25 +97,25 @@ CREATE PROCEDURE prc_insertar_consumo_hilos(
 @id_cons INT,
 @id_inven INT,
 @id_h INT,
-@metros FLOAT
+@cons FLOAT
 )
 AS
 BEGIN
-declare @cantidad_existente INT;
+declare @cantidad_existente FLOAT;
 
-INSERT INTO tbl_consumo_hilo VALUES (@id_cons, @id_inven,@id_h,@metros);
+INSERT INTO tbl_consumo_hilo VALUES (@id_cons, @id_inven,@id_h,@cons);
 
 set @cantidad_existente = (select metros_hilo from tbl_inventario_hilo 
 where id_inventario = @id_inven and id_hilo = @id_h);
-UPDATE tbl_inventario_hilo SET metros_hilo = @cantidad_existente - @metros
+UPDATE tbl_inventario_hilo SET metros_hilo = @cantidad_existente - @cons
 where id_inventario = @id_inven and id_hilo = @id_h;
+UPDATE tbl_hilos SET metros_hilo = @cantidad_existente - @cons 
+where id_hilo = @id_h;
 END
 
 --FIN PROCEDURE--
 
 --PROCEDURE PARA CONSULTAR HILO PARA CONSUMO--
-select * from tbl_inventario_hilo
-select * from tbl_hilos
 
 CREATE PROCEDURE prc_buscar_hilo_para_consumo(
 @id INT
@@ -105,7 +137,7 @@ AS
 BEGIN
 declare @inven int, @id int;
 set @inven = (select MAX(id_inventario) from tbl_inventario_hilo);
-set @id = (select id_hilo from tbl_hilos where referencia_hilo = @ref);
+set @id = (select id_hilo from tbl_hilos where referencia_hilo LIKE  @ref+'%');
 SELECT H.id_hilo, H.referencia_hilo, H.tipo_hilo, H.titulo_hilo, H.color_hilo, IH.metros_hilo
 FROM tbl_hilos as H Inner Join tbl_inventario_hilo as IH On
 H.id_hilo = IH.id_hilo and IH.id_inventario = @inven and IH.id_hilo = @id 

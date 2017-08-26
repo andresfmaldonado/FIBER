@@ -2,6 +2,7 @@
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -219,5 +220,43 @@ namespace HEXI_ASP.NET
             hilo = proceso.consultarHiloIdConsumo(datos);
             return hilo;
         }
+
+        
+        public List<DTOInventario> registrarHilo(int id, string referencia, float metros, float consumo)
+        {
+            
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Hilo = id;
+            datos.Referencia_Hilo = referencia;
+            datos.Metros_Hilo = metros;
+            datos.Consumo = consumo;
+            datos.Resta = metros - consumo;
+            hilos = proceso.registrarHilosPaso(datos);
+            return hilos;
+        }
+
+        public List<DTOInventario> verTodosHilos()
+        {
+            List<DTOInventario> todosHilos = new List<DTOInventario>();
+            CADInventario proceso = new CADInventario();
+            todosHilos = proceso.consultarTodosHilos();
+            return todosHilos;
+        }
+
+        public List<DTOInventario> olvidarHilo(int id)
+        {
+   
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Hilo = id;
+            hilos = proceso.olvidarHilo(datos);
+            
+            return hilos;
+        }
+
+     
     }
 }

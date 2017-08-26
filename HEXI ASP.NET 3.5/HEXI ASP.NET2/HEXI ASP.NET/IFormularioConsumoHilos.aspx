@@ -12,6 +12,30 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/styles2.css" rel="stylesheet" />
     <link href="css/stacktable.css" rel="stylesheet" />
+    <link href="css/sweetalert2.css" rel="stylesheet" />
+    <script src="jvscript/sweetalert2.js"></script>
+    <script src="jvscript/jquery-3.1.0.js"></script>
+    <script>
+        function registro() {
+            swal("Proceso éxitoso!", "", "success");
+        }
+        function problema() {
+            swal('Oops...', 'Ocurrió un error inesperado! ', 'info');
+        }
+        function yaexiste() {
+            swal('Oops...', 'Esta cohorte ya existe!', 'error');
+        }
+        function yaexistedni() {
+            swal('Oops...', 'Ya existe una cohorte con este DNI!', 'error');
+        }
+        function campos() {
+            swal('Oops...', 'No completó los campos de forma correcta o te hizo falta alguno(s)!', 'warning');
+        }
+
+        function noprocess() {
+            swal('Oops...', 'No ha procesado ningun producto!', 'warning');
+        }
+    </script>
     <title>Fiber|Consumo Hilos</title>
 </head>
 <body>
@@ -103,27 +127,46 @@
 
         </div>
         &nbsp
-     <div class="form-group">
+     <div class="row">
+         <div class="col-md-12">
+
+         </div>
+         <div class="form-group">
          <asp:Label ID="Label4" class="control-label col-sm-2" runat="server" Text="Buscar:"></asp:Label>
-         <div class="col-sm-8">
+         <div class="col-md-7">
              <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Nombre Hilo" runat="server"></asp:TextBox>
          </div>
-         <div class=" col-md-2">
+         <div class="col-md-1">
              <input id="buscar" type="button" class="btn btn-default" value="Buscar" />
          </div>
+         
+         <input id="verTodos" type="button" class="btn btn-default" value="Ver todos" /> 
+    </div>   
      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="table-responsive " id="tablaHilos2">
+                        
+                 <!-- Table -->
+                 <table class="table" id="registrohilos2">
+                 </table>
+                        
+              </div>
+            </div>
+        </div>
+    </div>
+        
+        
      <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-1 col-center">
+        <div class="col-sm-offset-5 col-sm-1 col-center">
             <div class="btn-group">
                 <asp:Button ID="fin_consumo" type="button" class="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
             </div>
         </div>
-         <div class="col-sm-offset-1 col-sm-1 col-center">
-            <div class="btn-group">
-                <input id="verTodos" type="button" class="btn btn-default" value="Ver todos" />
-            </div>
-         </div>
+         
      </div>   
+    <asp:HiddenField runat="server" ID="_repostcheckcode" />
     </form>
     <div class="form-group">
         <div class="col-sm-12">
@@ -138,7 +181,7 @@
         <div class="modal-dialog modal-bg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div class="table-responsive shop" id="tablaHilo">
+                    <div class="table-responsive" id="tablaHilo">
                         <div class="panel panel-default">
                             <!-- Table -->
                             <table class="table" id="hilo">
@@ -147,10 +190,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
     <!-- /Modal -->
+    <!-- Modal2 -->
+    <div class="modal fade bs-example-bg" id="modalTodos" tabindex="-1" role="dialog" aria-labelledby="modalVerTodosLabel" data-backdrop="static">
+        <div class="modal-dialog modal-bg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="table-responsive" id="tablaHilos">
+                        <div class="panel panel-default">
+                            <!-- Table -->
+                            <table class="table" id="TodosHilos">
+             
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal2 -->
     <script>$('[data-toggle="tooltip"]').tooltip(); </script>
     <script src="jvscript/jquery-3.1.0.js"></script>
 
@@ -194,7 +261,8 @@
     <script src="jvscript/animacion.js"></script>
     <script>
         $("#buscar").click(function () {
-            var dataString = '{"referencia":"' + $("#txtbuscar").val(); +'"}';
+            var dataString = '{"referencia":"' + $("#txtbuscar").val() +'"}';
+            
             $.ajax({
                 type: "POST",
                 url: "ServiceLectorQR.svc/hilo",
@@ -203,12 +271,13 @@
                 dataType: "json",
                 processdata: true,
                 success: function (Dato) {
+                    alert("Entró al success");
                     console.log(Dato.hiloResult);
                     item = Dato.hiloResult;
                     $("#hilo").html('');
                     $("#hilo").append('<thead class="text-center"><tr><th>Id</th><th>Referencia</th><th>Tipo</th><th>Titulo</th><th>Color</th><th>Metros</th><th>Accion</th></tr></thead>');
                     $("#hilo").append('<tbody></tbody>');
-                    $each(item, function (index, value) {
+                    $.each(item, function (index, value) {
                         $("#hilo").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Tipo_Hilo + '</td><td>' + value.Titulo_Hilo + '</td><td>' + value.Color_Hilo + '</td><td>' + value.Metros_Hilo + '</td><td><button id="seleccionarHilo" class="btn btn-default" value="'+value.Id_Hilo+'">Seleccionar</button></td></tr>');
                     });
                     $("#modalBuscar").modal('show');
@@ -222,7 +291,6 @@
                             dataType: "json",
                             processdata: true,
                             success: function (Dato) {
-                                console.log(Dato.hilo_por_idResult);
                                 item = Dato.hilo_por_idResult;
                                 $.each(item, function (index, value) {
                                     $("#id").val(value.Id_Hilo);
@@ -242,6 +310,118 @@
                 },
                 error: function (Mensaje) {
                     alert("ERROR al llamar el servicio" + Mensaje.status + " " + Mensaje.statusText);
+                }
+            });
+        });
+        var doc = $(document);
+        $("#registrar").click(function () {
+            var dataString3 = '{"id":"' + $("#id").val() + '","referencia":"' + $("#referencia").val() + '","metros":"' + $("#metros").val() + '","consumo":"' + $("#consumo").val() + '"}';
+            $.ajax({
+                type: "POST",
+                url: "ServiceLectorQR.svc/registrarHilo",
+                data: dataString3,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processdata: true,
+                success: function (Dato) {
+                    console.log(Dato.registrarHiloResult);
+                    item = Dato.registrarHiloResult;
+                    $("#registrohilos2").html('');
+                    $("#registrohilos2").append('<thead><tr><th>Id</th><th>Referencia</th><th>Metros</th><th>Consumo</th><th>Acción</th></tr></thead>');
+                    $("#registrohilos2").append('<tbody></tbody>');
+                    $.each(item, function (index, value) {
+                        $("#registrohilos2").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Metros_Hilo + '</td><td>' + value.Consumo + '</td><td><button id="olvidar" value="' + value.Id_Hilo + '" class="btn btn-danger">Quitar</button></td></tr>');
+                    });
+                    $("#id, #referencia, #tipo, #titulo, #color, #metros, #consumo").val('');
+                    
+                    $("#olvidar").click(function () {
+                        console.time("Peticion AJAX");
+                        var cache = doc.data("cache");
+                        if (cache) {
+                            console.log(cache);
+                            console.timeEnd("Peticion AJAX");
+
+                            return false;
+                        }
+                        var dataString5 = '{"id":"' + $("#olvidar").val() + '"}';
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceLectorQR.svc/olvidarHilo",
+                            data: dataString5,
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            processdata: true,
+                            success: function (Dato) {
+                                doc.data("cache");
+                                console.log(Dato);
+                                alert("Entro al success");
+                            },
+                            complete:function(){
+                                console.timeEnd("Peticion AJAX");
+                            },
+                            error: function (Mensaje) {
+
+                            }
+                        }); 
+                    });
+                },
+                error: function (Mensaje) {
+                    alert("ERROR al llamar el servicio53 " + Mensaje.status + " " + Mensaje.statusText);
+                }
+            });
+            return false;
+        });
+        $("#verTodos").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "ServiceLectorQR.svc/verTodosHilos",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processdata: true,
+                success: function (Dato) {
+                    
+                    console.log(Dato.verTodosHilosResult);
+                    item = Dato.verTodosHilosResult;
+                    $("#TodosHilos").html('');
+                    $("#TodosHilos").append('<thead><tr><th>Id</th><th>Referencia</th><th>Tipo</th><th>Titulo</th><th>Color</th><th>Metros</th><th>Accion</th></tr></thead>');
+                    $("#TodosHilos").append('<tbody></tbody>');
+                    $.each(item, function (index, value) {
+                        $("#TodosHilos").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Tipo_Hilo + '</td><td>' + value.Titulo_Hilo + '</td><td>' + value.Color_Hilo + '</td><td>' + value.Metros_Hilo + '</td><td><button class="btn btn-default seleccionarTodoHilo" value="' + value.Id_Hilo + '">Seleccionar</button></td></tr>');
+                    });
+                    $("#modalTodos").modal('show');
+                    $(".seleccionarTodoHilo").click(function () {
+                       
+                        var dataString4 = '{"id":"' + $(this).val() + '"}';
+                        alert(dataString4);
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceLectorQR.svc/hilo_por_id",
+                            data: dataString4,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            processdata: true,
+                            success: function (Dato) {
+                                console.log(Dato.hilo_por_idResult);
+                                item = Dato.hilo_por_idResult;
+                                $.each(item, function (index, value) {
+                                    $("#id").val(value.Id_Hilo);
+                                    $("#referencia").val(value.Referencia_Hilo);
+                                    $("#tipo").val(value.Tipo_Hilo);
+                                    $("#titulo").val(value.Titulo_Hilo);
+                                    $("#color").val(value.Color_Hilo);
+                                    $("#metros").val(value.Metros_Hilo);
+                                });
+                                $("#modalTodos").modal('hide');
+                            },
+                            error: function (Mensaje) {
+                                alert("ERROR al llamar al servicio4 " + Mensaje.status + " " + Mensaje.statusText);
+                            }
+                        });
+                    });
+                },
+                error: function (Mensaje) {
+                    alert("ERROR al llamar el servicio " + Mensaje.status + " " + Mensaje.statusText);
                 }
             });
         });
