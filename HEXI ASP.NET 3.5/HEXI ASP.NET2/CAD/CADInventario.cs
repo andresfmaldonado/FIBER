@@ -1020,28 +1020,26 @@ namespace CAD
             return id_inven;
         }
 
-        public bool InsertarConsumoHilo(DataTable hilos)
+        public void InsertarConsumoHilo(DTOInventario datos)
         {
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_insertar_consumo_hilos";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id_cons", datos.Id_Consumo);
+            cmd.Parameters.AddWithValue("@id_inven", datos.Id_Inventario);
+            cmd.Parameters.AddWithValue("@id_h", datos.Id_Hilo);
+            cmd.Parameters.AddWithValue("@cons", datos.Consumo);
             try
             {
-                cnx.Open();
-                using (SqlBulkCopy sqlbc = new SqlBulkCopy(cnx))
-                {
-                    sqlbc.DestinationTableName = "tbl_consumo_hilo";
-                    sqlbc.ColumnMappings.Add("id_consumo", "id_consumo");
-                    sqlbc.ColumnMappings.Add("id_inventario", "id_inventario");
-                    sqlbc.ColumnMappings.Add("id_hilo", "id_hilo");
-                    sqlbc.ColumnMappings.Add("consumo", "consumo");
-                    sqlbc.WriteToServer(hilos);
-
-                }
-            }
-            catch
+                cmd.ExecuteNonQuery();
+            }catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
             cnx.Close();
-            return true;
+
         }
 
         public int EliminarPaso()

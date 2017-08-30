@@ -101,56 +101,38 @@ namespace HEXI_ASP.NET
 
             if (proceso.InsertarConsumo(datos) == 0)
             {
-                int id_cons = proceso.consultarMaximoConsumo();
-                int id_inven = proceso.consultarMaximoInventarioHilo();
+                datos.Id_Consumo = proceso.consultarMaximoConsumo();
+                datos.Id_Inventario = proceso.consultarMaximoInventarioHilo();
                 List<DTOInventario> hilos = new List<DTOInventario>();
                 hilos = proceso.consultarPasoParaFinalizar();
-                if (hilos.Count > 0)
+                foreach (var item in hilos)
                 {
-
-                    DataTable Tabla = new DataTable();
-                    DataRow fila;
-                    DataColumn columna;
+                    datos.Id_Hilo = item.Id_Hilo;
+                    datos.Consumo = item.Consumo;
+                    try
+                    {
+                        proceso.InsertarConsumoHilo(datos);
+                        proceso.EliminarPaso();
+                    }
+                    catch 
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                        break;
+                    }
                     
-                    columna = new DataColumn();
-                    columna.DataType = System.Type.GetType("System.Int32");
-                    columna.ColumnName = "id_consumo";
-                    Tabla.Columns.Add(columna);
-
-                    columna = new DataColumn();
-                    columna.DataType = System.Type.GetType("System.Int32");
-                    columna.ColumnName = "id_inventario";
-                    Tabla.Columns.Add(columna);
-
-                    columna = new DataColumn();
-                    columna.DataType = System.Type.GetType("System.Int32");
-                    columna.ColumnName = "id_hilo";
-                    Tabla.Columns.Add(columna);
-
-                    columna = new DataColumn();
-                    columna.DataType = System.Type.GetType("System.Single");
-                    columna.ColumnName = "consumo";
-                    Tabla.Columns.Add(columna);
-
-                    foreach (var item in hilos)
-                    {
-                        fila = Tabla.NewRow();
-                        fila["id_consumo"] = id_cons;
-                        fila["id_inventario"] = id_inven;
-                        fila["id_hilo"] = item.Id_Hilo;
-                        fila["consumo"] = item.Consumo;
-                        Tabla.Rows.Add(fila);
-                        
-                    }
-                    if (proceso.InsertarConsumoHilo(Tabla))
-                    {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
-                    }
                 }
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
             }else
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
             }
+            
+                    
+                  
+                        
+              
+                
+            
             
             
         }
