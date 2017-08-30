@@ -361,7 +361,7 @@
                                 console.timeEnd("Peticion AJAX");
                             },
                             error: function (Mensaje) {
-
+                                console.log(Mensaje);
                             }
                         }); 
                     });
