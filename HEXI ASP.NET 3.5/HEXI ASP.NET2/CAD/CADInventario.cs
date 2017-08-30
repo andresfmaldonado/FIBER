@@ -1020,29 +1020,28 @@ namespace CAD
             return id_inven;
         }
 
-        public int InsertarConsumoHilo(DTOInventario datos)
+        public bool InsertarConsumoHilo(DataTable hilos)
         {
-            int estado = 0;
-            cnx.Open();
-            cmd = new SqlCommand();
-            cmd.Connection = cnx;
-            cmd.CommandText = "prc_insertar_consumo_hilos";
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@id_cons", datos.Id_Consumo);
-            cmd.Parameters.AddWithValue("@id_inven", datos.Id_Inventario);
-            cmd.Parameters.AddWithValue("@id_h", datos.Id_Hilo);
-            cmd.Parameters.AddWithValue("@cons", datos.Consumo);
             try
             {
-                cmd.ExecuteNonQuery();
+                cnx.Open();
+                using (SqlBulkCopy sqlbc = new SqlBulkCopy(cnx))
+                {
+                    sqlbc.DestinationTableName = "tbl_consumo_hilo";
+                    sqlbc.ColumnMappings.Add("id_consumo", "id_consumo");
+                    sqlbc.ColumnMappings.Add("id_inventario", "id_inventario");
+                    sqlbc.ColumnMappings.Add("id_hilo", "id_hilo");
+                    sqlbc.ColumnMappings.Add("consumo", "consumo");
+                    sqlbc.WriteToServer(hilos);
+
+                }
             }
             catch
             {
-                estado = 1;
+                return false;
             }
             cnx.Close();
-
-            return estado;
+            return true;
         }
 
         public int EliminarPaso()
@@ -1131,6 +1130,28 @@ namespace CAD
             cnx.Close();
             return hilos;
 
+        }
+
+        public List<DTOInventario> consultarPasoParaFinalizar()
+        {
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "SELECT * FROM tbl_paso";
+            cmd.CommandType = CommandType.Text;
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                hilos.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id"].ToString()),
+                    Consumo = float.Parse(dr["consumo"].ToString())
+                });
+            }
+            cnx.Close();
+            dr.Close();
+            return hilos;
         }
 
         

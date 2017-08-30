@@ -644,3 +644,16 @@ BEGIN
 SELECT id_pedido,(CAST(fecha_pedido AS VARCHAR(50))+' / '+ CAST(id_pedido AS VARCHAR(15))) AS pedido FROM tbl_pedidos WHERE categoria='Hilos';
 END
 --FIN PROCEDURE--
+
+--PROCEDURE PARA INSERTAR TABLA DE PASO--
+CREATE PROCEDURE prc_insertar_paso]
+@id int,
+@ref varchar(20),
+@cant float,
+@con float,
+@res float
+)
+AS
+BEGIN
+INSERT INTO tbl_paso VALUES (@id,@ref,@cant,@con,@res);
+END

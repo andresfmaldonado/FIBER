@@ -2,6 +2,9 @@
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -69,11 +72,23 @@ namespace HEXI_ASP.NET
             }
         }
 
-       
+        public DataTable ConvertToDataTable<DTOInventario>(List<DTOInventario> hilos)
+        {
+            PropertyDescriptorCollection properties =
+               TypeDescriptor.GetProperties(typeof(DTOInventario));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (DTOInventario item in hilos)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
 
-       
-
-        
+        }
 
         protected void fin_consumo_Click(object sender, EventArgs e)
         {
@@ -86,32 +101,58 @@ namespace HEXI_ASP.NET
 
             if (proceso.InsertarConsumo(datos) == 0)
             {
-                int id_con = proceso.consultarMaximoConsumo();
+                int id_cons = proceso.consultarMaximoConsumo();
                 int id_inven = proceso.consultarMaximoInventarioHilo();
-                if (id_con > 0 && id_inven > 0)
+                List<DTOInventario> hilos = new List<DTOInventario>();
+                hilos = proceso.consultarPasoParaFinalizar();
+                if (hilos.Count > 0)
                 {
-                    datos.Id_Consumo = id_con;
-                    datos.Id_Inventario = id_inven;
-                    if (proceso.InsertarConsumoHilo(datos) == 0)
-                    {
-                        if(proceso.EliminarPaso() == 0)
-                        {
-                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
-                        }
-                        else
-                        {
-                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
-                        }
 
-                    }else
+                    DataTable Tabla = new DataTable();
+                    DataRow fila;
+                    DataColumn columna;
+                    
+                    columna = new DataColumn();
+                    columna.DataType = System.Type.GetType("System.Int32");
+                    columna.ColumnName = "id_consumo";
+                    Tabla.Columns.Add(columna);
+
+                    columna = new DataColumn();
+                    columna.DataType = System.Type.GetType("System.Int32");
+                    columna.ColumnName = "id_inventario";
+                    Tabla.Columns.Add(columna);
+
+                    columna = new DataColumn();
+                    columna.DataType = System.Type.GetType("System.Int32");
+                    columna.ColumnName = "id_hilo";
+                    Tabla.Columns.Add(columna);
+
+                    columna = new DataColumn();
+                    columna.DataType = System.Type.GetType("System.Single");
+                    columna.ColumnName = "consumo";
+                    Tabla.Columns.Add(columna);
+
+                    foreach (var item in hilos)
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                        fila = Tabla.NewRow();
+                        fila["id_consumo"] = id_cons;
+                        fila["id_inventario"] = id_inven;
+                        fila["id_hilo"] = item.Id_Hilo;
+                        fila["consumo"] = item.Consumo;
+                        Tabla.Rows.Add(fila);
+                        
                     }
-                }else
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                    if (proceso.InsertarConsumoHilo(Tabla))
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
+                    }
                 }
+            }else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
             }
+            
+            
         }
     }
 }
