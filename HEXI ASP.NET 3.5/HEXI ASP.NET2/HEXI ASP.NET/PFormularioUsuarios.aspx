@@ -28,10 +28,10 @@
                swal("Modificación éxitosa!", "", "success");
            }
            function AccesoDesh() {
-               swal("La habilitación de acceso al sistema fue eliminado con éxito!", "", "success");
+               swal("Usuario deshabilitación!", "", "success");
            }
            function AccesoHab() {
-               swal("La deshabilitación de acceso al sistema fue eliminado con éxito!", "", "success");
+               swal("Usuario habilitado!", "", "success");
            }
            function yaexiste() {
                swal('Oops...', 'Este usuario ya existe!', 'error');

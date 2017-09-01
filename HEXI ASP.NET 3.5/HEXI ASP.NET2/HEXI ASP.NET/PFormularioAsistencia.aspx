@@ -18,7 +18,7 @@
     <script src="jvscript/sweetalert2.js"></script>
     <script>
            function registro(){
-               swal("Gracias por ayudarnos a mejorar!", "En la menor brevedad posible obtendrás una respuesta", "success");
+               swal("Gracias por ayudarnos a mejorar!", "", "success");
            }
            function problema() {
                swal('Oops...', 'Ocurrió un error inesperado!', 'info');
@@ -128,13 +128,6 @@
                   <asp:TemplateField HeaderText="Fecha registro">
                       <ItemTemplate>
                           <asp:Label ID="FECHA_REGISTRO" runat="server" Text='<% # Bind("fecha_registro_problema") %>'></asp:Label>
-                      </ItemTemplate>
-
-                  </asp:TemplateField>
-
-                   <asp:TemplateField HeaderText="Estado">
-                      <ItemTemplate>
-                          <asp:Label ID="ESTADO_PROBLEMA" runat="server" Text='<% # Bind("estado_problema") %>'></asp:Label>
                       </ItemTemplate>
 
                   </asp:TemplateField>

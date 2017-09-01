@@ -4,17 +4,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="Imagenes/icono_pagina_fiber.png" type="image/png" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/styles2.css" rel="stylesheet" />
-    <meta http-equiv="Expires" content="0" />
-    <meta http-equiv="Cache-Control" content="no-cache" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <title>Fiber|Folder QR</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="Imagenes/icono_pagina_fiber.png" type="image/png" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/styles2.css" rel="stylesheet" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<title>Fiber|Folder QR</title>
 </head>
 <body>
     <canvas id="bg"></canvas>

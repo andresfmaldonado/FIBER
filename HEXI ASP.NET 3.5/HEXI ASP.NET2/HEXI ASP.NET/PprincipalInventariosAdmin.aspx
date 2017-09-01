@@ -5,14 +5,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="shortcut icon" href="Imagenes/icono_pagina_fiber.png" type="image/png" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet"/>
-    <link href="css/styles2.css" rel="stylesheet"/>
-    <title>Fiber|Inventarios</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="title" content="Fiber Inventarios" />
+<meta name="description" content="Fiber módulo Inventarios " />
+<link rel="shortcut icon" href="Imagenes/icono_pagina_fiber.png" type="image/png" />
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet"/>
+<link href="css/styles2.css" rel="stylesheet"/>
+<title>Fiber|Inventarios</title>
 </head>
 <body>
     <div id="page-wrapper">
@@ -34,6 +36,7 @@
                     			<li><a href="PerfilAdmin.aspx">Perfil</a></li>
                                 <li id="usuarios" runat="server"><a href="PFormularioUsuarios.aspx">Usuarios</a></li>
 								<li><a href="PAsistencia.aspx">Ayuda</a></li>
+                                <li><a href="History.aspx">Historial</a></li>
                                 <li><a href="default.aspx">Finalizar Sesión</a></li>
 							</ul>
 							<a href="#" class="close">Close</a>
@@ -95,10 +98,6 @@
 							</div>
 						</div>
                   </li>
-                </ul>
-            </section>
-           <section class="main">
-			  <ul class="ch-grid">
                   <li id="hilos" runat="server">
 						<div class="ch-item">
 							<div class="ch-info">
@@ -111,12 +110,12 @@
 							</div>
 						</div>
 					</li>
-                  <li id="historial" runat="server">
+                  <li id="inventario" runat="server">
 						<div class="ch-item">
 							<div class="ch-info">
 								<div class="ch-info-front ch-img-22"></div>
 								<div class="ch-info-back">
-                                    <a href="History.aspx"><h3>Historial</h3>
+                                    <a href="#"><h3>Inventario</h3>
 									<p>Fiber</p>
                                         </a>
 								</div>
@@ -135,7 +134,7 @@
 							</div>
 						</div>
 					</li>
-                  	<li id="inventario" runat="server">
+                  	<li id="informes" runat="server">
 						<div class="ch-item">				
 							<div class="ch-info">
 								<div class="ch-info-front ch-img-16"></div>

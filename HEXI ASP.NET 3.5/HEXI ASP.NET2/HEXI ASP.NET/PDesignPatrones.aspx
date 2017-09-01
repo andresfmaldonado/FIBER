@@ -5,21 +5,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Fiber | Diseño</title>
-    <meta name="Author" content="Johan Esteban Zapata Herrera" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="shortcut icon" href="Imagenes/icono_pagina_fiber.png" type="image/png" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/styles2.css" rel="stylesheet" />
-    <link href="css/patron.css" rel="stylesheet" />
-    <script src="jvscript/sweetalert2.js"></script>
-    <link rel="stylesheet" href="sweetalert2.css"/>
-    <script src="jvscript/jquery-3.1.0.js"></script>
-    <script src='jvscript/spectrum.js'></script>
-    <link rel='stylesheet' href='css/spectrum.css' />
+<title>Fiber | Diseño</title>
+<meta name="Author" content="Johan Esteban Zapata Herrera" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="title" content="Fiber Patrones" />
+<meta name="description" content="Fiber módulo de diseño de patrones de tejido plano " />
+<link rel="shortcut icon" href="Imagenes/icono_pagina_fiber.png" type="image/png" />
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/styles2.css" rel="stylesheet" />
+<link href="css/patron.css" rel="stylesheet" />
+<script src="jvscript/sweetalert2.js"></script>
+<link rel="stylesheet" href="sweetalert2.css"/>
+<script src="jvscript/jquery-3.1.0.js"></script>
+<script src='jvscript/spectrum.js'></script>
+<link rel='stylesheet' href='css/spectrum.css' />
 </head>
 <body>
    <div id="page-wrapper">

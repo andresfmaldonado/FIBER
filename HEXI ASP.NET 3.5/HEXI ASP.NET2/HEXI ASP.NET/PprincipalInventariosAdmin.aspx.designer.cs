@@ -67,13 +67,13 @@ namespace HEXI_ASP.NET {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl hilos;
         
         /// <summary>
-        /// Control historial.
+        /// Control inventario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl historial;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl inventario;
         
         /// <summary>
         /// Control scanner.
@@ -85,13 +85,13 @@ namespace HEXI_ASP.NET {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl scanner;
         
         /// <summary>
-        /// Control inventario.
+        /// Control informes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl inventario;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl informes;
         
         /// <summary>
         /// Control form1.

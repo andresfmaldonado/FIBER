@@ -340,9 +340,9 @@ namespace CAD
             cnx.Close();
             return estado;
         }
-        public string ObtenerRefProducto(DTOInventario inven)
+        public string ObtenerPlacaProducto(DTOInventario inven)
         {
-            string ref_p = "";
+            string placa_p = "";
             cnx.Open();
             cmd = new SqlCommand();
             cmd.Connection = cnx;
@@ -352,11 +352,31 @@ namespace CAD
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
-                ref_p = dr["referencia_producto"].ToString();
+                placa_p = dr["placa_producto"].ToString();
             }
             dr.Close();
             cnx.Close();
-            return ref_p;
+            return placa_p;
+
+        }
+
+        public string ObtenerSerialProducto(DTOInventario inven)
+        {
+            string serial_p = "";
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_producto_por_id";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", inven.Id_Producto);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                serial_p = dr["serial_producto"].ToString();
+            }
+            dr.Close();
+            cnx.Close();
+            return serial_p;
 
         }
 
