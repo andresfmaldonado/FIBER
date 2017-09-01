@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="Imagenes/icono_pagina_fiber.png" type="image/png" />
@@ -46,13 +46,18 @@
         </div>
     </div>
     <form id="form1" runat="server">
-    <div class="container text-center">
-      <br/>
-	<div class="row">
-       <div class="col-md-8 col-md-offset-2">
-        <asp:BulletedList ID="BulletedList1" runat="server" class="list-group"></asp:BulletedList>
-    </div>
-        </div>
+        <div class="container">
+            <br />
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-street-view" aria-hidden="true"></i> Historial</h3>
+                        </div>
+                        <asp:BulletedList ID="BulletedList1" runat="server" class="list-group  text-center"></asp:BulletedList>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </body>

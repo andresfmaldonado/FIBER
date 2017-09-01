@@ -660,6 +660,25 @@ namespace CAD
             return estado;
         }
 
+
+        public void ObtenerDatosUserEnvioReporte(DTOUsuario user)
+        {
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_cargar_info_perfil_usuario";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id_user", user.Id);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                user.Correo_contacto = dr["email_usuario"].ToString();
+                user.Nombre_contacto = dr["nombre_completo"].ToString();
+            }
+            dr.Close();
+            cnx.Close();
+        }
+
         // -----------------------------------CORREO--------------------------------------------
 
         //Clase para enviar email con correo y contraseña para ingresar al sistema
@@ -676,7 +695,7 @@ namespace CAD
                 mail.Subject = "¡Felicidades! Ahora forma parte de la familia FIBER";
                 //Aquí ponemos el mensaje que incluirá el correo
                 mail.IsBodyHtml = true;
-                mail.Body = "Hola " + user.Nombre + "!" + "<br/>" + "<br/>" + "Te damos las bienvenida a la familia FIBER." + "<br/>" + "<br/>" + "Los datos para ingresar al sistema de información son:" + "<br/>" + "Correo: " + user.Correo + "<br/>" + "Contraseña: " + user.Contraseña + "<br/>" + "<br/>" + "Recuerda darle un buen uso a ésta aplicación Web." + "<br/>" + "<br/>" + "<b>" + "​Fiber© Producto HEXI" + "</b>" + "<br/>" + "<br/>" + "<br/>" + "<b>" + "​AVISO LEGAL:" + "</b>" + "Este correo electrónico incluyendo sus anexos, contiene información confidencial de Fiber©, si usted no es el destinatario intencional, se le informa que cualquier uso, difusión, distribución o copiado de esta comunicación está terminantemente prohibido, hacerlo podría tener consecuencias legales como las contenidas en la Ley 1273 de 2009, Ley 1581 de 2012 y todas las que le apliquen. Si ha recibido este correo por error, por favor bórrelo. Si usted es el destinatario, le solicitamos mantener reserva sobre el contenido, los datos o información de contacto del remitente y en general sobre la información de este documento y/o archivos adjuntos, a no ser que exista una autorización explícita. Este mensaje y sus anexos han sido revisados con software antivirus, para evitar que contenga código malicioso que pueda afectar sistemas de cómputo, sin embargo es responsabilidad del destinatario confirmar este hecho en el momento de su recepción.";
+                mail.Body = "Hola " + user.Nombre + "!" + "<br/>" + "<br/>" + "Te damos la bienvenida a la familia FIBER." + "<br/>" + "<br/>" + "Los datos para ingresar al sistema de información son:" + "<br/>" + "Correo: " + user.Correo + "<br/>" + "Contraseña: " + user.Contraseña + "<br/>" + "<br/>" + "Recuerda darle un buen uso a ésta aplicación Web." + "<br/>" + "<br/>" + "<b>" + "​Fiber© Producto HEXI" + "</b>" + "<br/>" + "<br/>" + "<br/>" + "<b>" + "​AVISO LEGAL:" + "</b>" + "Este correo electrónico incluyendo sus anexos, contiene información confidencial de Fiber©, si usted no es el destinatario intencional, se le informa que cualquier uso, difusión, distribución o copiado de esta comunicación está terminantemente prohibido, hacerlo podría tener consecuencias legales como las contenidas en la Ley 1273 de 2009, Ley 1581 de 2012 y todas las que le apliquen. Si ha recibido este correo por error, por favor bórrelo. Si usted es el destinatario, le solicitamos mantener reserva sobre el contenido, los datos o información de contacto del remitente y en general sobre la información de este documento y/o archivos adjuntos, a no ser que exista una autorización explícita. Este mensaje y sus anexos han sido revisados con software antivirus, para evitar que contenga código malicioso que pueda afectar sistemas de cómputo, sin embargo es responsabilidad del destinatario confirmar este hecho en el momento de su recepción.";
                 //Especificamos a quien enviaremos el Email, no es necesario que sea Gmail, puede ser cualquier otro proveedor
                 mail.To.Add(user.Correo);
                 //Si queremos enviar archivos adjuntos tenemos que especificar la ruta en donde se encuentran
@@ -749,8 +768,75 @@ namespace CAD
                 //mail.Attachments.Add(new Attachment(@"C:\Documentos\carta.docx"));
 
                 //Configuracion del SMTP
-                SmtpClient SmtpServer = new SmtpClient();
-                SmtpServer.Host = "smtp.live.com";
+                SmtpClient SmtpServer = new SmtpClient("smtp.live.com");
+                SmtpServer.Port = 587; //Puerto que utiliza Gmail para sus servicios
+                //Especificamos las credenciales con las que enviaremos el mail
+                SmtpServer.Credentials = new System.Net.NetworkCredential("hexi@outlook.es", "Developersfuture");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public bool EnviarCorreoReporteUser(DTOUsuario user)
+        {
+            try
+            {
+                //Configuración del Mensaje
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.live.com");
+                //Especificamos el correo desde el que se enviará el Email y el nombre de la persona que lo envía
+                mail.From = new MailAddress("familiafiber@outlook.com", "HEXI©", Encoding.UTF8);
+                //Aquí ponemos el asunto del correo
+                mail.Subject = "Reporte problema usuario Fiber";
+                //Aquí ponemos el mensaje que incluirá el correo
+                mail.IsBodyHtml = true;
+                mail.Body = "<b>" + "Datos solicitante:" + "</b>" + "<br/>" + "<br/>" + "<b>" + "Nombre :" + "</b>" + "<br/>" + user.Nombre_contacto + "<br/>" + "<b>" + "Correo Electrónico: " + "</b>" + "<br/>" + user.Correo_contacto + "<br/>" + "<br/>" + "<b>" + "Nombre reporte:" + "</b>" + "<br/>" + user.Nomb_report + "<br/>" + "<br/>" + "<b>" + "Descripción:" + "</b>" + "<br/>" + user.Descript_report + "<br/>" + "<br/>" + "<b>" + "Reporte FIBER©" + "</b>";
+                //Especificamos a quien enviaremos el Email, no es necesario que sea Gmail, puede ser cualquier otro proveedor
+                mail.To.Add("hexi@outlook.es");
+                //Si queremos enviar archivos adjuntos tenemos que especificar la ruta en donde se encuentran
+                //mail.Attachments.Add(new Attachment(@"C:\Documentos\carta.docx"));
+
+                //Configuracion del SMTP
+                SmtpServer.Port = 587; //Puerto que utiliza Gmail para sus servicios
+                //Especificamos las credenciales con las que enviaremos el mail
+                SmtpServer.Credentials = new System.Net.NetworkCredential("familiafiber@outlook.com", "FiberByHEXISENA");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public bool EnviarCorreoConfirmaciónEnvíoReporteProblema(DTOUsuario user)
+        {
+            try
+            {
+                //Configuración del Mensaje
+                MailMessage mail = new MailMessage();
+                //Especificamos el correo desde el que se enviará el Email y el nombre de la persona que lo envía
+                mail.From = new MailAddress("familiafiber@outlook.com", "FIBER©", Encoding.UTF8);
+                //Aquí ponemos el asunto del correo
+                mail.Subject = "Confirmación FIBER©";
+                //Aquí ponemos el mensaje que incluirá el correo
+                mail.IsBodyHtml = true;
+                mail.Body = "Hola " + user.Nombre_contacto + "!" + "<br/>" + "<br/>" + "Muchas gracias por contactarnos, hemos recibido tu solicitud. A partir de éste momento comenzaremos a tramitarla para poder brindarte una respuesta en el menor tiempo posible." + "<br/>" + "<br/>" + "Cordialmente," + "<br/>" + "<b>" + "SERVICIO AL CLIENTE." + "<br/>" + "HEXI©" + "</b>" + "<br/>" + "<br/>" + "<br/>" + "<b>" + "​AVISO LEGAL:" + "</b>" + "Este correo electrónico incluyendo sus anexos, contiene información confidencial de HEXI©, si usted no es el destinatario intencional, se le informa que cualquier uso, difusión, distribución o copiado de esta comunicación está terminantemente prohibido, hacerlo podría tener consecuencias legales como las contenidas en la Ley 1273 de 2009, Ley 1581 de 2012 y todas las que le apliquen. Si ha recibido este correo por error, por favor bórrelo. Si usted es el destinatario, le solicitamos mantener reserva sobre el contenido, los datos o información de contacto del remitente y en general sobre la información de este documento y/o archivos adjuntos, a no ser que exista una autorización explícita. Este mensaje y sus anexos han sido revisados con software antivirus, para evitar que contenga código malicioso que pueda afectar sistemas de cómputo, sin embargo es responsabilidad del destinatario confirmar este hecho en el momento de su recepción.";
+                //Especificamos a quien enviaremos el Email, no es necesario que sea Gmail, puede ser cualquier otro proveedor
+                mail.To.Add(user.Correo_contacto);
+                //Si queremos enviar archivos adjuntos tenemos que especificar la ruta en donde se encuentran
+                //mail.Attachments.Add(new Attachment(@"C:\Documentos\carta.docx"));
+
+                //Configuracion del SMTP
+                SmtpClient SmtpServer = new SmtpClient("smtp.live.com");
                 SmtpServer.Port = 587; //Puerto que utiliza Gmail para sus servicios
                 //Especificamos las credenciales con las que enviaremos el mail
                 SmtpServer.Credentials = new System.Net.NetworkCredential("familiafiber@outlook.com", "FiberByHEXISENA");

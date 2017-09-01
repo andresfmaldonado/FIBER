@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
+    <meta name="title" content="HEXI" />
+    <meta name="description" content="HEXI developers diseño de sitios web, desarrollo de software y asesoría tecnológica. En busca de superar sus expectativas . Servicio excepcional . Fiber " />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="SitioWeb/css/bootstrap.css"/>
     <!--Carga de fuentes de Font Awesome-->
@@ -412,7 +413,7 @@
                                 window.location.href = "FiberInicioAdmin.aspx";
                               })
                               .fail(function() {
-                                   mensj = '<b>Resultado:</b><br/>Oops, ocurrió un error inesperado!';
+                                   mensj = '<b>Resultado:</b><br/>Oops, ocurrió un error inesperado! Recarge la página y vuelva a intentarlo';
                                    tp = 'error';
                                    $('#luser').empty().append('<i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar');
                                    $('#luser').attr('onclick', 'verificar();');
@@ -434,7 +435,7 @@
 
                         if (response.idenuResult[0] == "3") {
                             $('#password').val('');
-                            mensj = '<b>Resultado:</b><br/>Contraseña icorrecta!';
+                            mensj = '<b>Resultado:</b><br/>Contraseña incorrecta!';
                             tp = 'info';
                             $('#luser').empty().append('<i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar');
                             $('#luser').attr('onclick', 'verificar();');
@@ -462,7 +463,7 @@
                         }
 
                     } else {
-                        mensj = '<b>Resultado:</b><br/>Oops, ocurrió un error inesperado!';
+                        mensj = '<b>Resultado:</b><br/>Oops, ocurrió un error inesperado! Recarge la página y vuelva a intentarlo';
                         tp = 'error';
                         $('#luser').empty().append('<i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar');
                         $('#luser').attr('onclick', 'verificar();');
@@ -470,7 +471,7 @@
                     }
                 },
                 error: function (err) {
-                    mensj = '<b>Resultado:</b><br/>Oops, ocurrió un error inesperado!';
+                    mensj = '<b>Resultado:</b><br/>Oops, ocurrió un error inesperado! Recarge la página y vuelva a intentarlo';
                     tp = 'error';
                     $('#luser').empty().append('<i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar');
                     $('#luser').attr('onclick', 'verificar();');

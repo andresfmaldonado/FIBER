@@ -1059,7 +1059,7 @@ textarea {
 font-family: 'FontAwesome';
 content: "\f192"; 
 position: absolute;
-left: 25px;
+left: 15px;
 }
 
 .list-group li:hover,

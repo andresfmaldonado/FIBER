@@ -124,8 +124,6 @@ namespace HEXI_ASP.NET
                 inven.ValorUnitario_Producto = val;
                 inven.Consumible = consu;
                 inven.Cantidad_Producto = cantid_p;
-                if(inventario.ConsultarProductoPorRef(inven) == 0)
-                {
                     if (inventario.ConsultarProductoPorPlaca(inven) == 0)
                     {
                         if (inventario.ConsultarProductoPorSerial(inven) == 0)
@@ -136,7 +134,7 @@ namespace HEXI_ASP.NET
                                 QrEncoder qrencoder = new QrEncoder();
                                 QrCode qrcode = new QrCode();
                                 //Recolectando referencia producto
-                                qrencoder.TryEncode(referencia.Text, out qrcode);
+                                qrencoder.TryEncode(placa.Text, out qrcode);
                                 //Generar dicho datos con cierta estructura y estipular colores
                                 GraphicsRenderer renderer = new GraphicsRenderer(new FixedCodeSize(400, QuietZoneModules.Zero),Brushes.Black,Brushes.White);
                                 //Memoria de datos
@@ -146,11 +144,11 @@ namespace HEXI_ASP.NET
                                 var image = new Bitmap(ms);
                                 var imagenfinal = new Bitmap(image, new Size(new Point(200, 200)));
                                 //Guardar codigoQR en carpeta servidor
-                                imagenfinal.Save(Server.MapPath("~/QR/") + referencia.Text+".png", ImageFormat.Png);
+                                imagenfinal.Save(Server.MapPath("~/QR/") + placa.Text+".png", ImageFormat.Png);
                                 DTOUsuario u = new DTOUsuario();
                                 CADUsuario process = new CADUsuario();
                                 u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
-                                u.Descripcion_history = "Registro producto referencia: "+referencia.Text;
+                                u.Descripcion_history = "Registro producto placa: "+placa.Text;
                                 process.InsertarHistorial(u);
                                 btn_Registrar.CssClass = "btn btn-default";
                                 btn_Registrar.Enabled = true;
@@ -183,12 +181,6 @@ namespace HEXI_ASP.NET
                     {
                         ScriptManager.RegisterClientScriptBlock(this, GetType(), "yaexisplaca", "yaexisteplaca();", true);
                     }
-                }else
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "yaexisref", "yaexisteref();", true);
-                }
-
-
             }else
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
@@ -227,10 +219,23 @@ namespace HEXI_ASP.NET
             DTOInventario inven = new DTOInventario();
             CADInventario inventario = new CADInventario();
             inven.Id_Producto = Convert.ToInt32(codigo.Text);
-            string referencia_p = inventario.ObtenerRefProducto(inven);
-            if (referencia_p == referencia.Text)
+            string placa_p = inventario.ObtenerPlacaProducto(inven);
+            string serial_p = inventario.ObtenerSerialProducto(inven);
+            if (placa_p != placa.Text && serial_p!=serial.Text)
             {
                 modifi = 1;
+            }
+            if (placa_p != placa.Text && serial_p == serial.Text)
+            {
+                modifi = 2;
+            }
+            if (placa_p == placa.Text && serial_p != serial.Text)
+            {
+                modifi = 3;
+            }
+            if (placa_p == placa.Text && serial_p == serial.Text)
+            {
+                modifi = 4;
             }
             try
             {
@@ -251,7 +256,7 @@ namespace HEXI_ASP.NET
             if (confirma == 9)
             {
 
-                inven.Referencia_Producto = referencia_p;
+                inven.Referencia_Producto = referencia.Text;
                 inven.Nombre_Producto = nombre.Text;
                 inven.Descripcion_Producto = descripcion.Text;
                 inven.Novedad_Producto = novedad.Text;
@@ -264,41 +269,227 @@ namespace HEXI_ASP.NET
                 inven.Cantidad_Producto = int.Parse(cantidad.Text);
                 if (modifi == 1)
                 {
-                    if (inventario.ModificarProducto(inven) == 0)
+                    if (inventario.ConsultarProductoPorPlaca(inven) == 0)
                     {
-                            DTOUsuario u = new DTOUsuario();
-                            CADUsuario process = new CADUsuario();
-                            u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
-                            u.Descripcion_history = "Actualización producto referencia: " + referencia.Text;
-                            process.InsertarHistorial(u);
-                            codigo.Text = "";
-                            referencia.Text = "";
-                            nombre.Text = "";
-                            descripcion.Text = "";
-                            novedad.Text = "";
-                            placa.Text = "";
-                            serial.Text = "";
-                            marca.Text = "";
-                            modelo.Text = "";
-                            cantidad.Text = "";
-                            valorUnitario.Text = "";
-                            // consumible.Text = "";
-                            btn_Registrar.CssClass = "btn btn-default";
-                            btn_Registrar.Enabled = true;
-                            btn_Actualizar.CssClass = "btn btn-default";
-                            btn_Actualizar.Enabled = false;
-                            btn_Cancelar.CssClass = "btn btn-default";
-                            btn_Cancelar.Enabled = false;
-                            cantidad.ReadOnly = false;
-                            // program.ObtenerUltimoIDProgramaEIncrementarlo(codigo_programa);
-                            inventario.CargarProductos(GVProductos);
-                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "modificacion();", true);
-                       
+                        if (inventario.ConsultarProductoPorSerial(inven) == 0)
+                        {
+                            if (inventario.ModificarProducto(inven) == 0)
+                            {
+                                var filePath = Server.MapPath("~/QR/" + placa_p +".png");
+                                if (File.Exists(filePath))
+                                {
+                                    File.Delete(filePath);
+                                }
+                                //Genernado Codigo QR
+                                QrEncoder qrencoder = new QrEncoder();
+                                QrCode qrcode = new QrCode();
+                                //Recolectando referencia producto
+                                qrencoder.TryEncode(placa.Text, out qrcode);
+                                //Generar dicho datos con cierta estructura y estipular colores
+                                GraphicsRenderer renderer = new GraphicsRenderer(new FixedCodeSize(400, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
+                                //Memoria de datos
+                                MemoryStream ms = new MemoryStream();
+
+                                renderer.WriteToStream(qrcode.Matrix, ImageFormat.Png, ms);
+                                var image = new Bitmap(ms);
+                                var imagenfinal = new Bitmap(image, new Size(new Point(200, 200)));
+                                //Guardar codigoQR en carpeta servidor
+                                imagenfinal.Save(Server.MapPath("~/QR/") + placa.Text + ".png", ImageFormat.Png);
+                                DTOUsuario u = new DTOUsuario();
+                                CADUsuario process = new CADUsuario();
+                                u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
+                                u.Descripcion_history = "Actualización producto placa: " + placa.Text;
+                                process.InsertarHistorial(u);
+                                codigo.Text = "";
+                                referencia.Text = "";
+                                nombre.Text = "";
+                                descripcion.Text = "";
+                                novedad.Text = "";
+                                placa.Text = "";
+                                serial.Text = "";
+                                marca.Text = "";
+                                modelo.Text = "";
+                                cantidad.Text = "";
+                                valorUnitario.Text = "";
+                                // consumible.Text = "";
+                                btn_Registrar.CssClass = "btn btn-default";
+                                btn_Registrar.Enabled = true;
+                                btn_Actualizar.CssClass = "btn btn-default";
+                                btn_Actualizar.Enabled = false;
+                                btn_Cancelar.CssClass = "btn btn-default";
+                                btn_Cancelar.Enabled = false;
+                                cantidad.ReadOnly = false;
+                                // program.ObtenerUltimoIDProgramaEIncrementarlo(codigo_programa);
+                                inventario.CargarProductos(GVProductos);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "modificacion();", true);
+
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "inconsis", "problema();", true);
+                            }
+                        }else
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "yaexisserial", "yaexisteserial();", true);
+                        }
+                    }else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "yaexisplaca", "yaexisteplaca();", true);
+                    }
+                    
+                }
+
+
+                if (modifi == 2)
+                {
+                    if (inventario.ConsultarProductoPorPlaca(inven) == 0)
+                    {
+                            if (inventario.ModificarProducto(inven) == 0)
+                            {
+                                var filePath = Server.MapPath("~/QR/" + placa_p + ".png");
+                                if (File.Exists(filePath))
+                                {
+                                    File.Delete(filePath);
+                                }
+                                //Genernado Codigo QR
+                                QrEncoder qrencoder = new QrEncoder();
+                                QrCode qrcode = new QrCode();
+                                //Recolectando referencia producto
+                                qrencoder.TryEncode(placa.Text, out qrcode);
+                                //Generar dicho datos con cierta estructura y estipular colores
+                                GraphicsRenderer renderer = new GraphicsRenderer(new FixedCodeSize(400, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
+                                //Memoria de datos
+                                MemoryStream ms = new MemoryStream();
+
+                                renderer.WriteToStream(qrcode.Matrix, ImageFormat.Png, ms);
+                                var image = new Bitmap(ms);
+                                var imagenfinal = new Bitmap(image, new Size(new Point(200, 200)));
+                                //Guardar codigoQR en carpeta servidor
+                                imagenfinal.Save(Server.MapPath("~/QR/") + placa.Text + ".png", ImageFormat.Png);
+                                DTOUsuario u = new DTOUsuario();
+                                CADUsuario process = new CADUsuario();
+                                u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
+                                u.Descripcion_history = "Actualización producto placa: " + placa.Text;
+                                process.InsertarHistorial(u);
+                                codigo.Text = "";
+                                referencia.Text = "";
+                                nombre.Text = "";
+                                descripcion.Text = "";
+                                novedad.Text = "";
+                                placa.Text = "";
+                                serial.Text = "";
+                                marca.Text = "";
+                                modelo.Text = "";
+                                cantidad.Text = "";
+                                valorUnitario.Text = "";
+                                // consumible.Text = "";
+                                btn_Registrar.CssClass = "btn btn-default";
+                                btn_Registrar.Enabled = true;
+                                btn_Actualizar.CssClass = "btn btn-default";
+                                btn_Actualizar.Enabled = false;
+                                btn_Cancelar.CssClass = "btn btn-default";
+                                btn_Cancelar.Enabled = false;
+                                cantidad.ReadOnly = false;
+                                // program.ObtenerUltimoIDProgramaEIncrementarlo(codigo_programa);
+                                inventario.CargarProductos(GVProductos);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "modificacion();", true);
+
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "inconsis", "problema();", true);
+                            }
                     }
                     else
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "inconsis", "problema();", true);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "yaexisplaca", "yaexisteplaca();", true);
                     }
+                }
+
+
+                if (modifi == 3)
+                {
+                        if (inventario.ConsultarProductoPorSerial(inven) == 0)
+                        {
+                            if (inventario.ModificarProducto(inven) == 0)
+                            {
+                                DTOUsuario u = new DTOUsuario();
+                                CADUsuario process = new CADUsuario();
+                                u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
+                                u.Descripcion_history = "Actualización producto placa: " + placa.Text;
+                                process.InsertarHistorial(u);
+                                codigo.Text = "";
+                                referencia.Text = "";
+                                nombre.Text = "";
+                                descripcion.Text = "";
+                                novedad.Text = "";
+                                placa.Text = "";
+                                serial.Text = "";
+                                marca.Text = "";
+                                modelo.Text = "";
+                                cantidad.Text = "";
+                                valorUnitario.Text = "";
+                                // consumible.Text = "";
+                                btn_Registrar.CssClass = "btn btn-default";
+                                btn_Registrar.Enabled = true;
+                                btn_Actualizar.CssClass = "btn btn-default";
+                                btn_Actualizar.Enabled = false;
+                                btn_Cancelar.CssClass = "btn btn-default";
+                                btn_Cancelar.Enabled = false;
+                                cantidad.ReadOnly = false;
+                                // program.ObtenerUltimoIDProgramaEIncrementarlo(codigo_programa);
+                                inventario.CargarProductos(GVProductos);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "modificacion();", true);
+
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "inconsis", "problema();", true);
+                            }
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "yaexisserial", "yaexisteserial();", true);
+                        }
+                }
+
+                if (modifi == 4)
+                {
+                            if (inventario.ModificarProducto(inven) == 0)
+                            {
+                                DTOUsuario u = new DTOUsuario();
+                                CADUsuario process = new CADUsuario();
+                                u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
+                                u.Descripcion_history = "Actualización producto placa: " + placa.Text;
+                                process.InsertarHistorial(u);
+                                codigo.Text = "";
+                                referencia.Text = "";
+                                nombre.Text = "";
+                                descripcion.Text = "";
+                                novedad.Text = "";
+                                placa.Text = "";
+                                serial.Text = "";
+                                marca.Text = "";
+                                modelo.Text = "";
+                                cantidad.Text = "";
+                                valorUnitario.Text = "";
+                                // consumible.Text = "";
+                                btn_Registrar.CssClass = "btn btn-default";
+                                btn_Registrar.Enabled = true;
+                                btn_Actualizar.CssClass = "btn btn-default";
+                                btn_Actualizar.Enabled = false;
+                                btn_Cancelar.CssClass = "btn btn-default";
+                                btn_Cancelar.Enabled = false;
+                                cantidad.ReadOnly = false;
+                                // program.ObtenerUltimoIDProgramaEIncrementarlo(codigo_programa);
+                                inventario.CargarProductos(GVProductos);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "modificacion();", true);
+
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "inconsis", "problema();", true);
+                            }
                 }
 
             }
