@@ -1095,7 +1095,7 @@ namespace CAD
             cnx.Open();
             cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandText = "prc_olvidar_hilo";
+            cmd.CommandText = "prc_olvidar_registro_paso";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", datos.Id_Hilo);
             try
@@ -1132,7 +1132,7 @@ namespace CAD
 
         public List<DTOInventario> consultarPasoParaFinalizar()
         {
-            List<DTOInventario> hilos = new List<DTOInventario>();
+            List<DTOInventario> lista = new List<DTOInventario>();
             cnx.Open();
             cmd = new SqlCommand();
             cmd.Connection = cnx;
@@ -1141,18 +1141,237 @@ namespace CAD
             dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                hilos.Add(new DTOInventario
+                lista.Add(new DTOInventario
                 {
                     Id_Hilo = int.Parse(dr["id"].ToString()),
+                    Id_Producto = int.Parse(dr["id"].ToString()),
                     Consumo = float.Parse(dr["consumo"].ToString())
                 });
             }
             cnx.Close();
             dr.Close();
-            return hilos;
+            return lista;
         }
 
-        
+        public List<DTOInventario> buscarProductoConsumo(DTOInventario datos)
+        {
+            List<DTOInventario> producto = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_buscar_Producto_Consumo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ref", datos.Referencia_Producto);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                producto.Add(new DTOInventario
+                {
+                    Id_Producto = int.Parse(dr["id_producto"].ToString()),
+                    Referencia_Producto = dr["referencia_producto"].ToString(),
+                    Nombre_Producto = dr["nombre_producto"].ToString(),
+                    Placa_Producto = dr["placa_producto"].ToString(),
+                    Cantidad_Producto = float.Parse(dr["cantidad_producto"].ToString())
+                });
+            }
+                
+            
+            cnx.Close();
+            dr.Close();
+            return producto;
+
+
+        }
+
+        public List<DTOInventario> buscarProductoConsumoId(DTOInventario datos)
+        {
+            List<DTOInventario> producto = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_buscar_Producto_Consumo_Id";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Producto);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                producto.Add(new DTOInventario
+                {
+                    Id_Producto = int.Parse(dr["id_producto"].ToString()),
+                    Referencia_Producto = dr["referencia_producto"].ToString(),
+                    Nombre_Producto = dr["nombre_producto"].ToString(),
+                    Descripcion_Producto = dr["descripcion_producto"].ToString(),
+                    Novedad_Producto = dr["novedad_producto"].ToString(),
+                    Placa_Producto = dr["placa_producto"].ToString(),
+                    Serial_Producto = dr["serial_producto"].ToString(),
+                    Modelo_Producto = dr["modelo_producto"].ToString(),
+                    Marca_Producto = dr["marca_producto"].ToString(),
+                    Cantidad_Producto = float.Parse(dr["cantidad_producto"].ToString())
+                });
+            }
+            cnx.Close();
+            dr.Close();
+            return producto;
+
+
+        }
+
+        public List<DTOInventario> buscarTodosProductos()
+        {
+            List<DTOInventario> productos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_Todos_Productos_Consumo";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                productos.Add(new DTOInventario
+                {
+                    Id_Producto = int.Parse(dr["id_producto"].ToString()),
+                    Referencia_Producto = dr["referencia_producto"].ToString(),
+                    Nombre_Producto = dr["nombre_producto"].ToString(),
+                    Descripcion_Producto = dr["descripcion_producto"].ToString(),
+                    Novedad_Producto = dr["novedad_producto"].ToString(),
+                    Placa_Producto = dr["placa_producto"].ToString(),
+                    Serial_Producto = dr["serial_producto"].ToString(),
+                    Modelo_Producto = dr["modelo_producto"].ToString(),
+                    Marca_Producto = dr["marca_producto"].ToString(),
+                    Cantidad_Producto = float.Parse(dr["cantidad_producto"].ToString())
+                });
+            }
+            dr.Close();
+            cnx.Close();
+            return productos;
+        }
+        public List<DTOInventario> registrarProductoPaso(DTOInventario datos)
+        {
+            int estado = 0;
+            List<DTOInventario> productos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_insertar_paso";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Producto);
+            cmd.Parameters.AddWithValue("@ref", datos.Referencia_Producto);
+            cmd.Parameters.AddWithValue("@cant", datos.Cantidad_Producto);
+            cmd.Parameters.AddWithValue("@con", datos.Consumo);
+            cmd.Parameters.AddWithValue("@res", datos.Resta);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = 1;
+            }
+            if (estado == 0)
+            {
+                cmd.CommandText = "select * from tbl_paso";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    productos.Add(new DTOInventario
+                    {
+                        Id_Producto = int.Parse(dr["id"].ToString()),
+                        Referencia_Producto = dr["referencia"].ToString(),
+                        Cantidad_Producto = float.Parse(dr["cantidad"].ToString()),
+                        Consumo = float.Parse(dr["consumo"].ToString()),
+                        Resta = float.Parse(dr["resta"].ToString())
+                    });
+                }
+                dr.Close();
+            }
+            cnx.Close();
+            return productos;
+
+        }
+
+        public List<DTOInventario> olvidarProducto(DTOInventario datos)
+        {
+            int estado = 0;
+            List<DTOInventario> productos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_olvidar_registro_paso";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Producto);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = 1;
+            }
+            if (estado == 0)
+            {
+                cmd.CommandText = "select * from tbl_paso";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    productos.Add(new DTOInventario
+                    {
+                        Id_Hilo = int.Parse(dr["id"].ToString()),
+                        Referencia_Hilo = dr["referencia"].ToString(),
+                        Metros_Hilo = float.Parse(dr["cantidad"].ToString()),
+                        Consumo = float.Parse(dr["consumo"].ToString()),
+                        Resta = float.Parse(dr["resta"].ToString())
+                    });
+                }
+                dr.Close();
+            }
+
+            cnx.Close();
+            return productos;
+
+        }
+
+        public int consultarMaximoInventarioProducto()
+        {
+            int id_inventario = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_maximo_id_inventario_producto";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                id_inventario = int.Parse(dr["id_inventario"].ToString());
+            }
+            dr.Close();
+            cnx.Close();
+            return id_inventario;
+        }
+
+        public void InsertarConsumoProducto(DTOInventario datos)
+        {
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_insertar_consumo_producto";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id_cons", datos.Id_Consumo);
+            cmd.Parameters.AddWithValue("@id_inven", datos.Id_Inventario);
+            cmd.Parameters.AddWithValue("@id_prod", datos.Id_Hilo);
+            cmd.Parameters.AddWithValue("@cons", datos.Consumo);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cnx.Close();
+
+        }
 
     }
     

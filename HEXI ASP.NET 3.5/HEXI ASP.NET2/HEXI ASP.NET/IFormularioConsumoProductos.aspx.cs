@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CAD;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -68,6 +70,44 @@ namespace HEXI_ASP.NET
             {
                 //Unexpected action - caused by F5 (Refresh) button
                 Response.Redirect("IFormularioConsumoProductos.aspx");
+            }
+        }
+
+        protected void fin_consumo_Click(object sender, EventArgs e)
+        {
+            int id_u = Convert.ToInt32(Session["id_usuario"]);
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+
+            datos.Id_Usuario = id_u;
+
+            if (procesos.InsertarConsumo(datos) == 0)
+            {
+                datos.Id_Consumo = procesos.consultarMaximoConsumo();
+                datos.Id_Inventario = procesos.consultarMaximoInventarioProducto();
+                List<DTOInventario> productos = new List<DTOInventario>();
+                productos = procesos.consultarPasoParaFinalizar();
+                foreach(var item in productos)
+                {
+                    datos.Id_Producto = item.Id_Producto;
+                    datos.Consumo = item.Consumo;
+                    try
+                    {
+                        procesos.InsertarConsumoProducto(datos);
+                        procesos.EliminarPaso();
+                    }
+                    catch       
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                        break;
+                    }
+                }
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
+
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
             }
         }
     }

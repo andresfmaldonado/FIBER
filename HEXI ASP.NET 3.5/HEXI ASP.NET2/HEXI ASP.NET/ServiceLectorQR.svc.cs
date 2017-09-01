@@ -257,6 +257,58 @@ namespace HEXI_ASP.NET
             return hilos;
         }
 
-     
+        public List<DTOInventario> buscarProducto(string referencia)
+        {
+            List<DTOInventario> producto = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+
+            datos.Referencia_Producto = referencia;
+
+            producto = procesos.buscarProductoConsumo(datos);
+
+            return producto;
+        }
+
+        public List<DTOInventario> buscarProductoId(int id)
+        {
+            List<DTOInventario> producto = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+
+            datos.Id_Producto = id;
+
+            producto = procesos.buscarProductoConsumoId(datos);
+
+            return producto;
+        }
+
+        public List<DTOInventario> buscarTodosProductos()
+        {
+            List<DTOInventario> producto = new List<DTOInventario>();
+            CADInventario procesos = new CADInventario();
+
+            producto = procesos.buscarTodosProductos();
+
+            return producto;
+        }
+
+        public List<DTOInventario> registrarProducto(int id, string referencia, float cantidad, float consumo)
+        {
+
+            List<DTOInventario> producto = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Producto = id;
+            datos.Referencia_Producto = referencia;
+            datos.Cantidad_Producto = cantidad;
+            datos.Consumo = consumo;
+            datos.Resta = cantidad - consumo;
+            producto = proceso.registrarProductoPaso(datos);
+            return producto;
+        }
+
+
+
     }
 }

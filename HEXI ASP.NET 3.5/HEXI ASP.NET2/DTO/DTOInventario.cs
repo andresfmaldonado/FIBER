@@ -59,9 +59,9 @@ namespace DTO
         public float ValorMetro { get; set; }
 
         //tbl_inventario_producto
-        private int cantidad_producto;
+        private float cantidad_producto;
 
-        public int Cantidad_Producto { get; set; }
+        public float Cantidad_Producto { get; set; }
 
         //tbl_inventario_hilo
         private float metros_hilo;

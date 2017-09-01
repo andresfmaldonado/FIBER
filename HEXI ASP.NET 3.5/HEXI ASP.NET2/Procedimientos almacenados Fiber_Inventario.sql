@@ -21,8 +21,25 @@ SELECT MAX(id_consumo) as id_consumo FROM tbl_consumos;
 END
 --FIN PROCEDURE--
 
+--PROCEDURE PARA CONSULTAR EL ULTIMO INVENTARIO DE HILOS--
+CREATE PROCEDURE prc_consultar_maximo_id_inventario_hilo
+AS
+BEGIN
+SELECT MAX(I.id_inventario) as id_inventario FROM tbl_hilos as H INNER JOIN tbl_inventario_hilo as IH ON H.id_hilo = IH.id_hilo INNER JOIN tbl_inventarios as I ON IH.id_inventario = I.id_inventario;
+END
+--FIN PROCEDURE--
 
---PROCEDURE PARA CONSULTAR CONSUMOS PRODUCTOS--
+--PROCEDURE PARA CONSULTAR EL UTLIMO INVENTARIO DE PRODUCTOS--
+CREATE PROCEDURE prc_consultar_maximo_id_inventario_producto
+AS
+BEGIN
+SELECT MAX(I.id_inventario) as id_inventario FROM tbl_productos as P INNER JOIN tbl_inventario_producto as IP ON
+P.id_producto = IP.id_producto INNER JOIN tbl_inventarios as I ON IP.id_inventario = I.id_inventario;
+END
+--FIN PROCEDURE--
+
+
+--PROCEDURE PARA CONSULTAR CONSUMOS--
 CREATE PROCEDURE prc_consultar_consumos
 AS
 BEGIN
@@ -46,7 +63,7 @@ END
 select * from tbl_paso
 delete from tbl_paso
 --PROCEDURE OlVIDAR HILO DE TABLA PASO--
-CREATE PROCEDURE prc_olvidar_hilo(
+CREATE PROCEDURE prc_olvidar_registro_paso(
 @id int
 )
 AS
@@ -67,11 +84,12 @@ AS
 BEGIN
 declare @cantidad_existente INT;
 INSERT INTO tbl_consumo_producto VALUES (@id_cons, @id_inven, @id_prod,@cant);
- 
+
 set @cantidad_existente = (select cantidad_producto from tbl_inventario_producto
 where id_inventario = @id_inven and id_producto = @id_prod);
 UPDATE tbl_inventario_producto set cantidad_producto = @cantidad_existente - @cant 
 where id_inventario = @id_inven and id_producto = @id_prod;
+UPDATE tbl_productos set cantidad_producto = @cantidad_existente - @cant where id_producto = @id_prod;
 END
 
 --FIN PROCEDURE--
@@ -143,7 +161,44 @@ FROM tbl_hilos as H Inner Join tbl_inventario_hilo as IH On
 H.id_hilo = IH.id_hilo and IH.id_inventario = @inven and IH.id_hilo = @id 
 END
 
+--FIN PROCEDURE--
 
+--PROCEDURE PARA BUSCAR PRODUCTO POR REFERENCIA PARA CONSUMO--
+ALTER PROCEDURE prc_buscar_Producto_Consumo(
+@ref VARCHAR(10)
+)
+AS
+BEGIN
+declare @inven int, @id int;
+set @inven = (select MAX(id_inventario) from tbl_inventario_producto);
+set @id = (select id_producto from tbl_productos where referencia_producto LIKE @ref+'%');
+SELECT P.id_producto, P.referencia_producto,P.nombre_producto,P.placa_producto, IP.cantidad_producto from tbl_productos as P Inner Join tbl_inventario_producto as IP On
+P.id_producto = IP.id_producto and IP.id_inventario = @inven and IP.id_producto = @id and P.consumible = 1;
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA CONSULTAR PRODUCTO POR ID PARA CONSUMO--
+CREATE PROCEDURE prc_buscar_Producto_Consumo_Id(
+@id int
+)
+AS
+BEGIN
+declare @inven int;
+set @inven = (select MAX(id_inventario) from tbl_inventario_producto);
+SELECT P.id_producto, P.referencia_producto, P.nombre_producto, P.descripcion_producto,P.novedad_producto,P.placa_producto,P.serial_producto,P.modelo_producto,P.marca_producto, IP.cantidad_producto from tbl_productos as P Inner Join tbl_inventario_producto as IP On
+P.id_producto = IP.id_producto and IP.id_inventario = @inven and IP.id_producto = @id and P.consumible = 1;
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA CONSULTAR TODOS LOS PRODUCTOS--
+CREATE PROCEDURE prc_consultar_Todos_Productos_Consumo
+AS
+BEGIN
+declare @inven int;
+set @inven = (select MAX(id_inventario) from tbl_inventario_producto);
+SELECT P.id_producto, P.referencia_producto, P.nombre_producto, P.descripcion_producto,P.novedad_producto,P.placa_producto,P.serial_producto,P.modelo_producto,P.marca_producto, IP.cantidad_producto from tbl_productos as P Inner Join tbl_inventario_producto as IP On
+P.id_producto = IP.id_producto and IP.id_inventario = @inven;
+END
 --FIN PROCEDURE--
 
 

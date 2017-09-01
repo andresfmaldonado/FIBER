@@ -123,25 +123,23 @@
                     <input id="registrar" type="button" class="btn btn-default" value="Registrar" />
                 </div>
             </div>
-            
-
         </div>
         &nbsp
      <div class="row">
          <div class="col-md-12">
+             <div class="form-group">
+                 <asp:Label ID="Label4" class="control-label col-sm-2" runat="server" Text="Buscar:"></asp:Label>
+                 <div class="col-md-7">
+                     <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Nombre Hilo" runat="server"></asp:TextBox>
+                 </div>
+                 <div class="col-md-1">
+                     <input id="buscar" type="button" class="btn btn-default" value="Buscar" />
+                 </div>
 
+                 <input id="verTodos" type="button" class="btn btn-default" value="Ver todos" />
+             </div>
          </div>
-         <div class="form-group">
-         <asp:Label ID="Label4" class="control-label col-sm-2" runat="server" Text="Buscar:"></asp:Label>
-         <div class="col-md-7">
-             <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Nombre Hilo" runat="server"></asp:TextBox>
-         </div>
-         <div class="col-md-1">
-             <input id="buscar" type="button" class="btn btn-default" value="Buscar" />
-         </div>
-         
-         <input id="verTodos" type="button" class="btn btn-default" value="Ver todos" /> 
-    </div>   
+
      </div>
     <div class="container">
         <div class="row">
@@ -313,7 +311,6 @@
                 }
             });
         });
-        var doc = $(document);
         $("#registrar").click(function () {
             var dataString3 = '{"id":"' + $("#id").val() + '","referencia":"' + $("#referencia").val() + '","metros":"' + $("#metros").val() + '","consumo":"' + $("#consumo").val() + '"}';
             $.ajax({
@@ -334,43 +331,37 @@
                     });
                     $("#id, #referencia, #tipo, #titulo, #color, #metros, #consumo").val('');
                     
-                    $("#olvidar").click(function () {
-                        console.time("Peticion AJAX");
-                        var cache = doc.data("cache");
-                        if (cache) {
-                            console.log(cache);
-                            console.timeEnd("Peticion AJAX");
-
-                            return false;
-                        }
-                        var dataString5 = '{"id":"' + $("#olvidar").val() + '"}';
-                        
-                        $.ajax({
-                            type: "POST",
-                            url: "ServiceLectorQR.svc/olvidarHilo",
-                            data: dataString5,
-                            dataType: "json",
-                            contentType: "application/json; charset=utf-8",
-                            processdata: true,
-                            success: function (Dato) {
-                                doc.data("cache");
-                                console.log(Dato);
-                                alert("Entro al success");
-                            },
-                            complete:function(){
-                                console.timeEnd("Peticion AJAX");
-                            },
-                            error: function (Mensaje) {
-                                console.log(Mensaje);
-                            }
-                        }); 
-                    });
+                    
                 },
                 error: function (Mensaje) {
                     alert("ERROR al llamar el servicio53 " + Mensaje.status + " " + Mensaje.statusText);
                 }
             });
-            return false;
+            
+            $("#olvidar").click(function () {
+                var dataString5 = '{"id":"' + $("#olvidar").val() + '"}';
+
+                $.ajax({
+                    type: "POST",
+                    url: "ServiceLectorQR.svc/olvidarHilo",
+                    data: dataString5,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    processdata: true,
+                    success: function (Dato) {
+                        item = Dato.olvidarHiloResult;
+                        $("#registrohilos2").html('');
+                        $("#registrohilos2").append('<thead><tr><th>Id</th><th>Referencia</th><th>Metros</th><th>Consumo</th><th>Acción</th></tr></thead>');
+                        $("#registrohilos2").append('<tbody></tbody>');
+                        $.each(item, function (index, value) {
+                            $("#registrohilos2").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Metros_Hilo + '</td><td>' + value.Consumo + '</td><td><button id="olvidar" value="' + value.Id_Hilo + '" class="btn btn-danger">Quitar</button></td></tr>');
+                        });
+                    },
+                    error: function (Mensaje) {
+                        alert("Error");
+                    }
+                });
+            });
         });
         $("#verTodos").click(function () {
             $.ajax({
