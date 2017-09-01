@@ -69,7 +69,7 @@ namespace HEXI_ASP.NET
             }
         }
 
-        protected void GVPedidos_H_RowDeleted(object sender, GridViewDeletedEventArgs e)
+        protected void fin_consumo_Click(object sender, EventArgs e)
         {
 
         }

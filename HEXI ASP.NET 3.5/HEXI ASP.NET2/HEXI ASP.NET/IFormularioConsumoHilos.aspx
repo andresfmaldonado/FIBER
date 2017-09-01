@@ -130,7 +130,7 @@
              <div class="form-group">
                  <asp:Label ID="Label4" class="control-label col-sm-2" runat="server" Text="Buscar:"></asp:Label>
                  <div class="col-md-7">
-                     <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Nombre Hilo" runat="server"></asp:TextBox>
+                     <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Referencia del hilo" runat="server"></asp:TextBox>
                  </div>
                  <div class="col-md-1">
                      <input id="buscar" type="button" class="btn btn-default" value="Buscar" />
@@ -236,19 +236,6 @@
     <script type="text/javascript" src="jvscript/bootstrap.min.js"></script>
     <script type="text/javascript" src="jvscript/bootstrap-datetimepicker.js" charset="UTF-8"></script>
     <script type="text/javascript" src="jvscript/locales/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
-    <script type="text/javascript">
-        $('.form_datetime').datetimepicker({
-            format: 'dd/mm/yyyy hh:ii:ss',
-            language: 'es',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            forceParse: 0,
-            showMeridian: 1
-        });
-    </script>
     <script src="jvscript/js1/skel.min.js"></script>
     <script src="jvscript/js1/jquery.min.js"></script>
     <script src="jvscript/js1/jquery.scrollex.min.js"></script>

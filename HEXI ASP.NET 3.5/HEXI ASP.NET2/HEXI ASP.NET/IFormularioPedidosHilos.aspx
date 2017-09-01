@@ -90,80 +90,102 @@
         </div>
     </div>
     <form id="form1" runat="server" class="form-horizontal">
-        <div class="container show-top-margin separate-rows tall-rows">
-            <div class="row show-grid">
-                <div class="col-md-11">
-                    <div id="GVPedidosHilos">
-                        <asp:GridView ID="GVPedidos_H" AutoGenerateColumns="true" CssClass="table table-striped table-bordered dt-responsive nowrap" CellSpacing="0" Width="100%" DataKeyNames="id_hilo" runat="server" OnRowDeleted="GVPedidos_H_RowDeleted">
-                            <Columns>
-                                <asp:TemplateField HeaderText="REFERENCIA">
-                                    <ItemTemplate>
-                                        <asp:Label ID="REFERENCIA_HILO" runat="server" Text="Bind('referencia_hilo')"></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="TIPO">
-                                    <ItemTemplate>
-                                        <asp:Label ID="TIPO_HILO" runat="server" Text="Bind('referencia_hilo')"></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="TITULO">
-                                    <ItemTemplate>
-                                        <asp:Label ID="TITULO_HILO" runat="server" Text="Bind('referencia_hilo')"></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="COLOR">
-                                    <ItemTemplate>
-                                        <asp:Label ID="COLOR_HILO" runat="server" Text="Bind('referencia_hilo')"></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="PESO">
-                                    <ItemTemplate>
-                                        <asp:Label ID="PESO_HILO" runat="server" Text="Bind('referencia_hilo')"></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:CommandField ButtonType="Button" ShowDeleteButton="true" ControlStyle-CssClass="btn btn-danger" >
-                                    <ControlStyle CssClass="btn btn-danger" />
-                                </asp:CommandField>
-                            </Columns>
-                        </asp:GridView>
+       <div class="row">
+           <div class="col-md-4 col-md-offset-1">
+                <asp:TextBox ID="id" Style="display: none;" type="text" class="form-control"  runat="server"></asp:TextBox>
+
+                <div class="form-group">
+                    <asp:Label ID="Label1" class="control-label col-sm-2" runat="server" Text="Referencia:"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox ID="referencia" ReadOnly="true" type="text" class="form-control" placeholder="Referencia del hilo" runat="server"></asp:TextBox>
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <div class="col-sm-offset-2 col-sm-1 col-center">
-                            <div class="btn-group">
-                                <asp:Button ID="btn_Agregar" type="button" CssClass="btn btn-default" runat="server" Text="Agregar" />
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <asp:Label ID="Label3" class="control-label col-sm-2" runat="server" Text="Color:"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox class="form-control" ID="color" placeholder="Color del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="Label6" class="control-label col-sm-2" runat="server" Text="Título:"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox class="form-control" ID="titulo" placeholder="Título del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+               <div class="form-group">
+                    <asp:Label ID="Label8" class="control-label col-sm-2" runat="server" Text="Cantidad:"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox class="form-control" ID="cantidad" placeholder="Cantidad del hilo a solicitar" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                <div class="form-group">
+                    <asp:Label ID="Label5" class="control-label col-sm-2" runat="server" Text="Tipo:"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox class="form-control" ID="tipo" placeholder="Tipo del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="Label7" class="control-label col-sm-2" runat="server" Text="Metros:"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox class="form-control" ID="metros" placeholder="Metros del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="Label2" class="control-label col-sm-2" runat="server" Text="Valor:"></asp:Label>
+                    <div class="col-sm-10">
+                        <asp:TextBox class="form-control" ID="valor" placeholder="Valor por metro del hilo" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                
+            </div>
+       </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-1 col-center">
+                <div class="btn-group">
+                    <input id="registrar" type="button" class="btn btn-default" value="Registrar" />
                 </div>
             </div>
         </div>
+        &nbsp
+     <div class="row">
+         <div class="col-md-12">
+             <div class="form-group">
+                 <asp:Label ID="Label4" class="control-label col-sm-2" runat="server" Text="Buscar:"></asp:Label>
+                 <div class="col-md-7">
+                     <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Referencia del hilo" runat="server"></asp:TextBox>
+                 </div>
+                 <div class="col-md-1">
+                     <input id="buscar" type="button" class="btn btn-default" value="Buscar" />
+                 </div>
+
+                 <input id="verTodos" type="button" class="btn btn-default" value="Ver todos" />
+             </div>
+         </div>
+     </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-1 col-center">
-                            <div class="btn-group">
-                                <asp:Button ID="btn_Guardar" type="button" CssClass="btn btn-default" runat="server" Text="Guardar" />
-                            </div>
-                        </div>
-                        <div class="col-sm-offset-2 col-sm-1 col-center">
-                            <div class="btn-group">
-                                <asp:Button ID="btn_Imprimir" type="button" CssClass="btn btn-default" runat="server" Text="Imprimir" />
-                            </div>
-                        </div>
-                        <div class="col-sm-offset-2 col-sm-1 col-center">
-                            <div class="btn-group">
-                                <asp:Button ID="btn_Enviar" type="button" CssClass="btn btn-default" runat="server" Text="Enviar" />
-                            </div>
-                        </div>
-                        <div class="col-sm-offset-2 col-sm-1 col-center">
-                            <div class="btn-group">
-                                <asp:Button ID="btn_Cancelar" type="button" CssClass="btn btn-default" runat="server" Text="Cancelar" />
-                            </div>
-                        </div>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="table-responsive " id="tablaHilos2">
+
+                        <!-- Table -->
+                        <table class="table" id="registrohilos2">
+                        </table>
+
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-1 col-center">
+                <div class="btn-group">
+                    <asp:Button ID="fin_consumo" type="button" class="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
+                </div>
+            </div>
+
         </div>
         <asp:HiddenField runat="server" ID="_repostcheckcode" />
     </form>
@@ -179,6 +201,50 @@
             </span> 
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade bs-example-bg" id="modalBuscar" tabindex="-1" role="dialog" aria-labelledby="modalBuscarLabel" data-backdrop="static">
+        <div class="modal-dialog modal-bg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="table-responsive" id="tablaHilo">
+                        <div class="panel panel-default">
+                            <!-- Table -->
+                            <table class="table" id="hilo">
+             
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal -->
+
+    <!-- Modal2 -->
+    <div class="modal fade bs-example-bg" id="modalTodos" tabindex="-1" role="dialog" aria-labelledby="modalVerTodosLabel" data-backdrop="static">
+        <div class="modal-dialog modal-bg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="table-responsive" id="tablaHilos">
+                        <div class="panel panel-default">
+                            <!-- Table -->
+                            <table class="table" id="TodosHilos">
+             
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal2 -->
     <script src="jvscript/jquery-3.1.0.js"></script>
     <script src="jvscript/bootstrap.min.js"></script>
     <!--<script src="jvscript/jquery.dataTables.min.js"></script>-->
