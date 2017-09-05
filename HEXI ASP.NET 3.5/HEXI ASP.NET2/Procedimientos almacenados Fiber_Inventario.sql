@@ -344,27 +344,28 @@ END
 
 --Procedimientos para la gestión de los hilos--
 
+
 --PROCEDURE PARA REGISTRAR UN HILO------------------------------------------------------
 CREATE PROCEDURE prc_insertar_hilo(@ref_hi VARCHAR(10),
 @tipo_hi VARCHAR(10),@titulo_hi INT,@color_hi VARCHAR(10),
-@m_hilo FLOAT,@valor FLOAT
+@m_hilo FLOAT,@valor FLOAT,@code VARCHAR(50)
 )
 AS
 BEGIN
-INSERT INTO tbl_hilos (referencia_hilo,tipo_hilo,titulo_hilo,color_hilo,metros_hilo,valorMetro)
+INSERT INTO tbl_hilos (referencia_hilo,code_hilo,tipo_hilo,titulo_hilo,color_hilo,metros_hilo,valorMetro)
 VALUES 
-(@ref_hi,@tipo_hi,@titulo_hi,@color_hi,@m_hilo,@valor);
+(@ref_hi,@code,@tipo_hi,@titulo_hi,@color_hi,@m_hilo,@valor);
 END
 
 --FIN PROCEDURE--
 
 --En veremos--
 --PROCEDURE PARA MODIFICAR UN HILO-----------------------------------------------------
-CREATE PROCEDURE prc_modificar_hilo(@id_hi INT,@tipo_hi VARCHAR(10),
+CREATE PROCEDURE prc_modificar_hilo(@id_hi INT,@refer_hi VARCHAR(10),@tipo_hi VARCHAR(10),
 @titulo_hi INT,@color_hi VARCHAR(10),@m_hilo FLOAT,@valor FLOAT)
 AS
 BEGIN
-UPDATE tbl_hilos SET tipo_hilo = @tipo_hi, titulo_hilo = @titulo_hi, color_hilo = @color_hi,
+UPDATE tbl_hilos SET referencia_hilo=@refer_hi, tipo_hilo = @tipo_hi, titulo_hilo = @titulo_hi, color_hilo = @color_hi,
 metros_hilo=@m_hilo, valorMetro = @valor WHERE id_hilo = @id_hi;
 END
 
@@ -374,7 +375,7 @@ END
 CREATE PROCEDURE  prc_cargar_hilo
 AS
 BEGIN
-SELECT id_hilo, referencia_hilo, 
+SELECT id_hilo, referencia_hilo, code_hilo,
 tipo_hilo, titulo_hilo, color_hilo,
 metros_hilo, valorMetro
 FROM tbl_hilos;
@@ -391,6 +392,15 @@ END
 
 --FIN PROCEDURE--
 
+
+--PROCEDURE PARA BUSCAR HILO POR LA CODIGO GUID --> QR ----------------------------------------
+CREATE PROCEDURE prc_consultar_hilo_por_guid(@guid VARCHAR(50))
+AS
+BEGIN
+SELECT * FROM tbl_hilos WHERE code_hilo = @guid;
+END
+
+--FIN PROCEDURE--
 
 
 --PROCUEDORE PARA CONSULTAR HILO POR ID-----------------------------------------------
@@ -430,6 +440,7 @@ END
 
 --PROCEDURE PARA MODIFICAR UN PRODUCTO--------------------------------------------------
 CREATE PROCEDURE prc_modificar_producto(@id_pro INT,
+@refe_pro VARCHAR(10),
 @nomb_pro VARCHAR(20),
 @desc_pro VARCHAR(50),
 @nov_pro VARCHAR(30),
@@ -442,7 +453,7 @@ CREATE PROCEDURE prc_modificar_producto(@id_pro INT,
 @cantid INT)
 AS
 BEGIN
-UPDATE tbl_productos SET nombre_producto = @nomb_pro,
+UPDATE tbl_productos SET referencia_producto=@refe_pro,nombre_producto = @nomb_pro,
 descripcion_producto = @desc_pro, novedad_producto = @nov_pro, 
 placa_producto = @placa_pro, serial_producto = @serial_pro, 
 marca_producto = @marca_pro, modelo_producto = @mod_pro, 

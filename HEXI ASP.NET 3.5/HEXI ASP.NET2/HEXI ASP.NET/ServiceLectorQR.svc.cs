@@ -29,6 +29,15 @@ namespace HEXI_ASP.NET
             return Product;
         }
 
+        public List<DTOInventario> GetHilo(string code)
+        {
+            DTOInventario GuidHilo = new DTOInventario();
+            CADInventario Process = new CADInventario();
+            GuidHilo.Code_Hilo = code;
+            List<DTOInventario> Hilo = Process.ConsultarHiloPorGuidQR(GuidHilo);
+            return Hilo;
+        }
+
         public List<string> idenu (string c, string p, string r)
         {
             List<string> userl = new List<string>();

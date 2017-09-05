@@ -1,9 +1,15 @@
 ﻿using CAD;
 using DTO;
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Render;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -81,7 +87,7 @@ namespace HEXI_ASP.NET
             CADInventario inventario = new CADInventario();
             DTOInventario inven = new DTOInventario();
             inven.Id_Hilo = int.Parse(GVHilos.DataKeys[e.NewEditIndex].Values[0].ToString());
-            if (inventario.CompletarRegistroHilosParaModificar(inven,codigo,referencia,tipo,titulo,color,tmetros,valor) == 0)
+            if (inventario.CompletarRegistroHilosParaModificar(inven,codigo,referencia,tipoh,titulo,color,tmetros,valor) == 0)
             {
                 btn_Registrar.CssClass = "btn btn-default";
                 btn_Registrar.Enabled = false;
@@ -101,6 +107,7 @@ namespace HEXI_ASP.NET
         protected void btn_Registrar_Click(object sender, EventArgs e)
         {
             int titu = 0, val = 0, confirma = 0;
+            string id_code = "";
             float m = 0;
             var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             culture.NumberFormat.NumberDecimalSeparator = ".";
@@ -111,6 +118,9 @@ namespace HEXI_ASP.NET
                 titu = Convert.ToInt32(titulo.Text);
                 val = Convert.ToInt32(valor.Text);
                 m = float.Parse(tmetros.Text,culture);
+                Guid guid = Guid.NewGuid();
+                byte[] guidbytes = guid.ToByteArray();
+                id_code = Convert.ToBase64String(guidbytes).Trim('=');
             }
             catch 
             {
@@ -118,7 +128,7 @@ namespace HEXI_ASP.NET
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
 
             }
-            if (referencia.Text != "" && tipo.Text != "" && color.Text != "")
+            if (referencia.Text != "" && tipoh.SelectedItem.Text != "Seleccione un tipo" && color.Text != "")
             {
                 confirma += 1;
             }
@@ -129,16 +139,30 @@ namespace HEXI_ASP.NET
             if(confirma == 2)
             {
                 inven.Referencia_Hilo = referencia.Text;
-                inven.Tipo_Hilo = tipo.Text;
+                inven.Code_Hilo = id_code;
+                inven.Tipo_Hilo = tipoh.SelectedItem.Text;
                 inven.Titulo_Hilo = titu;
                 inven.Color_Hilo = color.Text;
                 inven.ValorMetro = val;
                 inven.Metros_Hilo = m;
-                if (inventario.ConsultarHiloPorRef(inven) == 0)
-                {
+                
                     if (inventario.InsertarHilo(inven) == 0)
                     {
-                        DTOUsuario u = new DTOUsuario();
+                    QrEncoder qrencoder = new QrEncoder();
+                    QrCode qrcode = new QrCode();
+                    //Recolectando referencia producto
+                    qrencoder.TryEncode(id_code, out qrcode);
+                    //Generar dicho datos con cierta estructura y estipular colores
+                    GraphicsRenderer renderer = new GraphicsRenderer(new FixedCodeSize(400, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
+                    //Memoria de datos
+                    MemoryStream ms = new MemoryStream();
+
+                    renderer.WriteToStream(qrcode.Matrix, ImageFormat.Png, ms);
+                    var image = new Bitmap(ms);
+                    var imagenfinal = new Bitmap(image, new Size(new Point(200, 200)));
+                    //Guardar codigoQR en carpeta servidor
+                    imagenfinal.Save(Server.MapPath("~/QR/") + id_code + ".png", ImageFormat.Png);
+                    DTOUsuario u = new DTOUsuario();
                         CADUsuario process = new CADUsuario();
                         u.Id_u_logueado = int.Parse(Convert.ToString(Session["id_usuario"]));
                         u.Descripcion_history = "Registro hilo referencia: " + referencia.Text;
@@ -151,7 +175,7 @@ namespace HEXI_ASP.NET
                         btn_Cancelar.Enabled = false;
                         codigo.Text = "";
                         referencia.Text = "";
-                        tipo.Text = "";
+                        tipoh.SelectedValue = "0";
                         titulo.Text = "";
                         color.Text = "";
                         valor.Text = "";
@@ -162,10 +186,6 @@ namespace HEXI_ASP.NET
                     {
                         ScriptManager.RegisterClientScriptBlock(this, GetType(), "inconsis", "problema();", true);
                     }
-                }else
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "yaexisref", "yaexisteref();", true);
-                }
             }else
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
@@ -182,11 +202,11 @@ namespace HEXI_ASP.NET
             DTOInventario inven = new DTOInventario();
             CADInventario inventario = new CADInventario();
             inven.Id_Hilo = Convert.ToInt32(codigo.Text);
-            string referencia_h = inventario.ObtenerRefHilo(inven);
+           /* string referencia_h = inventario.ObtenerRefHilo(inven);
             if (referencia_h == referencia.Text)
             {
                 modifi = 1;
-            }
+            }*/
             try
             {
                 titu = int.Parse(titulo.Text);
@@ -198,19 +218,20 @@ namespace HEXI_ASP.NET
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
             }
-            if (tipo.Text != "" && color.Text != "")
+            if (tipoh.SelectedItem.Text != "Seleccione un tipo" && color.Text != "")
             {
                 confirm += 2;
             }
             if (confirm == 4)
             {
-                inven.Tipo_Hilo = tipo.Text;
+                inven.Referencia_Hilo=referencia.Text;
+                inven.Tipo_Hilo = tipoh.SelectedItem.Text;
                 inven.Titulo_Hilo = titu;
                 inven.Color_Hilo = color.Text;
                 inven.ValorMetro = val;
                 inven.Metros_Hilo = m;
-                if (modifi == 1)
-                {
+               /* if (modifi == 1)
+                {*/
                     if (inventario.ModificarHilo(inven) == 0)
                     {
                         DTOUsuario u = new DTOUsuario();
@@ -220,7 +241,7 @@ namespace HEXI_ASP.NET
                         process.InsertarHistorial(u);
                         codigo.Text = "";
                         referencia.Text = "";
-                        tipo.Text = "";
+                        tipoh.SelectedValue = "0";
                         titulo.Text = "";
                         color.Text = "";
                         valor.Text = "";
@@ -239,7 +260,7 @@ namespace HEXI_ASP.NET
                     {
                         ScriptManager.RegisterClientScriptBlock(this, GetType(), "inconsis", "problema();", true);
                     }
-                }
+                /*}*/
             }else
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "nopermitecamp", "campos();", true);
@@ -260,7 +281,7 @@ namespace HEXI_ASP.NET
             referencia.Enabled = true;
             tmetros.ReadOnly = false;
             referencia.Text = "";
-            tipo.Text = "";
+            tipoh.SelectedValue = "0";
             titulo.Text = "";
             color.Text = "";
             valor.Text = "";
@@ -295,5 +316,7 @@ namespace HEXI_ASP.NET
             }
             buscar.Text = "";
         }
+
+       
     }
 }

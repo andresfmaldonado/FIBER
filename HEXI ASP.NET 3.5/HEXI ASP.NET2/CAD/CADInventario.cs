@@ -178,6 +178,7 @@ namespace CAD
                 cmd.CommandText = "prc_modificar_producto";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id_pro", inventario.Id_Producto);
+                cmd.Parameters.AddWithValue("@refe_pro",inventario.Referencia_Producto);
                 cmd.Parameters.AddWithValue("@nomb_pro", inventario.Nombre_Producto);
                 cmd.Parameters.AddWithValue("@desc_pro", inventario.Descripcion_Producto);
                 cmd.Parameters.AddWithValue("@nov_pro", inventario.Novedad_Producto);
@@ -230,6 +231,7 @@ namespace CAD
                 cmd.CommandText = "prc_modificar_hilo";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id_hi", inven.Id_Hilo);
+                cmd.Parameters.AddWithValue("@refer_hi", inven.Referencia_Hilo);
                 cmd.Parameters.AddWithValue("@tipo_hi", inven.Tipo_Hilo);
                 cmd.Parameters.AddWithValue("@titulo_hi", inven.Titulo_Hilo);
                 cmd.Parameters.AddWithValue("@color_hi", inven.Color_Hilo);
@@ -483,6 +485,7 @@ namespace CAD
                 cmd.CommandText = "prc_insertar_hilo";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ref_hi", inven.Referencia_Hilo);
+                cmd.Parameters.AddWithValue("@code", inven.Code_Hilo);
                 cmd.Parameters.AddWithValue("@tipo_hi", inven.Tipo_Hilo);
                 cmd.Parameters.AddWithValue("@titulo_hi", inven.Titulo_Hilo);
                 cmd.Parameters.AddWithValue("@color_hi", inven.Color_Hilo);
@@ -499,7 +502,7 @@ namespace CAD
             return estado;
         }
 
-        public int CompletarRegistroHilosParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia, TextBox tipo, TextBox titulo, TextBox color, TextBox metrosh , TextBox valormetros)
+        public int CompletarRegistroHilosParaModificar(DTOInventario inven, TextBox codigo, TextBox referencia, DropDownList tipo, TextBox titulo, TextBox color, TextBox metrosh , TextBox valormetros)
         {
             int estado = 0;
             cnx.Open();
@@ -515,7 +518,7 @@ namespace CAD
                 {
                     codigo.Text = dr["id_hilo"].ToString();
                     referencia.Text = dr["referencia_hilo"].ToString();
-                    tipo.Text = dr["tipo_hilo"].ToString();
+                    tipo.SelectedIndex = tipo.Items.IndexOf(tipo.Items.FindByText(dr["tipo_hilo"].ToString()));
                     titulo.Text = dr["titulo_hilo"].ToString();
                     color.Text = dr["color_hilo"].ToString();
                     metrosh.Text = dr["metros_hilo"].ToString();
@@ -672,7 +675,7 @@ namespace CAD
             return estado;
         }
 
-        //MÉTODO LECTOR QR
+        //MÉTODO LECTOR QR PRODUCTOS
         public List<DTOInventario> ConsultarProductoPorRefQR(DTOInventario inven)
         {
             List<DTOInventario> Producto = new List<DTOInventario>();
@@ -705,6 +708,38 @@ namespace CAD
             dr.Close();
             cnx.Close();
             return Producto;
+        }
+
+        //MÉTODO LECTOR QR HILOS
+        public List<DTOInventario> ConsultarHiloPorGuidQR(DTOInventario inven)
+        {
+            List<DTOInventario> Hilo = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_hilo_por_guid";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@guid", inven.Code_Hilo);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                DTOInventario Hilos = new DTOInventario();
+                Hilos.Referencia_Hilo = dr["referencia_hilo"].ToString();
+                Hilos.Code_Hilo = dr["code_hilo"].ToString();
+                Hilos.Tipo_Hilo = dr["tipo_hilo"].ToString();
+                Hilos.Titulo_Hilo = int.Parse(dr["titulo_hilo"].ToString());
+                Hilos.Color_Hilo = dr["color_hilo"].ToString();
+                Hilos.Metros_Hilo = float.Parse(dr["metros_hilo"].ToString());
+                Hilos.ValorMetro = float.Parse(dr["valorMetro"].ToString());
+                Hilo.Add(Hilos);
+            }
+            else
+            {
+                Hilo.Add(null);
+            }
+            dr.Close();
+            cnx.Close();
+            return Hilo;
         }
 
         //Método get productos para informes

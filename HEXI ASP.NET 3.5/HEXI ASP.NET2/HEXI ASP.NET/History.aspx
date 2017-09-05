@@ -60,5 +60,8 @@
             </div>
         </div>
     </form>
+    <footer id="footer">
+						Fiber&copy; Producto: HEXI
+	</footer>
 </body>
 </html>

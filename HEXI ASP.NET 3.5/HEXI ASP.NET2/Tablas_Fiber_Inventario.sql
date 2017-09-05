@@ -15,6 +15,7 @@ fecha DATETIME NOT NULL
 CREATE TABLE tbl_hilos(
 id_hilo INT PRIMARY KEY IDENTITY,
 referencia_hilo VARCHAR(10) NOT NULL,
+code_hilo VARCHAR(50) NOT NULL,
 tipo_hilo VARCHAR(10) NOT NULL,
 titulo_hilo INT NOT NULL,
 color_hilo VARCHAR(10) NOT NULL,
