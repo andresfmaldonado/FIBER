@@ -68,8 +68,8 @@ namespace HEXI_ASP.NET
                 Response.Redirect("IFormularioPedidosHilos.aspx");
             }
         }
-
-        protected void fin_consumo_Click(object sender, EventArgs e)
+        
+        protected void fin_pedido_Click(object sender, EventArgs e)
         {
 
         }

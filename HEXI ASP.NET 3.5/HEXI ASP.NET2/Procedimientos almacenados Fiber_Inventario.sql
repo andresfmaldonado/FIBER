@@ -222,6 +222,84 @@ END
 
 --Procedures para pedidos--
 
+--PROCEDURE PARA BUSCAR UN HILO POR REFERENCIA PARA PEDIDOS--
+ALTER PROCEDURE prc_buscarHiloPedidoRef(@ref varchar(10))
+AS
+BEGIN
+SELECT * from tbl_hilos_necesarios where referencia_hilo LIKE @ref+'%';
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA BUSCAR UN HILO POR ID PARA PEDIDOS--
+CREATE PROCEDURE prc_buscarHiloPedidoId(@id int)
+AS
+BEGIN
+SELECT * FROM tbl_hilos_necesarios WHERE id_hilos = @id;
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA BUSCAR TODOS LOS HILOS PARA PEDIDOS--
+CREATE PROCEDURE prc_buscarTodosHilosP
+AS
+BEGIN
+SELECT * FROM tbl_hilos_necesarios
+END
+--FIN PROCEDURE--
+
+--CONSULTAR MAXIMO PEDIDO--
+CREATE PROCEDURE prc_consultarMaximoPedido
+AS
+BEGIN
+SELECT MAX(id_pedido) as id_pedido FROM tbl_pedidos;
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA INSERTAR PASO PEDIDO--
+ALTER PROCEDURE prc_insertar_paso_pedido
+(
+@id int,
+@metros FLOAT,
+@valor FLOAT
+) 
+AS
+BEGIN
+declare @valor_t float;
+INSERT INTO tbl_paso(id, cantidad, valor) VALUES (@id, @metros, @valor);
+set @valor_t = (select valor_total from tbl_paso where id = @id);
+update tbl_paso set valor_total = @valor_t + @valor where id = @id;
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA CONSULTAR PASO PEDOIDO--
+CREATE PROCEDURE prc_consultar_paso_pedido
+AS
+BEGIN
+SELECT id, cantidad, valor, valor_total FROM tbl_paso;
+END
+--FIN PROCEDURE--
+delete from tbl_paso
+select * from tbl_paso
+select max(id), valor_total from tbl_paso group by valor_total
+--PROCEDURE PARA INSERTAR EN EL PEDIDO UN HILO--------------------------------------
+CREATE PROCEDURE prc_insertar_pedido_hilo
+(
+@id_ped INT,
+@id_hi INT,
+@metros FLOAT,
+@valor FLOAT,
+@valor_pedido FLOAT
+)
+AS
+BEGIN
+
+INSERT INTO tbl_pedido_hilo VALUES (@id_ped, @id_hi,@metros, @valor);
+
+UPDATE tbl_pedidos SET valorTotal = @valor_pedido where id_pedido = @id_ped;
+END
+
+--FIN PROCEDURE--
+
+
 --PROCEDURE PARA REGISTRAR UN PEDIDO---------------------------------------------------
 CREATE PROCEDURE prc_Insertar_pedido
 AS

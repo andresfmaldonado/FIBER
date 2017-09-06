@@ -308,6 +308,55 @@ namespace HEXI_ASP.NET
             return producto;
         }
 
+        public List<DTOInventario> buscarHiloPedido(string referencia)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            datos.Referencia_Hilo = referencia;
+            CADInventario proceso = new CADInventario();
+            hilo = proceso.buscarHiloPedidoRef(datos);
+            return hilo;
+        }
+
+        public List<DTOInventario> buscarHiloPedidoId(int id)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            datos.Id_Hilo = id;
+            CADInventario proceso = new CADInventario();
+            hilo = proceso.buscarHiloPedidoId(datos);
+            return hilo;
+        }
+
+        public List<DTOInventario> buscarTodosHilosP()
+        {
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            CADInventario proceso = new CADInventario();
+            hilos = proceso.buscarTodosHilosP();
+            return hilos;
+        }
+
+        public List<DTOInventario> registrarHiloP(int id, float metros, float valor)
+        {
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario proceso = new CADInventario();
+            datos.Id_Pedido = proceso.consultarMaximoPedido();
+            datos.Id_Hilo = id;
+            datos.Metros_Hilo = metros;
+            datos.ValorTotal_Hilo = metros * valor;
+            hilos = proceso.registrarHiloP(datos);
+            return hilos;
+        }
+
+        public float consultarTotal()
+        {
+            float Total = 0;
+            CADInventario proceso = new CADInventario();
+            Total = proceso.consultarTotal();
+            return Total;
+
+        }
 
 
     }

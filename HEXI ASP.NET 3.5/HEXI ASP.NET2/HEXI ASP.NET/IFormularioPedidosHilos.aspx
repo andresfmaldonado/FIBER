@@ -84,6 +84,7 @@
         </nav>
     </div>
 
+    <!-- Formulario -->
     <div class="container">
         <div class="jumbotron">
             <img class="img" src="Iconos/Fiber.png" />
@@ -112,12 +113,7 @@
                         <asp:TextBox class="form-control" ID="titulo" placeholder="Título del hilo" ReadOnly="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
-               <div class="form-group">
-                    <asp:Label ID="Label8" class="control-label col-sm-2" runat="server" Text="Cantidad:"></asp:Label>
-                    <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="cantidad" placeholder="Cantidad del hilo a solicitar" runat="server"></asp:TextBox>
-                    </div>
-                </div>
+               
 
             </div>
             <div class="col-md-4 col-md-offset-1">
@@ -128,20 +124,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Label ID="Label7" class="control-label col-sm-2" runat="server" Text="Metros:"></asp:Label>
+                    <asp:Label ID="Label2" class="control-label col-sm-2" runat="server" Text="Valor:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="metros" placeholder="Metros del hilo" ReadOnly="true" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="valor" placeholder="Valor por metro del hilo" ReadOnly="true" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Label ID="Label2" class="control-label col-sm-2" runat="server" Text="Valor:"></asp:Label>
+                    <asp:Label ID="Label8" class="control-label col-sm-2" runat="server" Text="Cantidad:"></asp:Label>
                     <div class="col-sm-10">
-                        <asp:TextBox class="form-control" ID="valor" placeholder="Valor por metro del hilo" runat="server"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="cantidad" placeholder="Cantidad del hilo a solicitar" runat="server" required></asp:TextBox>
                     </div>
                 </div>
                 
             </div>
        </div>
+        <!-- Botón registrar -->
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-1 col-center">
                 <div class="btn-group">
@@ -150,6 +147,7 @@
             </div>
         </div>
         &nbsp
+        <!-- Formulario Buscar -->
      <div class="row">
          <div class="col-md-12">
              <div class="form-group">
@@ -165,6 +163,8 @@
              </div>
          </div>
      </div>
+
+        <!-- Tabla Registro -->
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -173,16 +173,17 @@
                         <!-- Table -->
                         <table class="table" id="registrohilos2">
                         </table>
-
+                        
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Botón Finalizar Pedido -->
         <div class="form-group">
             <div class="col-sm-offset-5 col-sm-1 col-center">
                 <div class="btn-group">
-                    <asp:Button ID="fin_consumo" type="button" class="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
+                    <asp:Button ID="fin_pedido" type="button" class="btn btn-default" runat="server" Text="Finalizar pedido" OnClick="fin_pedido_Click" />
                 </div>
             </div>
 
@@ -235,6 +236,7 @@
                             <table class="table" id="TodosHilos">
              
                             </table>
+                            
                         </div>
                     </div>
                 </div>
@@ -251,12 +253,6 @@
     <script src="jvscript/dataTables.bootstrap.min.js"></script>
     <script src="jvscript/dataTables.responsive.min.js"></script>
     <script src="jvscript/responsive.bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#GVPedidos_H').dataTable();
-        })
-    </script>
-    
 	<script src="jvscript/js1/skel.min.js"></script>
 	<script src="jvscript/js1/jquery.scrollex.min.js"></script>
 	<script src="jvscript/js1/util.js"></script>
@@ -264,5 +260,138 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="jvscript/select2.js"></script>
     <script src="jvscript/bootstrap.js"></script>
+    <script type="text/javascript">
+        
+        $("#buscar").click(function () {
+            var dataString = '{"referencia" : "' + $("#txtbuscar").val() + '"}';
+            $.ajax({
+                type: "POST",
+                url: "ServiceLectorQR.svc/buscarHiloPedido",
+                data: dataString,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                processdata: true,
+                success: function (Dato) {
+                    console.log(Dato.buscarHiloPedidoResult);
+                    item = Dato.buscarHiloPedidoResult;
+                    $("#hilo").html('');
+                    $("#hilo").append('<thead><tr><th>Id</th><th>Referencia</th><th>Tipo</th><th>Título</th><th>Color</th><th>Valor Metro</th><th>Acción</th></tr></thead>');
+                    $("#hilo").append('<tbody></tbody>');
+                    $.each(item, function (index, value) {
+                        $("#hilo").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Tipo_Hilo + '</td><td>' + value.Titulo_Hilo + '</td><td>' + value.Color_Hilo + '</td><td>' + value.ValorMetro + '</td><td><button  class="btn btn-default seleccionar" value="' + value.Id_Hilo + '">Seleccionar</button></td></tr>');
+                    });
+                    $("#modalBuscar").modal('show');
+                    $(".seleccionar").click(function () {
+                        dataString = '{"id":"' + $(this).val() + '"}';
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceLectorQR.svc/buscarHiloPedidoId",
+                            data: dataString,
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (Dato) {
+                                console.log(Dato.buscarHiloPedidoIdResult);
+                                item = Dato.buscarHiloPedidoIdResult;
+                                $.each(item, function (index, value) {
+                                    $("#id").val(value.Id_Hilo);
+                                    $("#referencia").val(value.Referencia_Hilo);
+                                    $("#tipo").val(value.Tipo_Hilo);
+                                    $("#titulo").val(value.Titulo_Hilo);
+                                    $("#color").val(value.Color_Hilo);
+                                    $("#valor").val(value.ValorMetro);
+                                });
+                                $("#modalBuscar").modal('hide');
+                            }
+                        });
+                    });
+                },
+                error: function (request, status, error) {
+                    alert(error);
+                }
+            });
+        });
+
+        $("#verTodos").click(function () {
+            alert("Entró al Click");
+            $.ajax({
+                type: "POST",
+                url: "ServiceLectorQR.svc/buscarTodosHilosP",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processdata: true,
+                success: function (Dato) {
+                    alert("Entró al success");
+                    console.log(Dato.buscarTodosHilosPResult);
+                    item = Dato.buscarTodosHilosPResult;
+                    $("#TodosHilos").html('');
+                    $("#TodosHilos").append('<thead><tr><th>Id</th><th>Referencia</th><th>Tipo</th><th>Título</th><th>Color</th><th>Valor Metro</th><th>Accion</th></tr></thead>');
+                    $("#TodosHilos").append('<tbody></tbody>');
+                    $.each(item, function (index, value) {
+                        $("#TodosHilos").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Referencia_Hilo + '</td><td>' + value.Tipo_Hilo + '</td><td>' + value.Titulo_Hilo + '</td><td>' + value.Color_Hilo + '</td><td>' + value.ValorMetro + '</td><td><button class="btn btn-default seleccionar" value="' + value.Id_Hilo + '">Seleccionar</button></td></tr>');
+                    });
+                    $("#modalTodos").modal('show');
+                    $(".seleccionar").click(function () {
+                        dataString = '{"id":"' + $(this).val() + '"}';
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceLectorQR.svc/buscarHiloPedidoId",
+                            data: dataString,
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (Dato) {
+                                console.log(Dato.buscarHiloPedidoIdResult);
+                                item = Dato.buscarHiloPedidoIdResult;
+                                $.each(item, function (index, value) {
+                                    $("#id").val(value.Id_Hilo);
+                                    $("#referencia").val(value.Referencia_Hilo);
+                                    $("#tipo").val(value.Tipo_Hilo);
+                                    $("#titulo").val(value.Titulo_Hilo);
+                                    $("#color").val(value.Color_Hilo);
+                                    $("#valor").val(value.ValorMetro);
+                                });
+                                $("#modalTodos").modal('hide');
+                            }
+                        });
+                    });
+                },
+                error: function (request, status, error) {
+                    alert(error);
+                }
+            });
+        });
+
+        $("#registrar").click(function () {
+            dataString = '{"id":"' + $("#id").val() + '", "metros":"' + $("#cantidad").val() + '", "valor":"' + $("#valor").val() + '"}';
+            alert(dataString);
+            $.ajax({
+                type: "POST",
+                url: "ServiceLectorQR.svc/registrarHiloP",
+                data: dataString,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                processdata: true,
+                success: function (Dato) {
+                    alert("entró al success");
+                    console.log(Dato.registrarHiloPResult);
+                    item = Dato.registrarHiloPResult;
+                    $("#registrohilos2").html('');
+                    $("#registrohilos2").append('<thead><tr><th>Id hilo</th><th>Metros</th><th>Valor por hilo</th><th>Acción</th></tr></thead>');
+                    $("#registrohilos2").append('<tbody></tbody>');
+                    var lastIndex = 0;
+                    $.each(item, function (index, value) {
+                        $("#registrohilos2").append('<tr><td>' + value.Id_Hilo + '</td><td>' + value.Metros_Hilo + '</td><td>' + value.ValorTotal_Hilo + '</td><td><button class="btn btn-danger quitar" value="' + value.Id_Hilo + '">Quitar</button></td></tr>');
+                        lastIndex = index;
+                    });
+                    $("#registrohilos2").append('<tr><td></td><td><b>Total:</b></td><td>' + item[lastIndex].ValorTotal + '</td><td></td></tr>');
+                    $("#id, #referencia, #tipo, #titulo, #color, #cantidad, #valor").val('');
+                    
+                },
+                error: function (request, status, error) {
+                    alert(error);
+                }
+            });
+        });
+        
+    </script>
 </body>
 </html>

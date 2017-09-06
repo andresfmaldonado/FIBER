@@ -1393,6 +1393,169 @@ namespace CAD
 
         }
 
+        public List<DTOInventario> buscarHiloPedidoRef(DTOInventario datos)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_buscarHiloPedidoRef";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ref", datos.Referencia_Hilo);
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                hilo.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id_hilos"].ToString()),
+                    Referencia_Hilo = dr["referencia_hilo"].ToString(),
+                    Tipo_Hilo = dr["tipo_hilo"].ToString(),
+                    Titulo_Hilo = int.Parse(dr["titulo_hilo"].ToString()),
+                    Color_Hilo = dr["color_hilo"].ToString(),
+                    ValorMetro = float.Parse(dr["valorMetro"].ToString())
+                });
+            }
+            dr.Close();
+            cnx.Close();
+            return hilo;
+        }
+
+        public List<DTOInventario> buscarHiloPedidoId(DTOInventario datos)
+        {
+            List<DTOInventario> hilo = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_buscarHiloPedidoId";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Hilo);
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                hilo.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id_hilos"].ToString()),
+                    Referencia_Hilo = dr["referencia_hilo"].ToString(),
+                    Tipo_Hilo = dr["tipo_hilo"].ToString(),
+                    Titulo_Hilo = int.Parse(dr["titulo_hilo"].ToString()),
+                    Color_Hilo = dr["color_hilo"].ToString(),
+                    ValorMetro = float.Parse(dr["valorMetro"].ToString())
+                });
+            }
+
+            dr.Close();
+            cnx.Close();
+            return hilo;
+
+        }
+
+        public List<DTOInventario> buscarTodosHilosP()
+        {
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_buscarTodosHilosP";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                hilos.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id_hilos"].ToString()),
+                    Referencia_Hilo = dr["referencia_hilo"].ToString(),
+                    Tipo_Hilo = dr["tipo_hilo"].ToString(),
+                    Titulo_Hilo = int.Parse(dr["titulo_hilo"].ToString()),
+                    Color_Hilo = dr["color_hilo"].ToString(),
+                    ValorMetro = float.Parse(dr["valorMetro"].ToString())
+                });
+            }
+
+            dr.Close();
+            cnx.Close();
+            return hilos;
+        }
+
+        public int consultarMaximoPedido()
+        {
+            int id_pedido = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultarMaximoPedido";
+            cmd.CommandType = CommandType.StoredProcedure;
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                id_pedido = int.Parse(dr["id_pedido"].ToString());
+            }
+            dr.Close();
+            cnx.Close();
+            return id_pedido;
+            
+        }
+
+        public List<DTOInventario> registrarHiloP(DTOInventario datos)
+        {
+            bool estado = true;
+            List<DTOInventario> hilos = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_insertar_paso_pedido";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", datos.Id_Hilo);
+            cmd.Parameters.AddWithValue("@metros", datos.Metros_Hilo);
+            cmd.Parameters.AddWithValue("@valor", datos.ValorTotal_Hilo);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = false;
+            }
+            if (estado)
+            {
+                SqlCommand cmd2 = new SqlCommand();
+                cmd2.Connection = cnx;
+                cmd2.CommandText = "prc_consultar_paso_pedido";
+                cmd2.CommandType = CommandType.StoredProcedure;
+                dr = cmd2.ExecuteReader();
+                while (dr.Read())
+                {
+                    hilos.Add(new DTOInventario
+                    {
+                        Id_Hilo = int.Parse(dr["id"].ToString()),
+                        Metros_Hilo = float.Parse(dr["cantidad"].ToString()),
+                        ValorTotal_Hilo = float.Parse(dr["valor"].ToString()),
+                        ValorTotal = float.Parse(dr["valor_total"].ToString())
+                    });
+                }
+                dr.Close();
+
+            }
+            cnx.Close();
+            return hilos;
+        }
+
+        public float consultarTotal()
+        {
+            float Total = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "select MAX(valor_total) as valor_total from tbl_paso";
+            cmd.CommandType = CommandType.Text;
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                Total = float.Parse(dr["valor_total"].ToString());
+            }
+            dr.Close();
+            cnx.Close();
+            return Total;
+        }
     }
     
 }
