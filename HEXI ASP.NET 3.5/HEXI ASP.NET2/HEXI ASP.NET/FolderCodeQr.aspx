@@ -67,7 +67,7 @@
                                 <a href="#" class="thumbnail">
                                     <asp:Image ID="Image" runat="server" ImageUrl='<%# string.Format("~/QR/{0}",(Container.DataItem)) %>' />
                                 </a>
-                                <asp:Label ID="Label" runat="server" Text='<%# Container.DataItem%>'></asp:Label>
+                                <asp:Label ID="Label" style="word-wrap:break-word;" runat="server" Text='<%# Container.DataItem%>'></asp:Label>
                             </div>
                         </div>
                     </ItemTemplate>

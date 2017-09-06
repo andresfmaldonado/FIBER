@@ -57,7 +57,8 @@ namespace HEXI_ASP.NET
                     DTOUsuario user = new DTOUsuario();
                     user.Id = Convert.ToInt32(id_usuario);
                     CADUsuario procesos = new CADUsuario();
-                    procesos.CargarPerfil(user, Nombre, Apellidos, correo, NombreUsuario, NombreRolUsuario,Image1);
+                    procesos.CargarPerfil(user, Nombre, Apellidos, correo, NombreUsuario,Image1);
+                    NombreRolUsuario.Text = Convert.ToString(Session["rol"]);
                 }
             }
         }
