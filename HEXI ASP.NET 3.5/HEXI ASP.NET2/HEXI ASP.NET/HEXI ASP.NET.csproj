@@ -117,10 +117,10 @@
     <Content Include="css\styles2.css" />
     <Content Include="css\styleventanaemergente.css" />
     <Content Include="css\sweetalert2.css" />
-<<<<<<< HEAD
-=======
+ 
+
     <Content Include="PDesignPatrones.aspx" />
->>>>>>> JOHAN
+
     <Content Include="FiberInicioAdmin.aspx" />
     <Content Include="FolderCodeQr.aspx" />
     <Content Include="Iconos\cancel.svg" />
@@ -277,8 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
-<<<<<<< HEAD
-=======
+
     <Compile Include="PDesignPatrones.aspx.cs">
       <DependentUpon>PDesignPatrones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -286,7 +285,7 @@
     <Compile Include="PDesignPatrones.aspx.designer.cs">
       <DependentUpon>PDesignPatrones.aspx</DependentUpon>
     </Compile>
->>>>>>> JOHAN
+
     <Compile Include="FiberInicioAdmin.aspx.cs">
       <DependentUpon>FiberInicioAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -434,7 +434,7 @@
 
                         if (response.idenuResult[0] == "3") {
                             $('#password').val('');
-                            mensj = '<b>Resultado:</b><br/>Contraseña icorrecta!';
+                            mensj = '<b>Resultado:</b><br/>Contraseña incorrecta!';
                             tp = 'info';
                             $('#luser').empty().append('<i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar');
                             $('#luser').attr('onclick', 'verificar();');
