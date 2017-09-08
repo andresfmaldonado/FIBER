@@ -71,7 +71,37 @@ namespace HEXI_ASP.NET
         
         protected void fin_pedido_Click(object sender, EventArgs e)
         {
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
 
+            if (procesos.InsertarPedido())
+            {
+                datos.Id_Pedido = procesos.consultarMaximoPedido();
+                List<DTOInventario> hilos = new List<DTOInventario>();
+                hilos = procesos.consultarPasoParaFinalizarPedido();
+                foreach(var item in hilos)
+                {
+                    datos.Id_Hilo = item.Id_Hilo;
+                    datos.Metros_Hilo = item.Metros_Hilo;
+                    datos.ValorTotal_Hilo = item.ValorTotal_Hilo;
+                    datos.ValorTotal = item.ValorTotal;
+                    try
+                    {
+                        procesos.InsertarPedidoH(datos);
+                        procesos.EliminarPaso();
+                    }
+                    catch
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                        break;
+                    }
+                }
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+            }
         }
     }
 }

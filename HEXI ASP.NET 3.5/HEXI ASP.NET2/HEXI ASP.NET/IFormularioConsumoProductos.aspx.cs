@@ -86,7 +86,7 @@ namespace HEXI_ASP.NET
                 datos.Id_Consumo = procesos.consultarMaximoConsumo();
                 datos.Id_Inventario = procesos.consultarMaximoInventarioProducto();
                 List<DTOInventario> productos = new List<DTOInventario>();
-                productos = procesos.consultarPasoParaFinalizar();
+                productos = procesos.consultarPasoParaFinalizarConsumo();
                 foreach(var item in productos)
                 {
                     datos.Id_Producto = item.Id_Producto;

@@ -655,11 +655,13 @@ namespace CAD
             {
                 cmd = new SqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "prc_insertar_pedido_h";
+                cmd.CommandText = "prc_insertar_pedido_hilo";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@fec", inven.Fecha_Pedido);
-                cmd.Parameters.AddWithValue("@desc", inven.Id_Hilo);
-                //cmd.Parameters.AddWithValue("@cant", inven.Cantidad_Hilo);
+                cmd.Parameters.AddWithValue("@id_ped", inven.Id_Pedido);
+                cmd.Parameters.AddWithValue("@id_hi", inven.Id_Hilo);
+                cmd.Parameters.AddWithValue("@metros", inven.Metros_Hilo);
+                cmd.Parameters.AddWithValue("@valor", inven.ValorTotal_Hilo);
+                cmd.Parameters.AddWithValue("@valor_pedido", inven.ValorTotal);
 
                 cmd.ExecuteNonQuery();
             }
@@ -1150,7 +1152,7 @@ namespace CAD
 
         }
 
-        public List<DTOInventario> consultarPasoParaFinalizar()
+        public List<DTOInventario> consultarPasoParaFinalizarConsumo()
         {
             List<DTOInventario> lista = new List<DTOInventario>();
             cnx.Open();
@@ -1555,6 +1557,139 @@ namespace CAD
             dr.Close();
             cnx.Close();
             return Total;
+        }
+
+        public bool InsertarPedido()
+        {
+            bool estado = true;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_Insertar_pedido";
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                estado = false;
+            }
+            cnx.Close();
+            return estado;
+
+
+        }
+
+        public List<DTOInventario> consultarPasoParaFinalizarPedido()
+        {
+            List<DTOInventario> lista = new List<DTOInventario>();
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "SELECT * FROM tbl_paso";
+            cmd.CommandType = CommandType.Text;
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                lista.Add(new DTOInventario
+                {
+                    Id_Hilo = int.Parse(dr["id"].ToString()),
+                    Id_Producto = int.Parse(dr["id"].ToString()),
+                    Metros_Hilo = float.Parse(dr["cantidad"].ToString()),
+                    Cantidad_Producto = float.Parse(dr["cantidad"].ToString()),
+                    ValorTotal_Hilo = float.Parse(dr["valor"].ToString()),
+                    ValorTotal_Producto = float.Parse(dr["valor"].ToString()),
+                    ValorTotal = float.Parse(dr["valor_total"].ToString())
+                });
+            }
+            cnx.Close();
+            dr.Close();
+            return lista;
+        }
+
+        public List<DTOInventario> buscarProductoPRef(DTOInventario datos)
+        {
+            //Instancia de objetos 
+            cmd = new SqlCommand();
+            List<DTOInventario> producto = new List<DTOInventario>();
+
+            //Abrir conexión
+            cnx.Open();
+
+            //Dar valores al SqlCommand
+            cmd.Connection = cnx;
+            cmd.CommandText = "buscarProductoPRef";
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Llenar parametros para el procedimiento almacenados
+            cmd.Parameters.AddWithValue("@ref", datos.Referencia_Producto);
+
+            //Ejecutar el comando dentro de un DataReader
+            dr = cmd.ExecuteReader();
+
+            //Mientras el DataReader pueda leerse, recorrer los datos e insertarlos en el List<DTOInventario>
+            while (dr.Read())
+            {
+                producto.Add(new DTOInventario
+                {
+                    Id_Producto = int.Parse(dr["id_producto"].ToString()),
+                    Referencia_Producto = dr["referencia_producto"].ToString(),
+                    Nombre_Producto = dr["nombre_producto"].ToString(),
+                    Descripcion_Producto = dr["descripcion_producto"].ToString(),
+                    ValorUnitario_Producto = int.Parse(dr["valorUnitario"].ToString())
+                });
+            }
+
+            //Cerrar la conexión
+            cnx.Close();
+
+            //Cerrar el DataReader
+            dr.Close();
+
+            //Retornar List<DTOInventario>
+            return producto;
+        }
+
+        public List<DTOInventario> buscarProductoPId(DTOInventario datos)
+        {
+            //Instanciar objetos 
+            cmd = new SqlCommand();
+            List<DTOInventario> producto = new List<DTOInventario>();
+
+            //Abrir conexión
+            cnx.Open();
+
+            //Dar valores al commando
+            cmd.Connection = cnx;
+            cmd.CommandText = "buscarProductoPId";
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Llenar parametros
+            cmd.Parameters.AddWithValue("@id", datos.Id_Producto);
+
+            //Ejecutar comando y agregar resultado al DataReader
+            dr = cmd.ExecuteReader();
+
+            //Mientras dr sea leible añadir campos al List
+            while (dr.Read())
+            {
+                producto.Add(new DTOInventario
+                {
+                    Id_Producto = int.Parse(dr["id_producto"].ToString()),
+                    Referencia_Producto = dr["referencia_producto"].ToString(),
+                    Nombre_Producto = dr["nombre_producto"].ToString(),
+                    Descripcion_Producto = dr["descripcion_producto"].ToString(),
+                    ValorUnitario_Producto = int.Parse(dr["valorUnitario"].ToString())
+                });
+            }
+
+            //Cerrar conexión y DataReader
+            dr.Close();
+            cnx.Close();
+
+            //Retornar lista
+            return producto;
         }
     }
     

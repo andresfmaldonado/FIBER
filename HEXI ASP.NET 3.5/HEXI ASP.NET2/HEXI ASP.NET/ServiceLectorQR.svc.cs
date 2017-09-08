@@ -358,6 +358,39 @@ namespace HEXI_ASP.NET
 
         }
 
+        public List<DTOInventario> buscarProductoP(string referencia)
+        {
+            //Instanciar objetos
+            List<DTOInventario> producto = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+
+            //Llenar valores al DTO
+            datos.Referencia_Producto = referencia;
+            
+            //Llenar List invocando función del CAD
+            producto = procesos.buscarProductoPRef(datos);
+
+            //Retornar List
+            return producto;
+        }
+
+        public List<DTOInventario> buscarProductoPId(int id)
+        {
+            //Instanciar objetos
+            List<DTOInventario> producto = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+
+            //Dar valores al DTO
+            datos.Id_Producto = id;
+
+            //Asignar valores al List
+            producto = procesos.buscarProductoPId(datos);
+
+            //Retornar List
+            return producto;
+        }
 
     }
 }

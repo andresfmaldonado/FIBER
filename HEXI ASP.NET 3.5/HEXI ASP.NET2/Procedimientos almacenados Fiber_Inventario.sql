@@ -222,6 +222,22 @@ END
 
 --Procedures para pedidos--
 
+--PROCEDURE PARA BUSCAR UN PRODUCTO POR REFERENCIA PARA PEDIDO--
+CREATE PROCEDURE buscarProductoPRef(@ref varchar(10))
+AS
+BEGIN
+SELECT * FROM tbl_productos_necesarios WHERE referencia_producto LIKE @ref + '%';
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA BUSCAR UN PRODUCTO POR EL ID PARA EL PEDIDO--
+CREATE PROCEDURE buscarProductoPRef(@id int)
+AS
+BEGIN
+SELECT * FROM tbl_productos_necesarios WHERE id_producto = @id;
+END
+--FIN PROCEDURE--
+
 --PROCEDURE PARA BUSCAR UN HILO POR REFERENCIA PARA PEDIDOS--
 ALTER PROCEDURE prc_buscarHiloPedidoRef(@ref varchar(10))
 AS

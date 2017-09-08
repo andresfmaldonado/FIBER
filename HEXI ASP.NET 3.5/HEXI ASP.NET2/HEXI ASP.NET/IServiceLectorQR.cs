@@ -61,60 +61,85 @@ namespace HEXI_ASP.NET
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> tablapedidoh(int referencia);
 
+        //Contrato que retorna un hilo según su referencia
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> hilo(string referencia);
 
+        //Contrato que retorna un hilo según su ID
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> hilo_por_id(int id);
 
+        //Contrato para registrar un hilo en la tabla Paso
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> registrarHilo(int id, string referencia, float metros, float consumo);
 
+        //Contrato para registrar un producto en la tabla Paso
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> registrarProducto(int id, string referencia, float cantidad, float consumo);
 
+        //Contrato para buscar todos los hilos
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> verTodosHilos();
 
+        //Contrato para eliminar registro de un hilo de la tabla Paso
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> olvidarHilo(int id);
 
+        //Contrato para buscar un producto según su referencia
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> buscarProducto(string referencia);
 
+        //Contrato para buscar todos los productos
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> buscarTodosProductos();
 
+        //Contrato para buscar un producto según su ID
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> buscarProductoId(int id);
 
+        //Contrato para buscar atributos de un hilo para realizar el pedido según su referencia
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> buscarHiloPedido(string referencia);
 
+        //Contrato para buscar atributos de un hilo para realizar el pedido según su ID
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> buscarHiloPedidoId(int id);
 
+        //Contrato para buscar todos los hilos para realizar un pedido
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> buscarTodosHilosP();
 
+        //Contrato para registrar un hilo en la tabla Paso para hacer un pedido
         [OperationContract]
         [WebInvoke(Method ="POST", BodyStyle =WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> registrarHiloP(int id, float metros, float valor);
-
+ 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         float consultarTotal();
+
+        //Contrato para consultar un producto por la referencia para pedidos
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        List<DTOInventario> buscarProductoP(string referencia);
+
+        //Contrato para consultar un producto por el ID para pedidos
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        List<DTOInventario> buscarProductoPId(int id);
+
+
     }
 }
