@@ -71,12 +71,12 @@ namespace HEXI_ASP.NET
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> hilo_por_id(int id);
 
-        //Contrato para registrar un hilo en la tabla Paso
+        //Contrato para registrar un hilo en la tabla Paso con atributos de consumo
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> registrarHilo(int id, string referencia, float metros, float consumo);
 
-        //Contrato para registrar un producto en la tabla Paso
+        //Contrato para registrar un producto en la tabla Paso con atributos de consumo
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> registrarProducto(int id, string referencia, float cantidad, float consumo);
@@ -140,6 +140,15 @@ namespace HEXI_ASP.NET
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         List<DTOInventario> buscarProductoPId(int id);
 
+        //Contrato para consultar todos los productos para pedidos
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        List<DTOInventario> consultarTodosProductosP();
+
+        //Contrato para registrar productos en la tabla Paso
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        List<DTOInventario> registrarProductoPaso(int id, float cantidad, float valor);
 
     }
 }

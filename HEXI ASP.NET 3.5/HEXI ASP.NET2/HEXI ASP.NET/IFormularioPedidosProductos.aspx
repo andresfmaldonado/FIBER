@@ -176,7 +176,7 @@
         <div class="form-group">
             <div class="col-sm-offset-5 col-sm-1 col-center">
                 <div class="btn-group">
-                    <asp:Button ID="fin_consumo" type="button" CssClass="btn btn-default" runat="server" Text="Finalizar consumo" />
+                    <asp:Button ID="fin_consumo" type="button" CssClass="btn btn-default" runat="server" Text="Finalizar consumo" OnClick="fin_consumo_Click" />
                 </div>
             </div>
         </div>
@@ -199,8 +199,8 @@
     <!-- /Footer -->
 
     <!-- Modal Buscar -->
-    <div class="modal fade bs-example-bg" id="modalBuscar" tabindex="-1" role="dialog" aria-labelledby="modalBuscarLabel" data-backdrop="static">
-        <div class="modal-dialog modal-bg" role="document">
+    <div class="modal fade bs-example-lg" id="modalBuscar" tabindex="-1" role="dialog" aria-labelledby="modalBuscarLabel" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="table-responsive" id="RegistroProducto">
@@ -220,8 +220,8 @@
     <!-- /Modal Buscar -->
 
     <!-- Modal Ver Todos -->
-    <div class="modal fade bs-example-bg" id="modalTodos" tabindex="-1" role="dialog" aria-labelledby="modalVerTodosLabel" data-backdrop="static">
-        <div class="modal-dialog modal-bg" role="document">
+    <div class="modal fade bs-example-lg" id="modalTodos" tabindex="-1" role="dialog" aria-labelledby="modalVerTodosLabel" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="table-responsive" id="RegistroProductos">
@@ -310,10 +310,83 @@
 
         });
         $("#verTodos").click(function () {
+            //Llamar el servicio a través de ajax
+            $.ajax({
+                type: "POST",
+                url: "ServiceLectorQR.svc/consultarTodosProductosP",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (Dato) {
+                    item = Dato.consultarTodosProductosPResult;
+                    $("#tablaTodos").html('');
+                    $("#tablaTodos").append('<thead class="text-center"><tr><th>Id</th><th>Referencia</th><th>Nombre</th><th>Descripción</th><th>Valor Unidad</th><th>Acción</th></tr></thead>');
+                    $("#tablaTodos").append('<tbody></tbody>');
+                    $.each(item, function (index, value) {
+                        $("#tablaTodos").append('<tr><td>' + value.Id_Producto + '</td><td>' + value.Referencia_Producto + '</td><td>' + value.Nombre_Producto + '</td><td>' + value.Descripcion_Producto + '</td><td>' + value.ValorUnitario_Producto + '</td><td><button class="btn btn-default seleccionar" value="' + value.Id_Producto + '">Seleccionar</button></td></tr>');
+                    });
+                    $("#modalTodos").modal('show');
+                    $(".seleccionar").click(function () {
+                        dataString = '{"id" : "' + $(this).val() + '"}';
+                        alert(dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceLectorQR.svc/buscarProductoPId",
+                            data: dataString,
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (Dato) {
+                                alert("entro al success");
+                                item = Dato.buscarProductoPIdResult;
+                                alert(item);
+                                $.each(item, function (index, value) {
+                                    $("#id").val(value.Id_Producto);
+                                    $("#referencia").val(value.Referencia_Producto);
+                                    $("#nombre").val(value.Nombre_Producto);
+                                    $("#descripcion").val(value.Descripcion_Producto);
+                                    $("#valor").val(value.ValorUnitario_Producto);
+                                });
+                                $("#modalTodos").modal('hide');
+                            },
+                            error: function (request, status, error) {
+                                alert(error);
+                            }
+                        });
+                    });
 
+                },
+                error: function (request, status, error) {
+                    alert(error);
+                }
+            });
         });
         $("#registrar").click(function () {
+            dataString = '{"id" : "' + $("#id").val() + '", "cantidad" : "' + $("#cantidad").val() + '", "valor" : "' + $("#valor").val() + '"}';
+            alert(dataString);
+            $.ajax({
+                type: "POST",
+                url: "ServiceLectorQR.svc/registrarProductoPaso",
+                data: dataString,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (Dato) {
+                    item = Dato.registrarProductoPasoResult;
+                    $("#tablaProductos1").html('');
+                    $("#tablaProductos1").append('<thead><tr><th>Id</th><th>Cantidad</th><th>Valor por producto</th><th>Acción</th></tr></thead>');
+                    $("#tablaProductos1").append('<tbody></tbody>');
+                    var lastIndex = 0;
+                    $.each(item, function (index, value) {
+                        $("#tablaProductos1").append('<tr><td>' + value.Id_Producto + '</td><td>' + value.Cantidad_Producto + '</td><td>' + value.ValorTotal_Producto + '</td><td><button class="btn btn-danger quitar" value="' + value.Id_Producto + '">Quitar</button></td></tr>');
+                        lastIndex = index;
+                    });
+                    $("#tablaProductos1").append('<tr><td></td><td><b>Total:</b></td><td>' + item[lastIndex].ValorTotal + '</td><td></td></tr>');
+                    $("#id, #referencia, #nombre, #descripcion, #cantidad, #valor").val('');
 
+                },
+                error: function (request, status, error) {
+
+                }
+                
+            });
         });
     </script>
 </body>

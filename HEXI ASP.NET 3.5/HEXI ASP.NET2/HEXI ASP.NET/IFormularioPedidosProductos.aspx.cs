@@ -78,5 +78,50 @@ namespace HEXI_ASP.NET
         {
 
         }
+
+        protected void fin_consumo_Click(object sender, EventArgs e)
+        {
+            //Instanciar objetos
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+            List<DTOInventario> productos = new List<DTOInventario>();
+
+            //Si crear un nuevo pedido es exitoso entonces...
+            if (procesos.InsertarPedido())
+            {
+                //Consultar el id del pedido recien creado
+                datos.Id_Pedido = procesos.consultarMaximoPedido();
+
+                //Consultar los productos registrados en la tabla paso
+                productos = procesos.consultarPasoParaFinalizarPedido();
+
+                //Recorrer list
+                foreach(var item in productos)
+                {
+                    //Dar valores al DTO
+                    datos.Id_Producto = item.Id_Producto;
+                    datos.Cantidad_Producto = item.Cantidad_Producto;
+                    datos.ValorTotal_Producto = item.ValorTotal_Producto;
+                    datos.ValorTotal = item.ValorTotal;
+
+                    //Intentar ejecutar la inserción de los productos y la elimináción de tabla Paso
+                    try
+                    {
+                        procesos.InsertarPedidoP(datos);
+                        procesos.EliminarPaso();
+                    }
+                    catch
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+                        break;
+                    }
+                }
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "mensaje", "registro();", true);
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "error", "problema();", true);
+            }
+        }
     }
 }
