@@ -40,7 +40,7 @@ END
 CREATE PROCEDURE prc_cargar_info_perfil_usuario(@id_user INT)
 AS
 BEGIN
-SELECT tbl_usuario.nombre_usuario,tbl_usuario.apellido_usuario,tbl_usuario.email_usuario, tbl_rol.nombre_rol,foto_usuario,(tbl_usuario.nombre_usuario+' '+tbl_usuario.apellido_usuario) AS nombre_completo  FROM tbl_usuario,tbl_usuario_rol,tbl_rol WHERE tbl_usuario.id_usuario=tbl_usuario_rol.id_usuario AND tbl_rol.id_rol=tbl_usuario_rol.id_rol AND tbl_usuario.id_usuario=@id_user;
+SELECT tbl_usuario.nombre_usuario,tbl_usuario.apellido_usuario,tbl_usuario.email_usuario,foto_usuario,(tbl_usuario.nombre_usuario+' '+tbl_usuario.apellido_usuario) AS nombre_completo  FROM tbl_usuario WHERE  tbl_usuario.id_usuario=@id_user;
 END
 
 --FIN PROCEDURE--

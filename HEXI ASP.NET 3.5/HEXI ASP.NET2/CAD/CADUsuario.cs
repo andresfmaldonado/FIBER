@@ -594,7 +594,7 @@ namespace CAD
         }
 
         //Clase para completar el perfil de usuario
-        public void CargarPerfil(DTOUsuario user, TextBox nombres, TextBox apellidos, TextBox correo, Label Nombre_completo, Label NombreRolUsuario,Image foto)
+        public void CargarPerfil(DTOUsuario user, TextBox nombres, TextBox apellidos, TextBox correo, Label Nombre_completo,Image foto)
         {
             cnx.Open();
             cmd = new SqlCommand();
@@ -609,7 +609,6 @@ namespace CAD
                 apellidos.Text = dr["apellido_usuario"].ToString();
                 correo.Text = dr["email_usuario"].ToString();
                 Nombre_completo.Text = dr["nombre_completo"].ToString();
-                NombreRolUsuario.Text = dr["nombre_rol"].ToString();
                 foto.ImageUrl = dr["foto_usuario"].ToString();
             }
             dr.Close();

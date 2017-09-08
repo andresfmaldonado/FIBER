@@ -46,6 +46,7 @@ namespace DTO
         //tbl_hilos
         private int id_hilo;
         private string referencia_hilo;
+        private string code_hilo;
         private string tipo_hilo;
         private int titulo_hilo;
         private string color_hilo;
@@ -53,6 +54,7 @@ namespace DTO
 
         public int Id_Hilo { get; set; }
         public string Referencia_Hilo { get; set; }
+        public string Code_Hilo { get; set; }
         public string Tipo_Hilo { get; set; }
         public int Titulo_Hilo { get; set; }
         public string Color_Hilo { get; set; }

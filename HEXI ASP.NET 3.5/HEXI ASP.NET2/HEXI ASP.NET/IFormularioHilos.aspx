@@ -65,6 +65,7 @@
                 <h2>Menú</h2>
                 <ul class="links">
                     <li><a href="PerfilAdmin.aspx">Perfil</a></li>
+                    <li><a href="FolderCodeQR.aspx">Códigos QR</a></li>
                     <li id="usuarios" runat="server"><a href="PFormularioUsuarios.aspx">Usuarios</a></li>
                     <li><a href="PAsistencia.aspx">Ayuda</a></li>
                     <li><a href="default.aspx">Finalizar Sesión</a></li>
@@ -108,7 +109,12 @@
             <div class="form-group">
                 <asp:Label ID="Label2" class="control-label col-sm-2" runat="server" Text="Tipo:"></asp:Label>
                 <div class="col-sm-10">
-                    <asp:TextBox ID="tipo" onkeyup="validacion('tipo');" type="text" class="form-control" placeholder="Tipo de hilo" runat="server" MaxLength="10"></asp:TextBox>
+                    <asp:DropDownList ID="tipoh" onchange="validacion('tipoh');" class="form-control" runat="server">
+                        <asp:ListItem Value="0">Seleccione un tipo</asp:ListItem>
+                        <asp:ListItem Value="1">Fantasía</asp:ListItem>
+                        <asp:ListItem Value="2">Liso</asp:ListItem>
+                        <asp:ListItem Value="3">Corespum</asp:ListItem>
+                    </asp:DropDownList>
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -200,6 +206,14 @@
                                     </ItemTemplate>
 
                                 </asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="Código">
+                                    <ItemTemplate>
+                                        <asp:Label ID="CODE_HILO" runat="server" Text='<% # Bind("code_hilo") %>'></asp:Label>
+                                    </ItemTemplate>
+
+                                </asp:TemplateField>
+
                                 <asp:TemplateField HeaderText="Tipo">
                                     <ItemTemplate>
                                         <asp:Label ID="TIPO_HILO" runat="server" Text='<% # Bind("tipo_hilo") %>'></asp:Label>
@@ -266,7 +280,7 @@
         function verificarmodifi() {
             var c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
             c1 = validacion("referencia");
-            c2 = validacion("tipo");
+            c2 = validacion("tipoh");
             c3 = validacion("titulo");
             c4 = validacion("color");
             c5 = validacion("valor");
@@ -281,7 +295,7 @@
         function verificar() {
             var v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0;
             v1 = validacion("referencia");
-            v2 = validacion("tipo");
+            v2 = validacion("tipoh");
             v3 = validacion("titulo");
             v4 = validacion("color");
             v5 = validacion("valor");
@@ -466,6 +480,21 @@
                     }
                 }
             }
+            if (campo === "tipoh") {
+                indice = document.getElementById(campo).selectedIndex;
+                if (indice == null || indice == 0) {
+                    $('#'+campo).parent().parent().attr("class", "form-group has-error");
+                    $('#'+campo).parent().children('span').text("Seleccione una opción").show();
+                    return false;
+                }
+                else {
+                    $('#' + campo).parent().parent().attr("class", "form-group has-success");
+                    $('#' + campo).parent().children('span').hide();
+                    return true;
+
+                }
+            }
+
             if (campo === "buscar") {
                 buscar = document.getElementById(campo).value;
                 if (buscar == null || buscar.length == 0 || /^\s+$/.test(buscar)) {
