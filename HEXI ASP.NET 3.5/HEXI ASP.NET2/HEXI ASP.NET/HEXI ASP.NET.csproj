@@ -122,6 +122,7 @@
     <Content Include="Iconos\octicons_f064%280%29_225.png" />
     <Content Include="IFormularioInformes.aspx" />
     <Content Include="IFormularioIngresos.aspx" />
+    <Content Include="IFormularioInventarios.aspx" />
     <Content Include="PDesignPatrones.aspx" />
     <Content Include="FiberInicioAdmin.aspx" />
     <Content Include="FolderCodeQr.aspx" />
@@ -281,6 +282,13 @@
     </Compile>
     <Compile Include="IFormularioIngresos.aspx.designer.cs">
       <DependentUpon>IFormularioIngresos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IFormularioInventarios.aspx.cs">
+      <DependentUpon>IFormularioInventarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IFormularioInventarios.aspx.designer.cs">
+      <DependentUpon>IFormularioInventarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="PDesignPatrones.aspx.cs">
       <DependentUpon>PDesignPatrones.aspx</DependentUpon>

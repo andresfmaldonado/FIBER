@@ -15,6 +15,7 @@ namespace DTO
         private DateTime fecha_inventario;
 
         public int Id_Inventario { get; set; }
+        public string Referencia_Inventario { get; set; }
         public string Observacion_Inventario { get; set; }
         public DateTime Fecha_Inventario { get; set; }
 

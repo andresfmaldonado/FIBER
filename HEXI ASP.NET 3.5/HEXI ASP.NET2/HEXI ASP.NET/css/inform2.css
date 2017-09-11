@@ -1,0 +1,30 @@
+  
+        .table-responsive {
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 280px;
+        }
+        
+        .panel-default>.config {
+            border-color: #337ab7;
+            color: white;
+            background-color: #337ab7;
+        }
+        
+        #getconsums,
+        #getproducts {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+        
+        #getconsums:hover,
+        #getproducts:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+        }
+        
+        table {
+            background-color: #fff;
+        }

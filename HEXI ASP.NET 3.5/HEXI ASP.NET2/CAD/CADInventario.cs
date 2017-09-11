@@ -1824,6 +1824,117 @@ namespace CAD
             cnx.Close();
             return productos;
         }
+
+        public int ConsultarInventarioPorReferencia(DTOInventario invent)
+        {
+            int exist = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_invent_por_referencia";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@refer", invent.Referencia_Inventario);
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                exist++;
+            }
+            dr.Close();
+            cnx.Close();
+            return exist;
+        }
+
+        public int RegistrarInventario(DTOInventario invent)
+        {
+            int result = 0;
+            cnx.Open();
+            try
+            {
+                cmd = new SqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "prc_insertar_inventario";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@refer_inv", invent.Referencia_Inventario);
+                cmd.Parameters.AddWithValue("@detalles", invent.Observacion_Inventario);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                result = 1;
+            }
+            dr.Close();
+            cnx.Close();
+            return result;
+        }
+
+        public int ObtenerIdInventarioPorReferencia(DTOInventario invent)
+        {
+            int id = 0;
+            cnx.Open();
+            cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "prc_consultar_invent_por_referencia";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@refer", invent.Referencia_Inventario);
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                id = int.Parse(dr["id_inventario"].ToString());
+            }
+            dr.Close();
+            cnx.Close();
+            return id;
+        }
+
+        public int RegistrarInventarioProducto(DTOInventario invent)
+        {
+            int result = 0;
+            cnx.Open();
+            try
+            {
+                cmd = new SqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "prc_insertar_inventario_productos";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_inven", invent.Id_Inventario);
+                cmd.Parameters.AddWithValue("@id_prod", invent.Id_Producto);
+                cmd.Parameters.AddWithValue("@cantid_regis", invent.Cantidad_Producto);
+                cmd.Parameters.AddWithValue("@cantid_actual", invent.Cantidad_Producto);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                result = 1;
+            }
+            dr.Close();
+            cnx.Close();
+            return result;
+        }
+
+        public int RegistrarInventarioHilo(DTOInventario invent)
+        {
+            int result = 0;
+            cnx.Open();
+            try
+            {
+                cmd = new SqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "prc_insertar_inventario_hilos";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_inven", invent.Id_Inventario);
+                cmd.Parameters.AddWithValue("@id_hilo", invent.Id_Hilo);
+                cmd.Parameters.AddWithValue("@m_regis", invent.Metros_Hilo);
+                cmd.Parameters.AddWithValue("@m_actual", invent.Metros_Hilo);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                result = 1;
+            }
+            dr.Close();
+            cnx.Close();
+            return result;
+        }
     }
     
 }

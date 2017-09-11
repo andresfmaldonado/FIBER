@@ -440,30 +440,22 @@ END
 --Procedures para la gestión de los inventarios--
 
 --PROCEDURE PARA REGISTRAR UN INVENTARIO--
-CREATE PROCEDURE prc_insertar_inventario(
-@ref VARCHAR(10),
-@observacion VARCHAR(50)
-)
+CREATE PROCEDURE prc_insertar_inventario(@refer_inv VARCHAR(10),@detalles VARCHAR(50))
 AS
 BEGIN
-INSERT INTO tbl_inventarios(referencia_inventario,observacion_inventario,
-fecha) VALUES (@ref,@observacion,CURRENT_TIMESTAMP);
+INSERT INTO tbl_inventarios(referencia_inventario,observacion_inventario,fecha) VALUES(@refer_inv,@detalles,GETDATE());
 END
 
 --FIN PROCEDURE--
 
 --PROCEDURE PARA REGISTRAR EN EL INVENTARIO UN PRODUCTO--------------------------------
-CREATE PROCEDURE prc_insertar_inventarios_productos
-(
-@id_inv INT,
-@id_prod INT,
-@cant_prod INT
-)
-AS 
-BEGIN 
-INSERT INTO tbl_inventario_producto VALUES(@id_inv, @id_prod,@cant_prod);
+CREATE PROCEDURE prc_insertar_inventario_productos(@id_inven INT,@id_prod INT,@cantid_regis INT,@cantid_actual INT)
+AS
+BEGIN
+INSERT INTO tbl_inventario_producto VALUES(@id_inven,@id_prod,@cantid_regis,@cantid_actual,GETDATE());
+UPDATE tbl_productos SET cantidad_producto = @cantid_regis WHERE id_producto = @id_prod;
 END
-
+select * from tbl_inventario_hilo
 --FIN PROCEDURE--
 
 --En veremos--
@@ -484,17 +476,12 @@ END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA REGISTRAR EN EL INVENTARIO UN HILO------------------------------------
-CREATE PROCEDURE prc_insertar_inventarios_hilo
-(
-@id_inv INT,
-@id_hi INT,
-@cant_hi INT
-)
-AS 
-BEGIN 
-INSERT INTO tbl_inventario_hilo VALUES(@id_inv, @id_hi,@cant_hi);
+CREATE PROCEDURE prc_insertar_inventario_hilos(@id_inven INT,@id_hilo INT,@m_regis INT,@m_actual INT)
+AS
+BEGIN
+INSERT INTO tbl_inventario_hilo VALUES(@id_inven,@id_hilo,@m_regis,@m_actual,GETDATE());
+UPDATE tbl_hilos SET metros_hilo = @m_regis WHERE id_hilo = @id_hilo;
 END
-
 --FIN PROCEDURE--
 
 --En veremos--
@@ -526,6 +513,15 @@ id_usuario = @id_usu WHERE id_inventario = @id_inv;
 END
 
 --FIN PROCEDURE--
+
+--PROCEDURE PARA BUSCAR UN INVENTARIO POR REFERENCIA--
+CREATE PROCEDURE prc_consultar_invent_por_referencia(@refer VARCHAR(10))
+AS
+BEGIN
+SELECT * FROM tbl_inventarios WHERE  referencia_inventario=@refer;
+END
+--FIN PROCEDURE--
+
 
 
 ====================================================================
@@ -562,12 +558,10 @@ END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA CARGAR LOS HILOS A LA GV---------------------------------------------
-CREATE PROCEDURE  prc_cargar_hilo
+CREATE PROCEDURE prc_cargar_hilo
 AS
 BEGIN
-SELECT id_hilo, referencia_hilo, code_hilo,
-tipo_hilo, titulo_hilo, color_hilo,
-metros_hilo, valorMetro
+SELECT *
 FROM tbl_hilos;
 END
 
@@ -612,22 +606,37 @@ select * from tbl_inventario_hilo
 --Procedimientos para la gestión de los productos--
 
 --PROCEDURE PARA REGISTRAR UN PRODUCTO -------------------------------------------------
-CREATE PROCEDURE prc_insertar_producto(@ref_pro VARCHAR(10),@nombre VARCHAR(20),
-@desc_pro VARCHAR(50),@nov_pro VARCHAR(30),@placa_pro VARCHAR(10),
-@serial_pro VARCHAR(10),@marca_pro VARCHAR(20),@mod_pro VARCHAR(20),
-@val_pro FLOAT,@consu_pro BIT,@cantid INT)
+ALTER PROCEDURE prc_insertar_producto(
+@ref_pro VARCHAR(10),
+@nombre VARCHAR(20),
+@desc_pro VARCHAR(50),
+@nov_pro VARCHAR(30),
+@placa_pro VARCHAR(10),
+@serial_pro VARCHAR(10),
+@marca_pro VARCHAR(20),
+@mod_pro VARCHAR(20),
+@cantid INT,
+@val_pro FLOAT,
+@consu_pro BIT
+)
 AS
 BEGIN
 INSERT INTO tbl_productos(referencia_producto,
-nombre_producto,descripcion_producto,novedad_producto,
-placa_producto,serial_producto,marca_producto,modelo_producto,
-cantidad_producto,valorUnitario_producto,consumible) VALUES 
+nombre_producto,
+descripcion_producto,
+novedad_producto,
+placa_producto,
+serial_producto,
+marca_producto,
+modelo_producto,
+cantidad_producto,
+valorUnitario_producto,
+consumible) VALUES 
 (@ref_pro,@nombre,@desc_pro,@nov_pro,
 @placa_pro,@serial_pro,@marca_pro,@mod_pro,@cantid,@val_pro,@consu_pro);
 END
 --FIN PROCEDURE--
-
-
+select * from tbl_inventario_producto
 --PROCEDURE PARA MODIFICAR UN PRODUCTO--------------------------------------------------
 CREATE PROCEDURE prc_modificar_producto(@id_pro INT,
 @refe_pro VARCHAR(10),

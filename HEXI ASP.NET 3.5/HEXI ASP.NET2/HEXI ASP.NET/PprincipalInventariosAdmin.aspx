@@ -115,7 +115,7 @@
 							<div class="ch-info">
 								<div class="ch-info-front ch-img-22"></div>
 								<div class="ch-info-back">
-                                    <a href="#"><h3>Inventario</h3>
+                                    <a href="IFormularioInventarios.aspx"><h3>Inventario</h3>
 									<p>Fiber</p>
                                         </a>
 								</div>
