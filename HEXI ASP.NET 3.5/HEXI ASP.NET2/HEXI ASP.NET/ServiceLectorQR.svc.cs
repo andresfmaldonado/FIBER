@@ -367,6 +367,71 @@ namespace HEXI_ASP.NET
 
         }
 
+        public List<DTOInventario> buscarProductoP(string referencia)
+        {
+            //Instanciar objetos
+            List<DTOInventario> producto = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+
+            //Llenar valores al DTO
+            datos.Referencia_Producto = referencia;
+            
+            //Llenar List invocando función del CAD
+            producto = procesos.buscarProductoPRef(datos);
+
+            //Retornar List
+            return producto;
+        }
+
+        public List<DTOInventario> buscarProductoPId(int id)
+        {
+            //Instanciar objetos
+            List<DTOInventario> producto = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+
+            //Dar valores al DTO
+            datos.Id_Producto = id;
+
+            //Asignar valores al List
+            producto = procesos.buscarProductoPId(datos);
+
+            //Retornar List
+            return producto;
+        }
+
+        public List<DTOInventario> consultarTodosProductosP()
+        {
+            //Instanciar objetos
+            List<DTOInventario> productos = new List<DTOInventario>();
+            CADInventario procesos = new CADInventario();
+
+            //Asignar valores al list
+            productos = procesos.buscarTodosProductosP();
+
+            //Retornar list
+            return productos;
+        }
+
+        public List<DTOInventario> registrarProductoPaso(int id, float cantidad, float valor)
+        {
+            //Instanciar objetos
+            List<DTOInventario> productos = new List<DTOInventario>();
+            DTOInventario datos = new DTOInventario();
+            CADInventario procesos = new CADInventario();
+
+            //Asignar valores al DTO
+            datos.Id_Producto = id;
+            datos.Cantidad_Producto = cantidad;
+            datos.ValorTotal_Producto = cantidad * valor;
+
+            //Llenar lista 
+            productos = procesos.registrarProductoPasoPed(datos);
+
+            //Retornar lista
+            return productos;
+        }
 
     }
 }

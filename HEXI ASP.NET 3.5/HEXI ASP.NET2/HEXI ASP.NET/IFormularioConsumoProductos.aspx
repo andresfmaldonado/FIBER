@@ -174,7 +174,7 @@
                 <div class="form-group">
                     <asp:Label ID="Label4" class="control-label col-sm-2" runat="server" Text="Buscar:"></asp:Label>
                     <div class="col-sm-7">
-                        <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Nombre Producto" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtbuscar" type="text" class="form-control" placeholder="Referencia producto" runat="server"></asp:TextBox>
                     </div>
                     <div class=" col-md-1">
                         <input id="buscar" type="button" class="btn btn-default" value="Buscar" />
@@ -264,34 +264,11 @@
 
 
     <script src="jvscript/stacktable.min.js" type="text/javascript"></script>
-
-<script>
-  $(document).on('click', '#run', function(e) {
-    e.preventDefault();
-    $('#simple-example-table').stacktable();
-    $(this).replaceWith('<span>ran - resize your window to see the effect</span>');
-  });
-  $('#responsive-example-table').stacktable({myClass:'your-custom-class'});
-  $('#cphMainContent_dgvUsers').cardtable();
-  $('#agenda-example').stackcolumns();
-      </script>
 <script type="text/javascript" src="jvscript/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="jvscript/bootstrap.min.js"></script>
 <script type="text/javascript" src="jvscript/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="jvscript/locales/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
-<script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        format: 'dd/mm/yyyy hh:ii:ss',
-        language: 'es',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian: 1
-    });
-</script>
+
  <script src="jvscript/js1/skel.min.js"></script>
  <script src="jvscript/js1/jquery.min.js"></script>
  <script src="jvscript/js1/jquery.scrollex.min.js"></script>

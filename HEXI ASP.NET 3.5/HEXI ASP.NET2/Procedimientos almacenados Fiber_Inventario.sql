@@ -222,6 +222,30 @@ END
 
 --Procedures para pedidos--
 
+--PROCEDURE PARA BUSCAR UN PRODUCTO POR REFERENCIA PARA PEDIDO--
+CREATE PROCEDURE buscarProductoPRef(@ref varchar(10))
+AS
+BEGIN
+SELECT * FROM tbl_productos_necesarios WHERE referencia_producto LIKE @ref + '%';
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA BUSCAR UN PRODUCTO POR EL ID PARA EL PEDIDO--
+CREATE PROCEDURE buscarProductoPId(@id int)
+AS
+BEGIN
+SELECT * FROM tbl_productos_necesarios WHERE id_producto = @id;
+END
+--FIN PROCEDURE--
+
+--PROCEDURE PARA BUSCAR TODOS LOS PRODUCTOS PARA EL PEDIDO--
+CREATE PROCEDURE prc_buscarTodosProductosP
+AS
+BEGIN
+SELECT * FROM tbl_productos_necesarios;
+END
+--FIN PROCEDURE--
+
 --PROCEDURE PARA BUSCAR UN HILO POR REFERENCIA PARA PEDIDOS--
 ALTER PROCEDURE prc_buscarHiloPedidoRef(@ref varchar(10))
 AS
@@ -255,21 +279,22 @@ END
 --FIN PROCEDURE--
 
 --PROCEDURE PARA INSERTAR PASO PEDIDO--
-ALTER PROCEDURE prc_insertar_paso_pedido
+CREATE PROCEDURE prc_insertar_paso_pedido
 (
 @id int,
-@metros FLOAT,
+@cantidad FLOAT,
 @valor FLOAT
 ) 
 AS
 BEGIN
 declare @valor_t float;
-INSERT INTO tbl_paso(id, cantidad, valor) VALUES (@id, @metros, @valor);
-set @valor_t = (select valor_total from tbl_paso where id = @id);
+INSERT INTO tbl_paso(id, cantidad, valor) VALUES (@id, @cantidad, @valor);
+set @valor_t = (select MAX(valor_total) from tbl_paso);
 update tbl_paso set valor_total = @valor_t + @valor where id = @id;
 END
 --FIN PROCEDURE--
-
+select * from tbl_paso
+Delete from tbl_paso
 --PROCEDURE PARA CONSULTAR PASO PEDOIDO--
 CREATE PROCEDURE prc_consultar_paso_pedido
 AS

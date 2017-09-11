@@ -104,7 +104,7 @@ namespace HEXI_ASP.NET
                 datos.Id_Consumo = proceso.consultarMaximoConsumo();
                 datos.Id_Inventario = proceso.consultarMaximoInventarioHilo();
                 List<DTOInventario> hilos = new List<DTOInventario>();
-                hilos = proceso.consultarPasoParaFinalizar();
+                hilos = proceso.consultarPasoParaFinalizarConsumo();
                 foreach (var item in hilos)
                 {
                     datos.Id_Hilo = item.Id_Hilo;
